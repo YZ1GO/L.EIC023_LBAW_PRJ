@@ -1,14 +1,26 @@
 # ER: Requirements Specification Component
 
-> Project vision.
+**Project Vision**
+
+The vision for NAME is to establish a leading online marketplace for gamers, specifically focusing on the sale of Content Distribution Keys (CDKs). By providing a secure, efficient, and user-friendly platform, NAME aims to become the go-to destination for gamers seeking affordable game keys, fostering a community that values both accessibility and quality in digital gaming.
 
 ## A1: Project Name
 
-> Goals, business context and environment.  
-> Motivation.  
-> Main features.  
-> User profiles.
+**Goals, Business Context, and Environment**
 
+The NAME project seeks to create a web-based platform for gamers to purchase CDKs for various video games. Positioned in the competitive landscape of online gaming marketplaces, NAME aims to deliver a seamless user experience, competitive pricing, and a vast selection of games, catering to both casual and dedicated gamers.
+
+**Motivation**
+
+The increasing demand for digital game distribution presents a significant opportunity for a dedicated platform focused on CDKs. NAME addresses this demand by offering affordable game keys while ensuring a secure and user-friendly purchasing process, appealing to a broad audience of gamers.
+
+**Main Features**
+
+The platform includes features such as advanced search capabilities and product filtering, enabling users to find specific games based on genre or platform. Users can create wishlists to save their favorite games and leave reviews and ratings to share their experiences with others. The shopping cart allows for easy management of purchases, and the streamlined checkout process supports multiple payment options. Additionally, users can track their purchase history and receive notifications about order status, promotions, and wishlist item availability.
+
+**User Profiles**
+
+NAME accommodates four distinct user profiles. *Anonymous Users* can browse products without registration, allowing them to explore the marketplace before deciding to create an account. *Buyers* are registered users who can browse products, purchase CDKs, and engage with the platform through wishlists and reviews. *Administrators* have full control over the platform, managing product listings, user accounts, and overseeing order processing to ensure smooth operations; however, they cannot make purchases. *Sellers* are users who list CDKs for sale and manage their product information and pricing, but they also cannot buy products on the platform. Together, these user profiles create a dynamic marketplace that fosters interaction and supports the gaming community.
 
 ---
 
