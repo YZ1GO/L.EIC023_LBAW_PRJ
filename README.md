@@ -27,14 +27,23 @@ NAME accommodates four distinct user profiles. *Anonymous Users* can browse prod
 
 ## A2: Actors and User stories
 
-> Brief presentation of the artifact goals.
+The following artifact contains the specifications about the actors and their user stories, acting as a guide and simple documentation for these project's requirements.
 
 
 ### 1. Actors
+![Actor Diagram](actor_diagram.png)
+**Figure 1:** Actor Diagram
 
-> Diagram identifying actors and their relationships.  
-> Table identifying actors, including a brief description.
+| **Actor**            | **Description**                                                                                     |
+|----------------------|-----------------------------------------------------------------------------------------------------|
+| Anonymous User        | Users who can browse products without registration, allowing them to explore the marketplace, but can choose to authenticate when they wish so.        |
+| User                 | Generic user that can access al publicly available information such as listed CDKs.                                      |
+| Authenticated User   | Registered users with access to additional features of the platform.                                 |
+| Buyer                | Registered users who can browse products, purchase CDKs, and create wishlists and engage with reviews.      |
+| Seller               | Users who list CDKs for sale and manage their product information and pricing. Cannot buy products.  |
+| Administrator        | Users with full control over the platform, managing product listings, user accounts, and overseeing order processing. Cannot make purchases. |
 
+**Table 1:** Actors and their descriptions
 
 ### 2. User Stories
 
