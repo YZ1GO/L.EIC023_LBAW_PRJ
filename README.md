@@ -2,7 +2,11 @@
 
 **Project Vision**
 
-![alt text](<assets/logo.jpg>)
+<div align = "center">
+    <a>
+        <img src="assets/logo.jpg" width="500">
+    </a>
+</div>
 
 **STEAL!** is an online marketplace focused on selling Content Distribution Keys (CDKs). It offers a secure, user-friendly platform for gamers seeking affordable game keys, aiming to become the top destination for accessible and quality digital gaming.
 
