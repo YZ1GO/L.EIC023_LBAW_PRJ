@@ -18,21 +18,29 @@
 
 ## A1: Project Name
 
-**Goals, Business Context, and Environment**
+### Goals, Business Context, and Environment
 
-STEAL! aims to be a website where gamers can buy CDKs , which can be activated on game platforms like Steam, Uplay, and Origin. Competing with other online gaming stores, STEAL! focuses on providing a smooth user experience, competitive prices, and a wide range of games for both casual and dedicated gamers.
+STEAL! aims to be a website where gamers can buy Content Distribution Keys (CDKs), which can be activated on game platforms like Steam, Uplay, and Origin. Competing with other online gaming stores, STEAL! focuses on providing a smooth user experience, competitive prices, and a wide range of games for both casual and dedicated gamers.
 
-**Motivation**
+### Motivation
 
 The increased demand for video games has made STEAL! possible by providing affordable game keys in an easy and safe manner, attracting a wide range of gamers.
 
-**Main Features**
+### Main Features
 
-STEAL! provides advanced search and filtering options, making it easy for users to find their desired games. It also offers personalized game recommendations based on users' preferences for those unsure of what to play next. Recognizing that our users are the foundation of our success, we reward them with S coins, which can be used in the store. Additionally, users can create wishlists to save their favorite games and take advantage of special sales when they occur.
+STEAL! provides advanced search and filtering options, making it easy for users to find their desired games. It also offers personalized game recommendations based on users' preferences for those unsure of what to play next. 
 
-**User Profiles**
+Recognizing that our users are the foundation of our success, we reward them with **S coins**, which can be used in the store. Additionally, users can create wishlists to save their favorite games and take advantage of special sales when they occur.
 
-STEAL! accommodates four distinct user profiles. *Anonymous Users* can browse products without registration, allowing them to explore the marketplace before deciding whether to create an account. *Buyers* are registered users who can browse products, purchase CDKs, and engage with the platform through wishlists and reviews. *Administrators* have full control over the platform, managing product listings, user accounts, and overseeing order processing to ensure smooth operations; however, they cannot make purchases. *Sellers* are users who list CDKs for sale and manage their product information and pricing, but they also cannot buy products on the platform. Together, these user profiles create a dynamic marketplace that fosters interaction and supports the gaming community.
+### User Profiles
+
+STEAL! accommodates four distinct user profiles: 
+- **Anonymous Users:** can browse products without registration, allowing them to explore the marketplace before deciding whether to create an account. 
+- **Buyers:** are registered users who can browse products, purchase CDKs, and engage with the platform through wishlists and reviews. 
+- **Sellers:** are users who list CDKs for sale and manage their product information and pricing, but they cannot buy products on the platform. 
+- **Administrators:** have full control over the platform, managing product listings, user accounts, and overseeing order processing to ensure smooth operations; however, they also cannot make purchases. 
+
+Together, these user profiles create a dynamic marketplace that fosters interaction and supports the gaming community.
 
 ---
 
