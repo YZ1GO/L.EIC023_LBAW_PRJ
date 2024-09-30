@@ -155,6 +155,8 @@ This section contains business rules, technical requirements and other non-funct
 | BR07 | Key Delivery | After payment is confirmed, the CDK is delivered instantly via the buyer's email. |
 | BR08 | Stock Availability | Buyers can only purchase a CDK if it is in stock. Out-of-stock items cannot be added to the cart or purchased. |
 | BR09 | Wishlist Removal | If a game is deleted from the store, it is automatically removed from all users' wishlists. |
+| BR10 | Date Validation | For any date entries (e.g., exit date), the exit date must be greater than or equal to the entry date. |
+| BR11 | Seller Interaction Restrictions | Sellers cannot vote, comment, or review their own products to ensure unbiased interactions on the platform. |
 
 **Table 7:** STEAL! business rules.
 
