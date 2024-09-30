@@ -2,9 +2,9 @@
 
 **Project Vision**
 
-<div align = "center">
+<div>
     <a>
-        <img src="assets/logo.jpg" width="700">
+        <img src="assets/logo.png" width="100">
     </a>
 </div>
 <br>
@@ -16,7 +16,7 @@
 ----
 
 
-## A1: Project Name
+## A1: STEAL!
 
 ### Goals, Business Context, and Environment
 
