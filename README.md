@@ -153,10 +153,34 @@ This section contains business rules, technical requirements and other non-funct
 | BR08 | Stock Availability | Buyers can only purchase a CDK if it is in stock. Out-of-stock items cannot be added to the cart or purchased. |
 | BR09 | Wishlist Removal | If a game is deleted from the store, it is automatically removed from all users' wishlists. |
 
+**Table 7:** STEAL! business rules.
+
 #### 3.2. Technical requirements
+
+| **Identifier** | **Name** | **Description** |
+|-|-|-|
+| **TR01** | **Response Time** | **The system should have response times shorter than 2 seconds to ensure user engagement. (Performance) <br><br> Fast response times are critical for user retention and satisfaction. If the system is slow, users may abandon their carts or leave the site entirely, resulting in lost revenue. A responsive and smooth experience encourages users to explore the platform and complete purchases.** |
+| TR02 | Error Handling | The system must be prepared to handle and continue operating when runtime errors occur. (Robustness) |
+| TR03 | Scalability | The system must be prepared to deal with the growth in the number of users and their actions. (Scalability) |
+| TR04 | Accessibility | The system must ensure that everyone can access the pages, regardless of disabilities or the web browser they use. (Accessibility) |
+| **TR05** | **User Review System** | **The system must include a feature for users to leave reviews and ratings for purchased CDKs. <br><br> User reviews build trust and provide valuable feedback, helping potential buyers make informed decisions and improving the overall credibility of our platform.** |
+| TR06 | Multi-Payment Support | The system must facilitate integration with multiple payment gateways, allowing users to select their preferred payment method. (Functionality) |
+| TR07 | Instant CDK Delivery | Upon successful payment, the system must deliver the CDK immediately via the buyer's account dashboard and send a confirmation email. (Usability) |
+| TR08 | User-Friendly Interface | The system should feature an intuitive user interface that allows users to navigate easily, search for CDKs, and manage their accounts. (Usability) |
+| TR09 | Database | The PostgreSQL database management system must be used, with a version of 11 or higher. |
+| **TR10** | **Real-Time Inventory Updates** | **The system must update inventory levels in real-time to prevent overselling and ensure accurate stock information. <br><br> Real-time updates help maintain trust with users by ensuring they can only purchase items that are actually in stock, reducing the likelihood of customer dissatisfaction.** |
+
+
+**Table 8:** STEAL! technical requirements.
 
 #### 3.3. Restrictions
 
+| **Identifier** | **Name** | **Description** |
+|-|-|-|
+| R01 | Game Age Restriction | Users must be at least the age specified by the game’s age rating (e.g., ESRB, PEGI) to create an account or make purchases for that game. |
+| R02 | Wishlist Promotion Notifications | Authenticated users who have a game in their wishlist will receive notifications of any promotional offers (e.g., discounts, bundles) related to that game. |
+
+**Table 9:** STEAL! project restrictions.
 
 ---
 
