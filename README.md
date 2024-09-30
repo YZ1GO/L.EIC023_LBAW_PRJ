@@ -11,7 +11,7 @@
 
 **STEAL!** is an online marketplace focused on selling Content Distribution Keys (CDKs). It offers a secure, user-friendly platform for gamers seeking affordable game keys, aiming to become the top destination for accessible, high-quality digital gaming.
 
-**"SO AFFORDABLE IT'S LIKE STEALING!"** 
+> **"SO AFFORDABLE IT'S LIKE STEALING!"** 
 
 ----
 
