@@ -53,18 +53,18 @@ The following artifact contains the specifications about the actors and their us
 ### 1. Actors
 ![Actor Diagram](assets/actor_diagram.png)
 
-**Figure 1:** Actor Diagram
+**Figure 1:** STEAL! actors.
 
 | **Actor**            | **Description**                                                                                     |
 |----------------------|-----------------------------------------------------------------------------------------------------|
 | Anonymous User        | Users who can browse products without registration, allowing them to explore the marketplace, but can choose to authenticate whenever they wish.        |
-| User                 | A generic user who can access all publicly available information, such as listed CDKs.                                      |
+| User                 | Generic users who can access all publicly available information, such as listed CDKs.                                      |
 | Authenticated User   | Registered users who have access to additional features of the platform.                                 |
 | Buyer                | Registered users who can browse products, purchase CDKs, and create wishlists and engage with reviews.      |
 | Seller               | Users who list CDKs for sale and manage their product information and pricing. Cannot buy products.  |
 | Administrator        | Users with full control over the platform, managing product listings, user accounts, and overseeing order processing. Cannot make purchases. |
 
-**Table 1:** Actors and their descriptions
+**Table 1:** STEAL! Actors description.
 
 ### 2. User Stories
 
@@ -79,6 +79,7 @@ We have defined the following user stories to facilitate the workflow and clarif
 | US3            | Register Account                      | High         | As an Anonymous User, I want to register an account, so that I can access additional features.                                         |
 | US4            | Sign In Account                      | High         | As an Anonymous User, I want to sign in to my account, so that I can access additional features.                                         |
 
+**Table 2:** Anonymous User user stories.
 
 #### 2.2. Authenticated User
 
@@ -90,6 +91,7 @@ We have defined the following user stories to facilitate the workflow and clarif
 | US8           | Access Public Information             | High         | As a Authenticated User, I want to access all publicly available information, so that I can make informed decisions about CDKs.                                          |
 | US9           | Contact Customer Support              | Medium       | As a Authenticated User, I want to be able to contact customer support, so that I can get help with any issues or questions I have.                                                |
 
+**Table 3:** Authenticated User user stories.
 
 #### 2.3. Buyer
 
@@ -109,6 +111,8 @@ We have defined the following user stories to facilitate the workflow and clarif
 | US21           | Cancel Order                          | Medium       | As a Buyer, I want to cancel my order, so that I can manage my purchases effectively if I change my mind.                                                 |
 | US22           | Report Inappropriate Reviews          | Medium       | As a Buyer, I want to report inappropriate reviews, so that I can help maintain a respectful and constructive community.                                   |
 
+**Table 4:** Buyer user stories.
+
 #### 2.4. Seller
 
 | **Identifier** | **Name**                              | **Priority** | **Description**                                                                                                                                         |
@@ -119,6 +123,8 @@ We have defined the following user stories to facilitate the workflow and clarif
 | US26           | Receive Seller Notifications          | Medium       | As a Seller, I want to receive notifications about sales and buyer reviews, so that I can stay informed about my transactions and feedback.               |
 | US27           | Manage Product Listings               | High         | As an Administrator, I want to manage product listings and stock, so that the marketplace has accurate and relevant information.                         |
 
+**Table 5:** Seller user stories.
+
 #### 2.5. Administrator
 
 | **Identifier** | **Name**                              | **Priority** | **Description**                                                                                                                                         |
@@ -127,6 +133,7 @@ We have defined the following user stories to facilitate the workflow and clarif
 | US29           | Oversee Order Processing              | High         | As an Administrator, I want to oversee order processing and manage order status, so that I can ensure smooth operations and address any issues promptly.  |
 | US30           | Manage Product Discounts              | Medium       | As an Administrator, I want to manage product discounts, so that I can offer promotions and sales on CDKs.                                                |
 
+**Table 6:** Administrator user stories.
 
 ### 3. Supplementary Requirements
 
