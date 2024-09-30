@@ -57,12 +57,12 @@ The following artifact contains the specifications about the actors and their us
 
 | **Actor** | **Description** |
 |-|-|
-| Anonymous User        | Users who can browse products without registration, allowing them to explore the marketplace, but can choose to authenticate whenever they wish.        |
-| User                 | Generic users who can access all publicly available information, such as listed CDKs.                                      |
-| Authenticated User   | Registered users who have access to additional features of the platform.                                 |
-| Buyer                | Registered users who can browse products, purchase CDKs, and create wishlists and engage with reviews.      |
-| Seller               | Users who list CDKs for sale and manage their product information and pricing. Cannot buy products.  |
-| Administrator        | Users with full control over the platform, managing product listings, user accounts, and overseeing order processing. Cannot make purchases. |
+| Anonymous User | Users who can browse products without registration, allowing them to explore the marketplace, but can choose to authenticate whenever they wish. |
+| User | Generic users who can access all publicly available information, such as listed CDKs. |
+| Authenticated User | Registered users who have access to additional features of the platform. |
+| Buyer | Registered users who can browse products, purchase CDKs, and create wishlists and engage with reviews. |
+| Seller | Users who list CDKs for sale and manage their product information and pricing. Cannot buy products. |
+| Administrator | Users with full control over the platform, managing product listings, user accounts, and overseeing order processing. Cannot make purchases. |
 
 **Table 1:** STEAL! Actors description.
 
@@ -72,66 +72,66 @@ We have defined the following user stories to facilitate the workflow and clarif
 
 #### 2.1. Anonymous User
 
-| **Identifier** | **Name**                              | **Priority** | **Description**                                                                                                                                         |
-|----------------|---------------------------------------|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| US1            | Browse Marketplace                    | High         | As an Anonymous User, I want to browse the marketplace and view the product list and categories, so that I can explore available CDKs.                   |
-| US2            | View Product Details                  | High         | As an Anonymous User, I want to view detailed information about a CDK, including reviews, so that I can decide if I want to purchase it.                 |
-| US3            | Register Account                      | High         | As an Anonymous User, I want to register an account, so that I can access additional features.                                         |
-| US4            | Sign In Account                      | High         | As an Anonymous User, I want to sign in to my account, so that I can access additional features.                                         |
+| **Identifier** | **Name** | **Priority** | **Description** |
+|-|-|-|-|
+| US1 | Browse Marketplace | High | As an Anonymous User, I want to browse the marketplace and view the product list and categories, so that I can explore available CDKs. |
+| US2 | View Product Details | High | As an Anonymous User, I want to view detailed information about a CDK, including reviews, so that I can decide if I want to purchase it. |
+| US3 | Register Account | High | As an Anonymous User, I want to register an account, so that I can access additional features. |
+| US4 | Sign In Account | High | As an Anonymous User, I want to sign in to my account, so that I can access additional features. |
 
 **Table 2:** Anonymous User user stories.
 
 #### 2.2. Authenticated User
 
-| **Identifier** | **Name**                              | **Priority** | **Description**                                                                                                                                         |
-|----------------|---------------------------------------|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| US5           | Update Profile Information            | Low          | As an Authenticated User, I want to update my profile information, so that my account details are current.                                                |
-| US6           | Change Password                       | Medium          | As an Authenticated User, I want to change my password, so that I can maintain the security of my account.                                                |
-| US7           | View Activity History                 | Low          | As an Authenticated User, I want to view my activity history, so that I can keep track of my interactions on the platform.                                |
-| US8           | Access Public Information             | High         | As a Authenticated User, I want to access all publicly available information, so that I can make informed decisions about CDKs.                                          |
-| US9           | Contact Customer Support              | Medium       | As a Authenticated User, I want to be able to contact customer support, so that I can get help with any issues or questions I have.                                                |
+| **Identifier** | **Name** | **Priority** | **Description** |
+|-|-|-|-|
+| US5 | Update Profile Information | Low | As an Authenticated User, I want to update my profile information, so that my account details are current. |
+| US6 | Change Password | Medium | As an Authenticated User, I want to change my password, so that I can maintain the security of my account. |
+| US7 | View Activity History | Low | As an Authenticated User, I want to view my activity history, so that I can keep track of my interactions on the platform. |
+| US8 | Access Public Information | High | As a Authenticated User, I want to access all publicly available information, so that I can make informed decisions about CDKs. |
+| US9 | Contact Customer Support | Medium | As a Authenticated User, I want to be able to contact customer support, so that I can get help with any issues or questions I have. |
 
 **Table 3:** Authenticated User user stories.
 
 #### 2.3. Buyer
 
-| **Identifier** | **Name**                              | **Priority** | **Description**                                                                                                                                         |
-|----------------|---------------------------------------|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| US10            | Search CDKs by Genre/Platform         | High         | As a Buyer, I want to search for CDKs by genre or platform, so that I can quickly find the games I am interested in.                                      |
-| US11            | Add to Wishlist                       | Medium       | As a Buyer, I want to add CDKs to my wishlist, so that I can save them for future purchases.                                                             |
-| US12            | Leave Reviews and Ratings             | Medium       | As a Buyer, I want to leave reviews and ratings for CDKs I have purchased, so that I can share my experience with other users.                            |
-| US13            | Manage Shopping Cart                  | High         | As a Buyer, I want to manage my shopping cart, so that I can easily add or remove items before checkout.                                                  |
-| US14            | Multiple Payment Options              | High         | As a Buyer, I want to complete my purchase using multiple payment methods, so that I can choose the most convenient method for me.                        |
-| US15            | Track Purchase History                | Medium       | As a Buyer, I want to track my purchase history, so that I can review my past orders.                                                                     |
-| US16           | Receive Order and Price Notifications | Medium       | As a Buyer, I want to receive notifications about order status, promotions, and price changes on products in my cart or wishlist.                         |
-| US17           | Receive Payment and Order Notifications | Medium     | As a Buyer, I want to receive notifications about payment approvals and changes in order status, so that I am updated on my purchase progress.            |
-| US18           | Manage Wishlist                       | Medium       | As a Buyer, I want to manage my wishlist, so that I can keep track of desired CDKs and purchase them in the future.                                       |
-| US19           | Review Purchased Product              | Medium       | As a Buyer, I want to review products I have purchased, so that I can share my feedback with other users.                                                 |
-| US20           | Edit or Remove Review                 | Medium       | As a Buyer, I want to edit or remove my reviews, so that I can update or delete feedback as necessary.                                             |
-| US21           | Cancel Order                          | Medium       | As a Buyer, I want to cancel my order, so that I can manage my purchases effectively if I change my mind.                                                 |
-| US22           | Report Inappropriate Reviews          | Medium       | As a Buyer, I want to report inappropriate reviews, so that I can help maintain a respectful and constructive community.                                   |
+| **Identifier** | **Name** | **Priority** | **Description** |
+|-|-|-|-|
+| US10 | Search CDKs by Genre/Platform | High | As a Buyer, I want to search for CDKs by genre or platform, so that I can quickly find the games I am interested in. |
+| US11 | Add to Wishlist | Medium | As a Buyer, I want to add CDKs to my wishlist, so that I can save them for future purchases. |
+| US12 | Leave Reviews and Ratings| Medium | As a Buyer, I want to leave reviews and ratings for CDKs I have purchased, so that I can share my experience with other users. |
+| US13 | Manage Shopping Cart | High | As a Buyer, I want to manage my shopping cart, so that I can easily add or remove items before checkout. |
+| US14 | Multiple Payment Options | High | As a Buyer, I want to complete my purchase using multiple payment methods, so that I can choose the most convenient method for me. |
+| US15 | Track Purchase History | Medium | As a Buyer, I want to track my purchase history, so that I can review my past orders. |
+| US16 | Receive Order and Price Notifications | Medium | As a Buyer, I want to receive notifications about order status, promotions, and price changes on products in my cart or wishlist. |
+| US17 | Receive Payment and Order Notifications | Medium | As a Buyer, I want to receive notifications about payment approvals and changes in order status, so that I am updated on my purchase progress. |
+| US18 | Manage Wishlist | Medium | As a Buyer, I want to manage my wishlist, so that I can keep track of desired CDKs and purchase them in the future. |
+| US19 | Review Purchased Product | Medium | As a Buyer, I want to review products I have purchased, so that I can share my feedback with other users. |
+| US20 | Edit or Remove Review | Medium | As a Buyer, I want to edit or remove my reviews, so that I can update or delete feedback as necessary. |
+| US21| Cancel Order | Medium | As a Buyer, I want to cancel my order, so that I can manage my purchases effectively if I change my mind.|
+| US22| Report Inappropriate Reviews | Medium | As a Buyer, I want to report inappropriate reviews, so that I can help maintain a respectful and constructive community. |
 
 **Table 4:** Buyer user stories.
 
 #### 2.4. Seller
 
-| **Identifier** | **Name**                              | **Priority** | **Description**                                                                                                                                         |
-|----------------|---------------------------------------|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| US23           | List CDKs for Sale                    | High         | As a Seller, I want to list CDKs for sale, so that I can reach potential buyers.                                                                          |
-| US24           | Manage Product Information and Pricing | Medium       | As a Seller, I want to manage my product information and pricing, so that I can keep my listings up-to-date and competitive.                              |
-| US25           | View Sales History                    | Medium       | As a Seller, I want to view my sales history, so that I can track my performance and earnings.                                                            |
-| US26           | Receive Seller Notifications          | Medium       | As a Seller, I want to receive notifications about sales and buyer reviews, so that I can stay informed about my transactions and feedback.               |
-| US27           | Manage Product Listings               | High         | As an Administrator, I want to manage product listings and stock, so that the marketplace has accurate and relevant information.                         |
+| **Identifier** | **Name** | **Priority** | **Description** |
+|-|-|-|-|
+| US23 | List CDKs for Sale | High | As a Seller, I want to list CDKs for sale, so that I can reach potential buyers. |
+| US24 | Manage Product Information and Pricing | Medium | As a Seller, I want to manage my product information and pricing, so that I can keep my listings up-to-date and competitive. |
+| US25 | View Sales History | Medium | As a Seller, I want to view my sales history, so that I can track my performance and earnings.|
+| US26 | Receive Seller Notifications | Medium | As a Seller, I want to receive notifications about sales and buyer reviews, so that I can stay informed about my transactions and feedback. |
+| US27 | Manage Product Listings | High | As an Administrator, I want to manage product listings and stock, so that the marketplace has accurate and relevant information. |
 
 **Table 5:** Seller user stories.
 
 #### 2.5. Administrator
 
-| **Identifier** | **Name**                              | **Priority** | **Description**                                                                                                                                         |
-|----------------|---------------------------------------|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| US28           | Manage User Accounts                  | High         | As an Administrator, I want to manage user accounts, so that I can maintain a secure and orderly platform.                                                |
-| US29           | Oversee Order Processing              | High         | As an Administrator, I want to oversee order processing and manage order status, so that I can ensure smooth operations and address any issues promptly.  |
-| US30           | Manage Product Discounts              | Medium       | As an Administrator, I want to manage product discounts, so that I can offer promotions and sales on CDKs.                                                |
+| **Identifier** | **Name** | **Priority** | **Description** |
+|-|-|-|-|
+| US28 | Manage User Accounts | High | As an Administrator, I want to manage user accounts, so that I can maintain a secure and orderly platform. |
+| US29 | Oversee Order Processing | High | As an Administrator, I want to oversee order processing and manage order status, so that I can ensure smooth operations and address any issues promptly. |
+| US30 | Manage Product Discounts | Medium | As an Administrator, I want to manage product discounts, so that I can offer promotions and sales on CDKs. |
 
 **Table 6:** Administrator user stories.
 
@@ -144,7 +144,7 @@ This section contains business rules, technical requirements and other non-funct
 | **Identifier** | **Name** | **Description** |
 |-|-|-|
 | BR01 | Administrator Account | Administrators accounts are independent of the user accounts, i.e. they cannot be created by anonymous user. |
-| BR02 | Delete Account |  Upon account deletion, shared user data (e.g. comments, reviews, likes) is kept but is made anonymous.  |
+| BR02 | Delete Account |  Upon account deletion, shared user data (e.g. comments, reviews, likes) is kept but is made anonymous.|
 | BR03 | Deleted Item History |  The history of an item must be maintained, even if the item is deleted, to preserve the sales record for all items. |
 | BR04 | Purchase Confirmation | Buyers must confirm their purchase before payment is processed. After confirmation, no changes or cancellations can be made. |
 | BR05 | Price Changes | Sellers can modify the price of listed CDKs, but buyers who already made a purchase will not be affected by the price change. |
