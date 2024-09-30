@@ -55,8 +55,8 @@ The following artifact contains the specifications about the actors and their us
 
 **Figure 1:** STEAL! actors.
 
-| **Actor**            | **Description**                                                                                     |
-|----------------------|-----------------------------------------------------------------------------------------------------|
+| **Actor** | **Description** |
+|-|-|
 | Anonymous User        | Users who can browse products without registration, allowing them to explore the marketplace, but can choose to authenticate whenever they wish.        |
 | User                 | Generic users who can access all publicly available information, such as listed CDKs.                                      |
 | Authenticated User   | Registered users who have access to additional features of the platform.                                 |
@@ -137,10 +137,21 @@ We have defined the following user stories to facilitate the workflow and clarif
 
 ### 3. Supplementary Requirements
 
-> Section including business rules, technical requirements, and restrictions.  
-> For each subsection, a table containing identifiers, names, and descriptions for each requirement.
+This section contains business rules, technical requirements and other non-functional requirements on the project.
 
 #### 3.1. Business rules
+
+| **Identifier** | **Name** | **Description** |
+|-|-|-|
+| BR01 | Administrator Account | Administrators accounts are independent of the user accounts, i.e. they cannot be created by anonymous user. |
+| BR02 | Delete Account |  Upon account deletion, shared user data (e.g. comments, reviews, likes) is kept but is made anonymous.  |
+| BR03 | Deleted Item History |  The history of an item must be maintained, even if the item is deleted, to preserve the sales record for all items. |
+| BR04 | Purchase Confirmation | Buyers must confirm their purchase before payment is processed. After confirmation, no changes or cancellations can be made. |
+| BR05 | Price Changes | Sellers can modify the price of listed CDKs, but buyers who already made a purchase will not be affected by the price change. |
+| BR06 | Refund Policy | Refunds can be issued for game keys only if the key has not been redeemed. Once redeemed, refunds are not permitted. |
+| BR07 | Key Delivery | After payment is confirmed, the CDK is delivered instantly via the buyer's email. |
+| BR08 | Stock Availability | Buyers can only purchase a CDK if it is in stock. Out-of-stock items cannot be added to the cart or purchased. |
+| BR09 | Wishlist Removal | If a game is deleted from the store, it is automatically removed from all users' wishlists. |
 
 #### 3.2. Technical requirements
 
