@@ -112,6 +112,7 @@ We have defined the following user stories to facilitate the workflow and clarif
 | US22 | Edit or Remove Review | Medium | As a Buyer, I want to edit or remove my reviews, so that I can update or delete feedback as necessary. |
 | US23 | Cancel Order | Medium | As a Buyer, I want to cancel my order, so that I can manage my purchases effectively if I change my mind.|
 | US24 | Report Inappropriate Reviews | Medium | As a Buyer, I want to report inappropriate reviews, so that I can help maintain a respectful and constructive community. |
+| US25 | Receive CDK recommendations | Low | As a Buyer, I want to receive CDK recommendations based on my search history and previous purchases, so that I more easily find products that may be of my interest. |
 
 **Table 4:** Buyer user stories.
 
@@ -119,11 +120,11 @@ We have defined the following user stories to facilitate the workflow and clarif
 
 | **Identifier** | **Name** | **Priority** | **Description** |
 |-|-|-|-|
-| US25 | List CDKs for Sale | High | As a Seller, I want to list CDKs for sale, so that I can reach potential buyers. |
-| US26 | Manage Product Listings | High | As a Seller, I want to manage product listings and stock, so that the marketplace has accurate and relevant information. |
-| US27 | Manage Product Information and Pricing | Medium | As a Seller, I want to manage my product information and pricing, so that I can keep my listings up-to-date and competitive. |
-| US28 | View Sales History | Medium | As a Seller, I want to view my sales history, so that I can track my performance and earnings.|
-| US29 | Receive Seller Notifications | Medium | As a Seller, I want to receive notifications about sales and buyer reviews, so that I can stay informed about my transactions and feedback. |
+| US26 | List CDKs for Sale | High | As a Seller, I want to list CDKs for sale, so that I can reach potential buyers. |
+| US27 | Manage Product Listings | High | As a Seller, I want to manage product listings and stock, so that the marketplace has accurate and relevant information. |
+| US28 | Manage Product Information and Pricing | Medium | As a Seller, I want to manage my product information and pricing, so that I can keep my listings up-to-date and competitive. |
+| US29 | View Sales History | Medium | As a Seller, I want to view my sales history, so that I can track my performance and earnings.|
+| US30 | Receive Seller Notifications | Medium | As a Seller, I want to receive notifications about sales and buyer reviews, so that I can stay informed about my transactions and feedback. |
 
 **Table 5:** Seller user stories.
 
@@ -131,9 +132,11 @@ We have defined the following user stories to facilitate the workflow and clarif
 
 | **Identifier** | **Name** | **Priority** | **Description** |
 |-|-|-|-|
-| US30 | Manage User Accounts | High | As an Administrator, I want to manage user accounts, so that I can maintain a secure and orderly platform. |
-| US31 | Oversee Order Processing | High | As an Administrator, I want to oversee order processing and manage order status, so that I can ensure smooth operations and address any issues promptly. |
-| US32 | Manage Product Discounts | Medium | As an Administrator, I want to manage product discounts, so that I can offer promotions and sales on CDKs. |
+| US31 | Manage User Accounts | High | As an Administrator, I want to manage user accounts, so that I can maintain a secure and orderly platform. |
+| US32 | Oversee Order Processing | High | As an Administrator, I want to oversee order processing and manage order status, so that I can ensure smooth operations and address any issues promptly. |
+| US33 | Manage Product Discounts | Medium | As an Administrator, I want to manage product discounts, so that I can offer promotions and sales on CDKs. |
+| US34 | Remove products | Medium | As an Administrator, I want to be able to remove and ban certain CDK's from the system, so that I can ensure that all products available comply with our system's rules and guidelines. |
+| US35 | Delete inappropriate reviews | Medium | As an Administrator, I want to be able to delete inappropriate user reviews from the system, so that I can keep the interactions between the users respectful and polite. |
 
 **Table 6:** Administrator user stories.
 
@@ -191,12 +194,28 @@ This section contains business rules, technical requirements and other non-funct
 
 ## A3: Information Architecture
 
-> Brief presentation of the artifact goals.
+> The following artifact provides a brief overview of the system's architecture. This overview facilitates a more in-depth identification and description of user requirements, as well as the methodical planning of the system's interface.
+
+This artifact includes two key elements:
+
+- 1. Sitemap – This element presents a brief and concise organization of the system's interface.
+- 2. Wireframes – These elements provide a simple overview of selected system interface pages. They help define functionality and describe content placement and organization. A minimum of two wireframes will be included in this section.
 
 
 ### 1. Sitemap
 
-STEAL! is divided in six main page types, the static pages that provide general information about the system, the authentication pages that allow unauthenticated users to create an account or login to the system, the item pages that can used by all user to view details and interact the CDK'S available in our system, the client pages available only to client users/buyers for buyer actions, the seller pages only available to sellers so that they can list CDK's for sale and manage them and the admin pages that are reserved for system admins to perform administrative tasks such as managing user accounts, product listings or user reports/complaints.
+A sitemap is a visual representation of the relationships between the pages within a system's interface, illustrating how information is organized and connected. It identifies all unique pages in the system and shows how they are structured and related to each other.
+
+The STEAL! system is divided into six main page types:
+
+- Static pages: Provide general information about the system.
+- Authentication pages: Allow unauthenticated users to create an account or log in.
+- Item pages: Accessible by all users to view details and interact with CDKs (codes or products) available in the system.
+- Client pages: Reserved for buyers (client users), enabling actions related to purchasing.
+- Seller pages: Exclusively for sellers to list, manage, and sell CDKs.
+- Admin pages: Reserved for system administrators to manage user accounts, product listings, and handle user reports or complaints.
+
+In the following sitemap, all pages in STEAL!'s interface are displayed as small rounded boxes and grouped by their type (e.g., static, authentication, client). Black lines represent direct navigational paths between pages. Some pages with the exact same functionality and organization that can have different instances per user such as the CDK info pages are represented by a stack of pages.
 
 ![sitemap](assets/sitemap.png)
 
