@@ -197,9 +197,11 @@ This section contains business rules, technical requirements and other non-funct
 
 ### 1. Sitemap
 
-> Sitemap presenting the overall structure of the web application.  
-> Each page must be identified in the sitemap.  
-> Multiple instances of the same page (e.g. student profile in SIGARRA) are presented as page stacks.
+STEAL! is divided in five main page types, the static pages that provide general information about the system, the item pages that can used by all user to view details and interact the CDK'S available in our system, the client pages available only to client users/buyers for buyer actions, the seller pages only available to sellers so that they can list CDK's for sale and manage them and the admin pages that are reserved for system admins to perform administrative tasks such as managing user accounts, product listings or user reports/complaints.
+
+![sitemap](assets/sitemap.png)
+**Figure 1:** STEAL! sitemap.
+
 
 
 ### 2. Wireframes
