@@ -55,15 +55,15 @@ The following artifact contains the specifications about the actors and their us
 
 **Figure 1:** STEAL! actors.
 
-| **Actor**            | **Description**                                                                                     |
-|----------------------|-----------------------------------------------------------------------------------------------------|
-| Anonymous User       | Users who can browse products without registration, allowing them to explore the marketplace, but can choose to authenticate whenever they wish.        |
-| User                 | A generic user who can access all publicly available information, such as listed games.                                      |
-| Authenticated User   | Registered users who have access to additional features of the platform.                                 |
-| Buyer                | Registered users who can browse products, purchase CDKs, and create wishlists and engage with reviews.      |
-| Seller               | Users who list game keys for sale and manage their product information and pricing. Cannot buy products.  |
-| Administrator        | Users with full control over the platform, managing product listings, user accounts, and overseeing order processing. Cannot make purchases. |
-| Google OAuth         | Allows users to authenticate using their Google account, allowing for a quick and secure sign-in process. |
+| **Actor** | **Description** |
+|-|-|
+| Anonymous User | Users who can browse products without registration, allowing them to explore the marketplace, but can choose to authenticate whenever they wish. |
+| User | Generic users who can access all publicly available information, such as listed games. |
+| Authenticated User | Registered users who have access to additional features of the platform. |
+| Buyer | Registered users who can browse products, purchase CDKs, and create wishlists and engage with reviews. |
+| Seller | Users who list game keys for sale and manage their product information and pricing. Cannot buy products. |
+| Administrator | Users with full control over the platform, managing product listings, user accounts, and overseeing order processing. Cannot make purchases. |
+| Google OAuth | Allows users to authenticate using their Google account, allowing for a quick and secure sign-in process. |
 
 **Table 1:** STEAL! Actors description.
 
@@ -80,7 +80,7 @@ We have defined the following user stories to facilitate the workflow and clarif
 | US3 | Register Account | High | As an Anonymous User, I want to register an account, so that I can access additional features. |
 | US4 | Sign In Account | High | As an Anonymous User, I want to sign in to my account, so that I can have access additional features. |
 | US5 | Add to Shopping Cart | High | As an Anonymous User, I want to add games to a shopping cart, so that I can purchase multiple items at once. |
-| US 6 | Manage Shopping Cart | High | As an Anonymous User, I want to manage my shopping cart, so that I can update quantities or remove items before purchasing. |
+| US6 | Manage Shopping Cart | High | As an Anonymous User, I want to manage my shopping cart, so that I can update quantities or remove items before purchasing. |
 
 **Table 2:** Anonymous User user stories.
 
