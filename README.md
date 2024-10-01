@@ -28,17 +28,23 @@ The increased demand for video games has made STEAL! possible by providing affor
 
 ### Main Features
 
-STEAL! provides advanced search and filtering options, making it easy for users to find their desired games. It also offers personalized game recommendations based on users' preferences for those unsure of what to play next. 
+STEAL! provides advanced search and filtering options, making it easy for users to find their desired games. It also offers personalized game recommendations based on users' preferences for those unsure of what to play next. Additionally, users can leave reviews for games they have purchased, helping others make informed decisions.
 
-Recognizing that our users are the foundation of our success, we reward them with **S coins**, which can be used in the store. Additionally, users can create wishlists to save their favorite games and take advantage of special sales when they occur.
+We have a dedicated staff team that actively manages the site and monitors user activity. If any suspicious behavior or inappropriate content is detected, whether in reviews or elsewhere, our team promptly takes action to ensure a safe and healthy gaming community.
+
+We have partnered with numerous game companies, allowing them to list their games directly on our platform, ensuring a wide and diverse selection for our users. Users can also log in with their Google account for a seamless and quick authentication process.
+
+Authenticated users with games in their wishlist will receive real-time notifications about discounts and special offers, ensuring they never miss a great deal. Our site also supports multiple currencies, enabling users from around the world to make purchases in their preferred currency for a more convenient shopping experience.
+
+Recognizing that our users are the foundation of our success, we reward them with **S coins**, which can be used in the store. Experience top-rated, minimalist design for effortless browsing and unbeatable deals, making your shopping journey as smooth as possible.
 
 ### User Profiles
 
 STEAL! accommodates four distinct user profiles: 
 - **Anonymous Users:** can browse products without registration, allowing them to explore the marketplace before deciding whether to create an account. 
 - **Buyers:** are registered users who can browse products, purchase CDKs, and engage with the platform through wishlists and reviews. 
-- **Sellers:** are users who list games for sale and manage their product information and pricing, but they cannot buy products on the platform. 
-- **Administrators:** have full control over the platform, managing product listings, user accounts, and overseeing order processing to ensure smooth operations; however, they also cannot make purchases. 
+- **Sellers:** are users who list games for sale, manage their product information and pricing, and oversee order processing to ensure efficient transactions, but they cannot buy products on the platform.
+- **Administrators:** have full control over the platform, managing product listings and user accounts to maintain smooth operations; however, they also cannot make purchases.
 
 Together, these user profiles create a dynamic marketplace that fosters interaction and supports the gaming community.
 
