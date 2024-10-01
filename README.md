@@ -129,6 +129,7 @@ We have defined the following user stories to facilitate the workflow and clarif
 | US31 | View Sales History | Medium | As a Seller, I want to view my sales history, so that I can track my performance and earnings.|
 | US32 | Receive Seller Notifications | Medium | As a Seller, I want to receive notifications about sales and buyer reviews, so that I can stay informed about my transactions and feedback. |
 | US33 | Manage Product Discounts | Medium | As a Seller, I want to manage product discounts, so that I can offer promotions and sales on CDKs. |
+| US34 | Oversee Order Processing | Medium | As a Seller, I want to oversee order processing and manage order status, so that I can ensure smooth operations and address any issues promptly. |
 
 **Table 5:** Seller user stories.
 
@@ -136,8 +137,7 @@ We have defined the following user stories to facilitate the workflow and clarif
 
 | **Identifier** | **Name** | **Priority** | **Description** |
 |-|-|-|-|
-| US34 | Manage User Accounts | High | As an Administrator, I want to manage user accounts, so that I can maintain a secure and orderly platform. |
-| US35 | Oversee Order Processing | High | As an Administrator, I want to oversee order processing and manage order status, so that I can ensure smooth operations and address any issues promptly. |
+| US35 | Manage User Accounts | High | As an Administrator, I want to manage user accounts, so that I can maintain a secure and orderly platform. |
 | US36 | Remove products | Medium | As an Administrator, I want to be able to remove and ban certain games from the system, so that I can ensure that all products available comply with our system's rules and guidelines. |
 | US37 | Delete inappropriate reviews | Medium | As an Administrator, I want to be able to delete inappropriate user reviews from the system, so that I can keep the interactions between the users respectful and polite. |
 | US38 | Access to Sales Report | Low | As an Administrator, I want to access sales reports for all games, so that I can analyze overall sales performance and trends. |
