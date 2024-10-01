@@ -75,7 +75,7 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 
 | **Identifier** | **Name** | **Priority** | **Responsible** | **Description** |
 |-|-|-|-|-|
-| US1 | Browse Marketplace | High | - | As an Anonymous User, I want to browse the marketplace and view the product list and categories, so that I can explore available CDKs. |
+| US1 | Browse Marketplace | High | - | As an Anonymous User, I want to browse the marketplace, view and filter the product list and categories, so that I can explore available CDKs. |
 | US2 | View Product Details | High | - | As an Anonymous User, I want to view detailed information about a game, including reviews, so that I can decide if I want to purchase it. |
 | US3 | Register Account | High | - | As an Anonymous User, I want to register an account, so that I can access additional features. |
 | US4 | Sign In Account | High | - | As an Anonymous User, I want to sign in to my account, so that I can have access additional features. |
@@ -90,11 +90,10 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 |-|-|-|-|-|
 | US7 | Log Out | High | - | As an Authenticated User, I want to log out of my account, so that my session is securely terminated and my account is protected. |
 | US8 | View Profile | High | - | As an Authenticated User, I want to view my profile information, so that I can see my account details and ensure they are correct. |
-| US9 | Access Public Information | High | - | As an Authenticated User, I want to access all publicly available information, so that I can make informed decisions about games. |
+| US9 | Update Profile Information | High | - | As an Authenticated User, I want to update my profile information, so that my account details are current. |
 | US10 | Change Password | Medium | - | As an Authenticated User, I want to change my password, so that I can maintain the security of my account. |
 | US11 | Contact Customer Support | Medium | - | As an Authenticated User, I want to be able to contact customer support, so that I can get help with any issues or questions I have. |
 | US12 | View Activity History | Low | - | As an Authenticated User, I want to view my activity history, so that I can keep track of my interactions on the platform. |
-| US13 | Update Profile Information | Low | - | As an Authenticated User, I want to update my profile information, so that my account details are current. |
 
 **Table 3:** Authenticated User user stories.
 
@@ -102,20 +101,20 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 
 | **Identifier** | **Name** | **Priority** | **Responsible** | **Description** |
 |-|-|-|-|-|
-| US14 | Search Games by Genre/Platform | High | - | As a Buyer, I want to search for games by genre or platform, so that I can quickly find the games I am interested in. |
-| US15 | Manage Shopping Cart | High | - | As a Buyer, I want to manage my shopping cart, so that I can easily add or remove items before checkout. |
-| US16 | Multiple Payment Options | High | - | As a Buyer, I want to complete my purchase using multiple payment methods, so that I can choose the most convenient method for me. |
-| US17 | Manage Wishlist | High | - | As a Buyer, I want to manage my wishlist, so that I can keep track of desired games and purchase them in the future. |
-| US18 | Add to Wishlist | High | - | As a Buyer, I want to add games to my wishlist, so that I can save them for future purchases. |
-| US19 | Leave Reviews and Ratings| Medium | - | As a Buyer, I want to leave reviews and ratings for CDKs I have purchased, so that I can share my experience with other users. |
-| US20 | Track Purchase History | Medium | - | As a Buyer, I want to track my purchase history, so that I can review my past orders. |
-| US21 | Receive Order and Price Notifications | Medium | - | As a Buyer, I want to receive notifications about order status, promotions, and price changes on products in my cart or wishlist. |
-| US22 | Receive Payment and Order Notifications | Medium | - | As a Buyer, I want to receive notifications about payment approvals and changes in order status, so that I am updated on my purchase progress. |
-| US23 | Review Purchased Product | Medium | - | As a Buyer, I want to review products I have purchased, so that I can share my feedback with other users. |
-| US24 | Edit or Remove Review | Medium | - | As a Buyer, I want to edit or remove my reviews, so that I can update or delete feedback as necessary. |
-| US25 | Cancel Order | Medium | - | As a Buyer, I want to cancel my order, so that I can manage my purchases effectively if I change my mind.|
-| US26 | Report Inappropriate Reviews | Medium | - | As a Buyer, I want to report inappropriate reviews, so that I can help maintain a respectful and constructive community. |
-| US27 | Receive Game Recommendations | Low | - | As a Buyer, I want to receive game recommendations based on my search history and previous purchases, so that I can more easily find products that may be of my interest. |
+| US13 | Search Games by Genre/Platform | High | - | As a Buyer, I want to search for games by genre or platform, so that I can quickly find the games I am interested in. |
+| US14 | Manage Shopping Cart | High | - | As a Buyer, I want to manage my shopping cart, so that I can easily add or remove items before checkout. |
+| US15 | Multiple Payment Options | High | - | As a Buyer, I want to complete my purchase using multiple payment methods, so that I can choose the most convenient method for me. |
+| US16 | Manage Wishlist | High | - | As a Buyer, I want to manage my wishlist, so that I can keep track of desired games and purchase them in the future. |
+| US17 | Add to Wishlist | High | - | As a Buyer, I want to add games to my wishlist, so that I can save them for future purchases. |
+| US18 | Leave Reviews and Ratings| Medium | - | As a Buyer, I want to leave reviews and ratings for CDKs I have purchased, so that I can share my experience with other users. |
+| US19 | Track Purchase History | Medium | - | As a Buyer, I want to track my purchase history, so that I can review my past orders. |
+| US20 | Receive Order and Price Notifications | Medium | - | As a Buyer, I want to receive notifications about order status, promotions, and price changes on products in my cart or wishlist. |
+| US21 | Receive Payment and Order Notifications | Medium | - | As a Buyer, I want to receive notifications about payment approvals and changes in order status, so that I am updated on my purchase progress. |
+| US22 | Review Purchased Product | Medium | - | As a Buyer, I want to review products I have purchased, so that I can share my feedback with other users. |
+| US23 | Edit or Remove Review | Medium | - | As a Buyer, I want to edit or remove my reviews, so that I can update or delete feedback as necessary. |
+| US24 | Cancel Order | Medium | - | As a Buyer, I want to cancel my order, so that I can manage my purchases effectively if I change my mind.|
+| US25 | Report Inappropriate Reviews | Medium | - | As a Buyer, I want to report inappropriate reviews, so that I can help maintain a respectful and constructive community. |
+| US26 | Receive Game Recommendations | Low | - | As a Buyer, I want to receive game recommendations based on my search history and previous purchases, so that I can more easily find products that may be of my interest. |
 
 **Table 4:** Buyer user stories.
 
@@ -123,13 +122,13 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 
 | **Identifier** | **Name** | **Priority** | **Responsible** | **Description** |
 |-|-|-|-|-|
-| US28 | List Games for Sale | High | - | As a Seller, I want to list games for sale, so that I can reach potential buyers. |
-| US29 | Manage Product Listings | High | - | As a Seller, I want to manage product listings and stock, so that the marketplace has accurate and relevant information. |
-| US30 | Manage Product Information and Pricing | Medium | - | As a Seller, I want to manage my product information and pricing, so that I can keep my listings up-to-date and competitive. |
-| US31 | View Sales History | Medium | - | As a Seller, I want to view my sales history, so that I can track my performance and earnings.|
-| US32 | Receive Seller Notifications | Medium | - | As a Seller, I want to receive notifications about sales and buyer reviews, so that I can stay informed about my transactions and feedback. |
-| US33 | Manage Product Discounts | Medium | - | As a Seller, I want to manage product discounts, so that I can offer promotions and sales on CDKs. |
-| US34 | Oversee Order Processing | Medium | - | As a Seller, I want to oversee order processing and manage order status, so that I can ensure smooth operations and address any issues promptly. |
+| US27 | List Games for Sale | High | - | As a Seller, I want to list games for sale, so that I can reach potential buyers. |
+| US28 | Manage Product Listings | High | - | As a Seller, I want to manage product listings and stock, so that the marketplace has accurate and relevant information. |
+| US29 | Manage Product Information and Pricing | Medium | - | As a Seller, I want to manage my product information and pricing, so that I can keep my listings up-to-date and competitive. |
+| US30 | View Sales History | Medium | - | As a Seller, I want to view my sales history, so that I can track my performance and earnings.|
+| US31 | Receive Seller Notifications | Medium | - | As a Seller, I want to receive notifications about sales and buyer reviews, so that I can stay informed about my transactions and feedback. |
+| US32 | Manage Product Discounts | Medium | - | As a Seller, I want to manage product discounts, so that I can offer promotions and sales on CDKs. |
+| US33 | Oversee Order Processing | Medium | - | As a Seller, I want to oversee order processing and manage order status, so that I can ensure smooth operations and address any issues promptly. |
 
 **Table 5:** Seller user stories.
 
@@ -137,10 +136,10 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 
 | **Identifier** | **Name** | **Priority** | **Responsible** | **Description** |
 |-|-|-|-|-|
-| US35 | Manage User Accounts | High | - | As an Administrator, I want to manage user accounts, so that I can maintain a secure and orderly platform. |
-| US36 | Remove products | Medium | - | As an Administrator, I want to be able to remove and ban certain games from the system, so that I can ensure that all products available comply with our system's rules and guidelines. |
-| US37 | Delete inappropriate reviews | Medium | - | As an Administrator, I want to be able to delete inappropriate user reviews from the system, so that I can keep the interactions between the users respectful and polite. |
-| US38 | Access to Sales Report | Low | - | As an Administrator, I want to access sales reports for all games, so that I can analyze overall sales performance and trends. |
+| US34 | Manage User Accounts | High | - | As an Administrator, I want to manage user accounts, so that I can maintain a secure and orderly platform. |
+| US35 | Remove products | Medium | - | As an Administrator, I want to be able to remove and ban certain games from the system, so that I can ensure that all products available comply with our system's rules and guidelines. |
+| US36 | Delete inappropriate reviews | Medium | - | As an Administrator, I want to be able to delete inappropriate user reviews from the system, so that I can keep the interactions between the users respectful and polite. |
+| US37 | Access to Sales Report | Low | - | As an Administrator, I want to access sales reports for all games, so that I can analyze overall sales performance and trends. |
 
 **Table 6:** Administrator user stories.
 
