@@ -89,8 +89,8 @@ We have defined the following user stories to facilitate the workflow and clarif
 | US6 | View Profile | High | As an Authenticated User, I want to view my profile information, so that I can see my account details and ensure they are correct. |
 | US7 | Access Public Information | High | As a Authenticated User, I want to access all publicly available information, so that I can make informed decisions about CDKs. |
 | US8 | Change Password | Medium | As an Authenticated User, I want to change my password, so that I can maintain the security of my account. |
-| US9 | View Activity History | Low | As an Authenticated User, I want to view my activity history, so that I can keep track of my interactions on the platform. |
-| US10 | Contact Customer Support | Medium | As a Authenticated User, I want to be able to contact customer support, so that I can get help with any issues or questions I have. |
+| US9 | Contact Customer Support | Medium | As a Authenticated User, I want to be able to contact customer support, so that I can get help with any issues or questions I have. |
+| US10 | View Activity History | Low | As an Authenticated User, I want to view my activity history, so that I can keep track of my interactions on the platform. |
 | US11 | Update Profile Information | Low | As an Authenticated User, I want to update my profile information, so that my account details are current. |
 
 **Table 3:** Authenticated User user stories.
