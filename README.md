@@ -87,9 +87,9 @@ We have defined the following user stories to facilitate the workflow and clarif
 |-|-|-|-|
 | US5 | Log Out | High | As an Authenticated User, I want to log out of my account, so that my session is securely terminated and my account is protected. |
 | US6 | View Profile | High | As an Authenticated User, I want to view my profile information, so that I can see my account details and ensure they are correct. |
-| US7 | Access Public Information | High | As a Authenticated User, I want to access all publicly available information, so that I can make informed decisions about CDKs. |
+| US7 | Access Public Information | High | As an Authenticated User, I want to access all publicly available information, so that I can make informed decisions about CDKs. |
 | US8 | Change Password | Medium | As an Authenticated User, I want to change my password, so that I can maintain the security of my account. |
-| US9 | Contact Customer Support | Medium | As a Authenticated User, I want to be able to contact customer support, so that I can get help with any issues or questions I have. |
+| US9 | Contact Customer Support | Medium | As an Authenticated User, I want to be able to contact customer support, so that I can get help with any issues or questions I have. |
 | US10 | View Activity History | Low | As an Authenticated User, I want to view my activity history, so that I can keep track of my interactions on the platform. |
 | US11 | Update Profile Information | Low | As an Authenticated User, I want to update my profile information, so that my account details are current. |
 
@@ -148,7 +148,7 @@ This section contains business rules, technical requirements and other non-funct
 
 | **Identifier** | **Name** | **Description** |
 |-|-|-|
-| BR01 | Administrator Account | Administrators accounts are independent of the user accounts, i.e. they cannot be created by anonymous user. |
+| BR01 | Administrator Account | Administrators accounts are independent of the user accounts, i.e. they cannot be created by anonymous users. |
 | BR02 | Delete Account |  Upon account deletion, shared user data (e.g. comments, reviews, likes) is kept but is made anonymous.|
 | BR03 | Deleted Item History |  The history of an item must be maintained, even if the item is deleted, to preserve the sales record for all items. |
 | BR04 | Purchase Confirmation | Buyers must confirm their purchase before payment is processed. After confirmation, no changes or cancellations can be made. |
@@ -184,8 +184,7 @@ This section contains business rules, technical requirements and other non-funct
 
 | **Identifier** | **Name** | **Description** |
 |-|-|-|
-| R01 | Game Age Restriction | Users must be at least the age specified by the game’s age rating (e.g., ESRB, PEGI) to create an account or make purchases for that game. |
-| R02 | Wishlist Promotion Notifications | Authenticated users who have a game in their wishlist will receive notifications of any promotional offers (e.g., discounts, bundles) related to that game. |
+| C01 | Game Age Restriction | Users must be at least the age specified by the game’s age rating (e.g., ESRB, PEGI) to create an account or make purchases for that game. |
 
 **Table 9:** STEAL! project restrictions.
 
