@@ -63,6 +63,7 @@ The following artifact contains the specifications about the actors and their us
 | Buyer                | Registered users who can browse products, purchase CDKs, and create wishlists and engage with reviews.      |
 | Seller               | Users who list CDKs for sale and manage their product information and pricing. Cannot buy products.  |
 | Administrator        | Users with full control over the platform, managing product listings, user accounts, and overseeing order processing. Cannot make purchases. |
+| Google OAuth         | Allows users to authenticate using their Google account, allowing for a quick and secure sign-in process. |
 
 **Table 1:** Actors and their descriptions
 
