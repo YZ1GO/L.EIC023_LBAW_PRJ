@@ -25,7 +25,7 @@ STEAL! provides advanced search and filtering options, making it easy for users 
 
 We have a dedicated staff team that actively manages the site and monitors user activity. If any suspicious behavior or inappropriate content is detected, whether in reviews or elsewhere, our team promptly takes action to ensure a safe and healthy gaming community.
 
-We have partnered with numerous game companies, allowing them to list their games directly on our platform, ensuring a wide and diverse selection for our users. Users can also log in with their Google account for a seamless and quick authentication process.
+We have partnered with numerous game companies, allowing them to list their games directly on our platform, ensuring a wide and diverse selection for our users. Users can easily sign in with their site account or log in using their Google account for a seamless and efficient authentication experience.
 
 Authenticated users with games in their wishlist will receive real-time notifications about discounts and special offers, ensuring they never miss a great deal. Our site also supports multiple currencies, enabling users from around the world to make purchases in their preferred currency for a more convenient shopping experience.
 
