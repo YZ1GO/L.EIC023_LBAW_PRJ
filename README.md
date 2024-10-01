@@ -2,13 +2,6 @@
 
 **Project Vision**
 
-<div>
-    <a>
-        <img src="assets/logo.png" width="100">
-    </a>
-</div>
-<br>
-
 **STEAL!** is an online marketplace focused on selling Content Distribution Keys (CDKs). It offers a secure, user-friendly platform for gamers seeking affordable game keys, aiming to become the top destination for accessible, high-quality digital gaming.
 
 > **"SO AFFORDABLE IT'S LIKE STEALING!"** 
@@ -20,7 +13,7 @@
 
 ### Goals, Business Context, and Environment
 
-STEAL! aims to be a website where gamers can buy Content Distribution Keys (CDKs), which can be activated on game platforms like Steam, Uplay, and Origin. Competing with other online gaming stores, STEAL! focuses on providing a smooth user experience, competitive prices, and a wide range of games for both casual and dedicated gamers.
+STEAL! aims to be a website where gamers can buy Content Distribution Keys (CDKs), which can be activated on game platforms like Steam, Uplay, Origin, and many others. Competing with other online gaming stores, STEAL! focuses on providing a smooth user experience, competitive prices, and a wide range of games for both casual and dedicated gamers.
 
 ### Motivation
 
