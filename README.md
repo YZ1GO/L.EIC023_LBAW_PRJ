@@ -138,7 +138,7 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 | **Identifier** | **Name** | **Priority** | **Responsible** | **Description** |
 |-|-|-|-|-|
 | US35 | Manage User Accounts | High | - | As an Administrator, I want to manage user accounts, so that I can maintain a secure and orderly platform. |
-| US36 | Remove products | Medium | - | As an Administrator, I want to be able to remove and ban certain games from the system, so that I can ensure that all products available comply with our system's rules and guidelines. |
+| US36 | Remove or Suspend Products | Medium | - | As an Administrator, I want to be able to suspend or remove and ban certain games from the system, so that I can ensure that all products available comply with our system's rules and guidelines. |
 | US37 | Delete inappropriate reviews | Medium | - | As an Administrator, I want to be able to delete inappropriate user reviews from the system, so that I can keep the interactions between the users respectful and polite. |
 | US38 | Send Notification | Low | - | As an Administrator, I want to send notifications to users, so that I can communicate important information to buyers, sellers, or both. |
 | US39 | Access to Sales Report | Low | - | As an Administrator, I want to access sales reports for all games, so that I can analyze overall sales performance and trends. |
@@ -153,17 +153,16 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 
 | **Identifier** | **Name** | **Description** |
 |-|-|-|
-| BR01 | Administrator Account | Administrators accounts are independent of the user accounts, i.e. they cannot be created by anonymous users. |
-| BR02 | Delete Account |  Upon account deletion, shared user data (e.g. comments, reviews, likes) is kept but is made anonymous.|
+| BR01 | Administrator Account | Administrators accounts are independent of the user accounts. (e.g. they can remove other users, they cannot buy nor sell products) |
+| BR02 | Delete Account |  Upon account deletion, shared user data (e.g. reviews, likes) is kept but is made anonymous.|
 | BR03 | Deleted Item History |  The history of an item must be maintained, even if the item is deleted, to preserve the sales record for all items. |
 | BR04 | Purchase Confirmation | Buyers must confirm their purchase before payment is processed. After confirmation, no changes or cancellations can be made. |
 | BR05 | Price Changes | Sellers can modify the price of listed games, but buyers who already made a purchase will not be affected by the price change. |
-| BR06 | Refund Policy | Refunds can be issued for game keys only if the key has not been redeemed. Once redeemed, refunds are not permitted. |
-| BR07 | Key Delivery | After payment is confirmed, the CDK is delivered instantly via the buyer's email. |
-| BR08 | Stock Availability | Buyers can only purchase a CDK if it is in stock. Out-of-stock items cannot be added to the cart or purchased. |
-| BR09 | Wishlist Removal | If a game is deleted from the store, it is automatically removed from all users' wishlists. |
-| BR10 | Date Validation | For any date entries (e.g., exit date), the exit date must be greater than or equal to the entry date. |
-| BR11 | Seller Interaction Restrictions | Sellers cannot vote, comment, or review their own products to ensure unbiased interactions on the platform. |
+| BR06 | Key Delivery | After payment is confirmed, the CDK is delivered instantly via the buyer's email. |
+| BR07 | Stock Availability | Buyers can only purchase a CDK if it is in stock. Out-of-stock items cannot be added to the cart or purchased; however, they can be added to the wishlist and be notified when in stock. |
+| BR08 | Wishlist and Cart Removal | If a game is deleted from the store, it is automatically removed from all users' wishlists and shopping carts. |
+| BR9 | Date Validation | For any date entries (e.g., exit date), the exit date must be greater than or equal to the entry date. |
+| BR10 | Seller Interaction Restrictions | Sellers cannot vote or review their own products to ensure unbiased interactions on the platform. |
 
 **Table 7:** STEAL! business rules.
 
@@ -171,13 +170,13 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 
 | **Identifier** | **Name** | **Description** |
 |-|-|-|
-| **TR01** | **Response Time** | **The system should have response times shorter than 2 seconds to ensure user engagement. (Performance) <br><br> Fast response times are critical for user retention and satisfaction. If the system is slow, users may abandon their carts or leave the site entirely, resulting in lost revenue. A responsive and smooth experience encourages users to explore the platform and complete purchases.** |
+| TR01 | Response Time | The system should have response times shorter than 2 seconds to ensure user engagement. (Performance) <br><br> Fast response times are critical for user retention and satisfaction. If the system is slow, users may abandon their carts or leave the site entirely, resulting in lost revenue. A responsive and smooth experience encourages users to explore the platform and complete purchases. |
 | TR02 | Error Handling | The system must be prepared to handle and continue operating when runtime errors occur. (Robustness) |
 | TR03 | Scalability | The system must be prepared to deal with the growth in the number of users and their actions. (Scalability) |
 | TR04 | Accessibility | The system must ensure that everyone can access the pages, regardless of disabilities or the web browser they use. (Accessibility) |
 | **TR05** | **User Review System** | **The system must include a feature for users to leave reviews and ratings for purchased CDKs. <br><br> User reviews build trust and provide valuable feedback, helping potential buyers make informed decisions and improving the overall credibility of our platform.** |
 | TR06 | Multi-Payment Support | The system must facilitate integration with multiple payment gateways, allowing users to select their preferred payment method. (Functionality) |
-| TR07 | Instant CDK Delivery | Upon successful payment, the system must deliver the CDK immediately via the buyer's account dashboard and send a confirmation email. (Usability) |
+| **TR07** | **Instant CDK Delivery** | **Upon successful payment, the system must deliver the CDK immediately via the buyer's email. (Usability)** |
 | TR08 | User-Friendly Interface | The system should feature an intuitive user interface that allows users to navigate easily, search for CDKs, and manage their accounts. (Usability) |
 | TR09 | Database | The PostgreSQL database management system must be used, with a version of 11 or higher. |
 | **TR10** | **Real-Time Inventory Updates** | **The system must update inventory levels in real-time to prevent overselling and ensure accurate stock information. <br><br> Real-time updates help maintain trust with users by ensuring they can only purchase items that are actually in stock, reducing the likelihood of customer dissatisfaction.** |
@@ -189,7 +188,8 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 
 | **Identifier** | **Name** | **Description** |
 |-|-|-|
-| C01 | Game Age Restriction | Users must be at least the age specified by the game’s age rating (e.g., ESRB, PEGI) to create an account or make purchases for that game. |
+| C01 | Game Age Restriction | Users must be at least the age specified by the game’s age rating (e.g., ESRB, PEGI) to make purchases for that game. |
+| C02 | Bot Restriction | Users must successfully complete a Captcha verification to ensure that purchases are made by humans and not automated bots. |
 
 **Table 9:** STEAL! project restrictions.
 
