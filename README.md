@@ -50,7 +50,7 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 
 
 ### 1. Actors
-![Actor Diagram](assets/actor_diagram.png)
+![Actor Diagram](assets/diagrams/actor_diagram.png)
 
 **Figure 1:** STEAL! actors.
 
@@ -221,7 +221,7 @@ The STEAL! system is divided into six main page types:
 
 In the following sitemap, all pages in STEAL!'s interface are displayed as small rounded boxes and grouped by their type (e.g., static, authentication, client). Black lines represent direct navigational paths between pages. Some pages with the exact same functionality and organization that can have different instances per user such as the CDK info pages are represented by a stack of pages.
 
-![sitemap](assets/sitemap.png)
+![sitemap](assets/diagrams/sitemap.png)
 
 **Figure 2:** STEAL! sitemap.
 
