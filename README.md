@@ -253,9 +253,8 @@ Wireframes are used to describe layout ideas, content, and the overall page-leve
 
 #### UI1: Homepage
 
-![homepage](assets/wireframes/homepage.png)
-
 <p align="center">
+    <img src="assets/wireframes/homepage.png" alt="homepage">
     <strong>Figure 3:</strong> Homepage (UI1) wireframe.
 </p>
 
