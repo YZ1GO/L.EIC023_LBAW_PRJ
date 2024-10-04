@@ -243,7 +243,7 @@ Wireframes are used to describe layout ideas, content, and the overall page-leve
 
 #### UI13: Game Info
 
-![gameinfo](assets/wireframes/item.png)
+![gameinfo](assets/wireframes/itempage.png)
 
 **Figure 5:** Game info page (UI13) wireframe.
 
