@@ -253,12 +253,12 @@ Wireframes are used to describe layout ideas, content, and the overall page-leve
 ## Revision history
 
 Changes made to the first submission:
-1. Item 1
-1. ...
+1. (no changes yet)
 
 ***
-GROUPYYgg, DD/MM/20YY
+GROUP2435, 04/10/2024
 
-* Group member 1 name, email (Editor)
-* Group member 2 name, email
-* ...
+* Bruno Huang, up202207517@up.pt (Editor)
+* Daniel Basílio, up201806838@up.pt
+* Francisco Magalhães, up202007945@up.pt
+* Ricardo Yang, up202208465@up.pt
