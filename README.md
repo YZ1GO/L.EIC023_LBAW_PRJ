@@ -253,7 +253,7 @@ Wireframes are used to describe layout ideas, content, and the overall page-leve
 
 #### UI1: Homepage
 
-![homepage](../lbaw2435/assets/wireframes/homepage.png)
+![homepage](assets/wireframes/homepage.png)
 
 <p align="center">
     <strong>Figure 3:</strong> Homepage (UI1) wireframe.
@@ -261,7 +261,7 @@ Wireframes are used to describe layout ideas, content, and the overall page-leve
 
 #### UI12: Game Catalog
 
-![gamecatalog](../lbaw2435/assets/wireframes/explorepage.png)
+![gamecatalog](assets/wireframes/explorepage.png)
 
 <p align="center">
     <strong>Figure 4:</strong> Game catalog page (UI12) wireframe.
@@ -269,7 +269,7 @@ Wireframes are used to describe layout ideas, content, and the overall page-leve
 
 #### UI13: Game Info
 
-![gameinfo](../lbaw2435/assets/wireframes/item.png)
+![gameinfo](assets/wireframes/item.png)
 
 <p align="center">
     <strong>Figure 5:</strong> Game info page (UI13) wireframe.
