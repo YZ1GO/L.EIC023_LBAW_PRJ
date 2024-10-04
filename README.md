@@ -77,8 +77,8 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 | US1 | Browse Marketplace | High | Bruno Huang | As an Anonymous User, I want to browse the marketplace, view and filter the product list and categories, so that I can explore available CDKs. |
 | US2 | View Product Details | High | Daniel Basílio | As an Anonymous User, I want to view detailed information about a game, including reviews, so that I can decide if I want to purchase it. |
 | US3 | Register Account | High | Francisco Magalhães | As an Anonymous User, I want to register an account, so that I can access additional features. |
-| US4 | Sign In Account | High | Ricardo Yang | As an Anonymous User, I want to sign in to my account, so that I can have access additional features. |
-| US5 | Add to Shopping Cart | High | Bruno Huang | As an Anonymous User, I want to add games to a shopping cart, so that I can purchase multiple items at once. |
+| US4 | Sign In Account | High | Francisco Magalhães | As an Anonymous User, I want to sign in to my account, so that I can have access additional features. |
+| US5 | Add to Shopping Cart | High | Daniel Basílio | As an Anonymous User, I want to add games to a shopping cart, so that I can purchase multiple items at once. |
 | US6 | Manage Shopping Cart | High | Daniel Basílio | As an Anonymous User, I want to manage my shopping cart, so that I can update quantities or remove items before purchasing. |
 
 **Table 2:** Anonymous User user stories.
@@ -88,12 +88,12 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 | **Identifier** | **Name** | **Priority** | **Responsible** | **Description** |
 |-|-|-|-|-|
 | US7 | Log Out | High | Francisco Magalhães | As an Authenticated User, I want to log out of my account, so that my session is securely terminated and my account is protected. |
-| US8 | View Profile | High | Ricardo Yang | As an Authenticated User, I want to view my profile information, so that I can see my account details and ensure they are correct. |
-| US9 | Update Profile Information | High | Bruno Huang | As an Authenticated User, I want to update my profile information, so that my account details are current. |
+| US8 | View Profile | High | Francisco Magalhães | As an Authenticated User, I want to view my profile information, so that I can see my account details and ensure they are correct. |
+| US9 | Update Profile Information | High | Francisco Magalhães | As an Authenticated User, I want to update my profile information, so that my account details are current. |
 | US10 | Search Games by Genre/Platform | High | Daniel Basílio | As an Authenticated User, I want to search for games by genre, platform, price, language and rating, so that I can quickly find the games I am interested in. |
 | US11 | Change Password | Medium | Francisco Magalhães | As an Authenticated User, I want to change my password, so that I can maintain the security of my account. |
 | US12 | Contact Customer Support | Low | Ricardo Yang | As an Authenticated User, I want to be able to contact customer support, so that I can get help with any issues or questions I have. |
-| US13 | View Activity History | Low | Bruno Huang | As an Authenticated User, I want to view my activity history, so that I can keep track of my interactions on the platform. |
+| US13 | View Activity History | Low | Francisco Magalhães | As an Authenticated User, I want to view my activity history, so that I can keep track of my interactions on the platform. |
 
 **Table 3:** Authenticated User user stories.
 
@@ -102,18 +102,18 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 | **Identifier** | **Name** | **Priority** | **Responsible** | **Description** |
 |-|-|-|-|-|
 | US14 | Manage Shopping Cart | High | Daniel Basílio | As a Buyer, I want to manage my shopping cart, so that I can easily add or remove items before checkout. |
-| US15 | Multiple Payment Options | High | Francisco Magalhães | As a Buyer, I want to complete my purchase using multiple payment methods as by PayPal, MBWay or credit card, so that I can choose the most convenient method for me. |
-| US16 | Manage Wishlist | High | Ricardo Yang | As a Buyer, I want to manage my wishlist, so that I can keep track of desired games and purchase them in the future. |
+| US15 | Multiple Payment Options | High | Bruno Huang | As a Buyer, I want to complete my purchase using multiple payment methods as by PayPal, MBWay or credit card, so that I can choose the most convenient method for me. |
+| US16 | Manage Wishlist | High | Daniel Basílio | As a Buyer, I want to manage my wishlist, so that I can keep track of desired games and purchase them in the future. |
 | US17 | Add to Wishlist | High | Bruno Huang | As a Buyer, I want to add games to my wishlist, so that I can save them for future purchases. |
 | US18 | Pay With S Coins | Medium | Daniel Basílio | As a Buyer, I want to use **S coins** to pay for my purchases, either in full or partially, so that I can utilize the rewards I have earned in the store. |
-| US19 | Leave Reviews and Ratings| Medium | Francisco Magalhães | As a Buyer, I want to leave reviews and ratings for CDKs I have purchased, so that I can share my experience with other users. |
-| US20 | Track Purchase History | Medium | Bruno Huang | As a Buyer, I want to track my purchase history, so that I can review my past orders. |
-| US21 | Receive Payment and Order Notifications | Medium | Daniel Basílio | As a Buyer, I want to receive notifications about payment approvals and changes in order status, so that I am updated on my purchase progress. |
+| US19 | Leave Reviews and Ratings| Medium | Bruno Huang | As a Buyer, I want to leave reviews and ratings for CDKs I have purchased, so that I can share my experience with other users. |
+| US20 | Track Purchase History | Medium | Francisco Magalhães | As a Buyer, I want to track my purchase history, so that I can review my past orders. |
+| US21 | Receive Payment and Order Notifications | Medium | Ricardo Yang | As a Buyer, I want to receive notifications about payment approvals and changes in order status, so that I am updated on my purchase progress. |
 | US22 | Review Purchased Product | Medium | Francisco Magalhães | As a Buyer, I want to review products I have purchased, so that I can share my feedback with other users. |
 | US23 | Edit or Remove Review | Medium | Ricardo Yang | As a Buyer, I want to edit or remove my reviews, so that I can update or delete feedback as necessary. |
 | US24 | Cancel Order | Medium | Bruno Huang | As a Buyer, I want to cancel my order, so that I can manage my purchases effectively if I change my mind.|
-| US25 | Report Inappropriate Reviews | Medium | Daniel Basílio | As a Buyer, I want to report inappropriate reviews, so that I can help maintain a respectful and constructive community. |
-| US26 | Receive Price Notifications | Medium | Francisco Magalhães | As a Buyer, I want to receive notifications about promotions, and price changes on products either in shopping cart or in wishlist. |
+| US25 | Report Inappropriate Reviews | Medium | Bruno Huang | As a Buyer, I want to report inappropriate reviews, so that I can help maintain a respectful and constructive community. |
+| US26 | Receive Price Notifications | Medium | Ricardo Yang | As a Buyer, I want to receive notifications about promotions, and price changes on products either in shopping cart or in wishlist. |
 | US27 | Receive Game Recommendations | Low | Ricardo Yang | As a Buyer, I want to receive game recommendations based on my search history and previous purchases, so that I can more easily find products that may be of my interest. |
 
 **Table 4:** Buyer user stories.
@@ -124,11 +124,11 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 |-|-|-|-|-|
 | US28 | List Games for Sale | High | Bruno Huang | As a Seller, I want to list games for sale, so that I can reach potential buyers. |
 | US29 | Manage Product Listings | High | Daniel Basílio | As a Seller, I want to manage product listings and stock, so that the marketplace has accurate and relevant information. |
-| US30 | Manage Product Information and Pricing | Medium | Francisco Magalhães | As a Seller, I want to manage my product information and pricing, so that I can keep my listings up-to-date and competitive. |
+| US30 | Manage Product Information and Pricing | Medium | Ricardo Yang | As a Seller, I want to manage my product information and pricing, so that I can keep my listings up-to-date and competitive. |
 | US31 | View Sales History | Medium | Ricardo Yang | As a Seller, I want to view my sales history, so that I can track my performance and earnings.|
 | US32 | Receive Seller Notifications | Medium | Bruno Huang | As a Seller, I want to receive notifications about sales and buyer reviews, so that I can stay informed about my transactions and feedback. |
 | US33 | Manage Product Discounts | Medium | Daniel Basílio | As a Seller, I want to manage product discounts, so that I can offer promotions and sales on CDKs. |
-| US34 | Oversee Order Processing | Medium | Francisco Magalhães | As a Seller, I want to oversee order processing and manage order status, so that I can ensure smooth operations and address any issues promptly. |
+| US34 | Oversee Order Processing | Medium | Bruno Huang | As a Seller, I want to oversee order processing and manage order status, so that I can ensure smooth operations and address any issues promptly. |
 
 **Table 5:** Seller user stories.
 
