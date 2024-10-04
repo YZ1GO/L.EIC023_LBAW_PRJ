@@ -52,9 +52,7 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 ### 1. Actors
 ![Actor Diagram](assets/diagrams/actor_diagram.png)
 
-<p align="center">
-    <strong>Figure 1:</strong> STEAL! actors.
-</p>
+**Figure 1:** STEAL! actors.
 
 | **Actor** | **Description** |
 |-|-|
@@ -66,9 +64,7 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 | Administrator | Users with full control over the platform, managing product listings, user accounts, and overseeing order processing. Cannot make purchases. |
 | API | A system actor that allows external applications to interact with the platform programmatically, enabling functionalities such as retrieving product information, managing user accounts, and processing payments in several currencies. |
 
-<p align="center">
-    <strong>Table 1:</strong> STEAL! Actors description.
-</p>
+**Table 1:** STEAL! Actors description.
 
 ### 2. User Stories
 
@@ -85,9 +81,7 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 | US5 | Add to Shopping Cart | High | Bruno Huang | As an Anonymous User, I want to add games to a shopping cart, so that I can purchase multiple items at once. |
 | US6 | Manage Shopping Cart | High | Daniel Basílio | As an Anonymous User, I want to manage my shopping cart, so that I can update quantities or remove items before purchasing. |
 
-<p align="center">
-    <strong>Table 2:</strong> Anonymous User user stories.
-</p>
+**Table 2:** Anonymous User user stories.
 
 #### 2.2. Authenticated User
 
@@ -101,9 +95,7 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 | US12 | Contact Customer Support | Low | Ricardo Yang | As an Authenticated User, I want to be able to contact customer support, so that I can get help with any issues or questions I have. |
 | US13 | View Activity History | Low | Bruno Huang | As an Authenticated User, I want to view my activity history, so that I can keep track of my interactions on the platform. |
 
-<p align="center">
-    <strong>Table 3:</strong> Authenticated User user stories.
-</p>
+**Table 3:** Authenticated User user stories.
 
 #### 2.3. Buyer
 
@@ -124,9 +116,7 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 | US26 | Receive Price Notifications | Medium | Francisco Magalhães | As a Buyer, I want to receive notifications about promotions, and price changes on products either in shopping cart or in wishlist. |
 | US27 | Receive Game Recommendations | Low | Ricardo Yang | As a Buyer, I want to receive game recommendations based on my search history and previous purchases, so that I can more easily find products that may be of my interest. |
 
-<p align="center">
-    <strong>Table 4:</strong> Buyer user stories.
-</p>
+**Table 4:** Buyer user stories.
 
 #### 2.4. Seller
 
@@ -140,9 +130,7 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 | US33 | Manage Product Discounts | Medium | Daniel Basílio | As a Seller, I want to manage product discounts, so that I can offer promotions and sales on CDKs. |
 | US34 | Oversee Order Processing | Medium | Francisco Magalhães | As a Seller, I want to oversee order processing and manage order status, so that I can ensure smooth operations and address any issues promptly. |
 
-<p align="center">
-    <strong>Table 5:</strong> Seller user stories.
-</p>
+**Table 5:** Seller user stories.
 
 #### 2.5. Administrator
 
@@ -154,9 +142,7 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 | US38 | Send Notification | Low | Francisco Magalhães | As an Administrator, I want to send notifications to users, so that I can communicate important information to buyers, sellers, or both. |
 | US39 | Access to Sales Report | Low | Ricardo Yang | As an Administrator, I want to access sales reports for all games, so that I can analyze overall sales performance and trends. |
 
-<p align="center">
-    <strong>Table 6:</strong> Administrator user stories.
-</p>
+**Table 6:** Administrator user stories.
 
 ### 3. Supplementary Requirements
 
@@ -177,9 +163,7 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 | BR9 | Date Validation | For any date entries (e.g., exit date), the exit date must be greater than or equal to the entry date. |
 | BR10 | Seller Interaction Restrictions | Sellers cannot vote or review their own products to ensure unbiased interactions on the platform. |
 
-<p align="center">
-    <strong>Table 7:</strong> STEAL! business rules.
-</p>
+**Table 7:** STEAL! business rules.
 
 #### 3.2. Technical requirements
 
@@ -196,9 +180,7 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 | TR09 | Database | The PostgreSQL database management system must be used, with a version of 11 or higher. |
 | **TR10** | **Real-Time Inventory Updates** | **The system must update inventory levels in real-time to prevent overselling and ensure accurate stock information. <br><br> Real-time updates help maintain trust with users by ensuring they can only purchase items that are actually in stock, reducing the likelihood of customer dissatisfaction.** |
 
-<p align="center">
-    <strong>Table 8:</strong> STEAL! technical requirements.
-</p>
+**Table 8:** STEAL! technical requirements.
 
 #### 3.3. Restrictions
 
@@ -207,9 +189,7 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 | C01 | Game Age Restriction | Users must be at least the age specified by the game’s age rating (e.g., ESRB, PEGI) to make purchases for that game. |
 | C02 | Bot Restriction | Users must successfully complete a Captcha verification to ensure that purchases are made by humans and not automated bots. |
 
-<p align="center">
-    <strong>Table 9:</strong> STEAL! project restrictions.
-</p>
+**Table 9:** STEAL! project restrictions.
 
 ---
 
@@ -241,9 +221,7 @@ In the following sitemap, all pages in STEAL!'s interface are displayed as small
 
 ![sitemap](assets/diagrams/sitemap.png)
 
-<p align="center">
-    <strong>Figure 2:</strong> STEAL! sitemap.
-</p>
+**Figure 2:** STEAL! sitemap.
 
 ### 2. Wireframes
 
@@ -253,26 +231,21 @@ Wireframes are used to describe layout ideas, content, and the overall page-leve
 
 #### UI1: Homepage
 
-<p align="center">
-    <img src="assets/wireframes/homepage.png" alt="homepage">
-    <strong>Figure 3:</strong> Homepage (UI1) wireframe.
-</p>
+![homepage](assets/wireframes/homepage.png)
+
+**Figure 3:** Homepage (UI1) wireframe.
 
 #### UI12: Game Catalog
 
 ![gamecatalog](assets/wireframes/explorepage.png)
 
-<p align="center">
-    <strong>Figure 4:</strong> Game catalog page (UI12) wireframe.
-</p>
+**Figure 4:** Game catalog page (UI12) wireframe.
 
 #### UI13: Game Info
 
 ![gameinfo](assets/wireframes/item.png)
 
-<p align="center">
-    <strong>Figure 5:</strong> Game info page (UI13) wireframe.
-</p>
+**Figure 5:** Game info page (UI13) wireframe.
 
 ---
 
