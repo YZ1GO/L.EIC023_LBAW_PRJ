@@ -30,10 +30,21 @@
 
 | Relation reference | Relation Compact Notation                        |
 | ------------------ | ------------------------------------------------ |
-| R01                | Table1(<ins>id</ins>, attribute **NN**)                     |
-| R02                | Table2(<ins>id</ins>, attribute → Table1 **NN**)            |
-| R03                | Table3(<ins>id</ins>, id2 → Table2, attribute **UK NN**)   |
-| R04                | Table4((<ins>id1</ins>, <ins>id2</ins>) → Table3, id3, attribute **CK** attribute > 0) |
+| R01                | administrator(<ins>id</ins>, username **UK** **NN**, name **NN**, email **UK** **NN**, password **NN**) |
+| R02                | user(<ins>id</ins>, username **UK** **NN**, name **NN**, email **UK** **NN**, password **NN**) |
+| R03                | buyer(<ins>id_user</ins> -> user, NIF **UK**, birth_date **NN** **CK** birth_date <= Today, coins **NN** **CK** coins >= 0) |
+| R04                | seller(<ins>id_user</ins> -> user → Table3) |
+| R05                | wishlist(<ins>id</ins>, id_buyer → buyer) |
+| R06                | shopping_cart(<ins>id</ins>, id_buyer → buyer?????, quantity **NN** **CK** quantity >= 0) |
+| R07                |  |
+| R08                |  |
+| R09                |  |
+| R10                |  |
+| R11                |  |
+| R12                |  |
+| R13                |  |
+| R14                |  |
+| R15                |  |
 
 ### 2. Domains
 
