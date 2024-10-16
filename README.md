@@ -32,19 +32,30 @@
 | ------------------ | ------------------------------------------------ |
 | R01                | administrator(<ins>id</ins>, username **UK** **NN**, name **NN**, email **UK** **NN**, password **NN**) |
 | R02                | user(<ins>id</ins>, username **UK** **NN**, name **NN**, email **UK** **NN**, password **NN**) |
-| R03                | buyer(<ins>id_user</ins> -> user, NIF **UK**, birth_date **NN** **CK** birth_date <= Today, coins **NN** **CK** coins >= 0) |
-| R04                | seller(<ins>id_user</ins> -> user → Table3) |
-| R05                | wishlist(<ins>id</ins>, id_buyer → buyer) |
-| R06                | shopping_cart(<ins>id</ins>, id_buyer → buyer?????, quantity **NN** **CK** quantity >= 0) |
-| R07                |  |
-| R08                |  |
-| R09                |  |
-| R10                |  |
-| R11                |  |
-| R12                |  |
-| R13                |  |
-| R14                |  |
-| R15                |  |
+| R03                | buyer(<ins>id_user</ins> -> user **NN**, NIF **UK**, birth_date **NN** **CK** birth_date <= Today, coins **NN** **CK** coins >= 0) |
+| R04                | seller(<ins>id_user</ins> -> user **NN**) |
+| R05                | wishlist(<ins>id</ins>, id_buyer → buyer **NN**) |
+| R06                | shopping_cart(<ins>id</ins>, id_buyer → buyer **NN**, quantity **NN** **CK** quantity >= 0) |
+| R07                | order(<ins>id</ins>, id_buyer -> buyer **NN**, date **NN**) |
+| R08                | payment(<ins>id</ins>, value **NN** **CK** value > 0.0) |
+| R09                | payment_method(<ins>id</ins>, method **NN**) |
+| R10                | notification(<ins>id</ins>, title **NN**, description **NN**) |
+| R11                | review(<ins>id</ins>, title **NN**, description **NN**, recommend **NN**, id_author -> buyer **NN**, id_game **NN**) |
+| R12                | review_like(<ins>id</ins>, id_review -> review **NN**, id_author -> buyer **NN**) |
+| R13                | report(<ins>id</ins>, description **NN**, id_reason -> reason **NN**) |
+| R14                | reason(<ins>id</ins>, reason **NN**) |
+| R15                | game(<ins>id</ins>, name **NN**, description **NN**, minimum_age **NN** **CK** minimum_age > 0, price **NN** **CK** price > 0.0, id_platform -> platform **NN**, id_category -> category **NN**, id_language -> language **NN**, id_player -> player **NN**) |
+| R16                | cdk(<ins>id</ins>, code **UK** **NN**, id_game -> game **NN**) |
+| R17                | stock<ins>id</ins>, quantity **NN** **CK** quantity >= 0, id_game -> game **NN** |
+| R18                | platform(<ins>id</ins>, platform **NN**) |
+| R19                | category(<ins>id</ins>, category **NN**) |
+| R20                | language(<ins>id</ins>, language **NN**) |
+| R21                | player(<ins>id</ins>, player **NN**) |
+| R22                | media(<ins>id</ins>, path **NN**, id_game -> game **NN**) |
+| R23                | purchase(<ins>id</ins>, value **NN** **CK** value > 0.0, status **NN** **CK** status **IN** Status) |
+| R24                | faq(<ins>id</ins>, question **NN**, answer **NN**) |
+| R25                | about(<ins>id</ins>, about **NN**) |
+| R26                | contact(<ins>id</ins>, contact **NN**) |
 
 ### 2. Domains
 
