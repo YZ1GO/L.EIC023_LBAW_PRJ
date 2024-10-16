@@ -44,7 +44,7 @@
 | R12                | review_like(<ins>id</ins>, id_review -> review **NN**, id_author -> buyer **NN**) |
 | R13                | report(<ins>id</ins>, description **NN**, id_reason -> reason **NN**) |
 | R14                | reason(<ins>id</ins>, reason **NN**) |
-| R15                | game(<ins>id</ins>, name **NN**, description **NN**, minimum_age **NN** **CK** minimum_age > 0, price **NN** **CK** price > 0.0, id_platform -> platform **NN**, id_category -> category **NN**, id_language -> language **NN**, id_player -> player **NN**) |
+| R15                | game(<ins>id</ins>, name **NN**, description **NN**, minimum_age **NN** **CK** minimum_age > 0, price **NN** **CK** price > 0.0, id_owner -> seller **NN**, id_platform -> platform **NN**, id_category -> category **NN**, id_language -> language **NN**, id_player -> player **NN**) |
 | R16                | cdk(<ins>id</ins>, code **UK** **NN**, id_game -> game **NN**) |
 | R17                | stock<ins>id</ins>, quantity **NN** **CK** quantity >= 0, id_game -> game **NN** |
 | R18                | platform(<ins>id</ins>, platform **NN**) |
