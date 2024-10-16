@@ -57,6 +57,11 @@
 | R25                | about(<ins>id</ins>, about **NN**) |
 | R26                | contact(<ins>id</ins>, contact **NN**) |
 
+Legend: 
+- UK = UNIQUE KEY
+- NN = NOT NULL
+- CK = CHECK
+
 ### 2. Domains
 
 > The specification of additional domains can also be made in a compact form, using the notation:  
@@ -64,7 +69,7 @@
 | Domain Name | Domain Specification           |
 | ----------- | ------------------------------ |
 | Today	      | DATE DEFAULT CURRENT_DATE      |
-| Priority    | ENUM ('High', 'Medium', 'Low') |
+| Status      | ENUM ('Pre_Purchased', 'Cancelled', 'Delivered') |
 
 ### 3. Schema validation
 
