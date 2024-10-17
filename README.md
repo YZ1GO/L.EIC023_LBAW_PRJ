@@ -1,19 +1,29 @@
 # EBD: Database Specification Component
 
-> Project vision.
+**Project Vision**
+
+**STEAL!** is an online marketplace focused on selling Content Distribution Keys (CDKs). It offers a secure, user-friendly platform for gamers seeking affordable game keys, aiming to become the top destination for accessible, high-quality digital gaming.
+
+> **"SO AFFORDABLE IT'S LIKE STEALING!"** 
+
+----
 
 ## A4: Conceptual Data Model
 
-> Brief presentation of the artifact goals.
+The goal of the class diagram for STEAL! is to visually represent the core components and structure of the platform, defining the key entities, attributes, and behaviors necessary to manage the buying, selling, and distribution of game CDKs.
 
 ### 1. Class diagram
 
-> UML class diagram containing the classes, associations, multiplicity and roles.  
-> For each class, the attributes, associations and constraints are included in the class diagram.
+> The following artifact is a UML class diagram representing the conceptual model of the STEAL! platform.
+
+![conceptual_model](assets/diagrams/Conceptual_Model.png)
+
+**Figure 1:** STEAL! conceptual data model in UML.
 
 ### 2. Additional Business Rules
  
-> Business rules can be included in the UML diagram as UML notes or in a table in this section.
+- BR01 A seller is unable to purchase games on the platform.
+- BR02 A buyer is unable to purchase games that have a higher age rating than their own.
 
 
 ---
@@ -21,12 +31,11 @@
 
 ## A5: Relational Schema, validation and schema refinement
 
-> Brief presentation of the artifact goals.
+> This artifact outlines the STEAL! platform's relational schema, detailing key relations, attributes, data types, and integrity constraints to ensure data consistency and accuracy in the database design.
 
 ### 1. Relational Schema
 
-> The Relational Schema includes the relation schemas, attributes, domains, primary keys, foreign keys and other integrity rules: UNIQUE, DEFAULT, NOT NULL, CHECK.  
-> Relation schemas are specified in the compact notation:  
+> The Relational Schema specifies the relations, attributes, domains, and integrity constraints like UNIQUE, DEFAULT, NOT NULL, and CHECK. Each relation is represented in a compact notation for easy reference. 
 
 | Relation reference | Relation Compact Notation                        |
 | ------------------ | ------------------------------------------------ |
