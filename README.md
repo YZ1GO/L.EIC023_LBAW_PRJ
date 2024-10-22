@@ -45,26 +45,29 @@ The goal of the class diagram for STEAL! is to visually represent the core compo
 | R04                | seller(<ins>id_user</ins> -> user **NN**) |
 | R05                | wishlist(<ins>id</ins>, <ins>id_buyer</ins> → buyer **NN**, <ins>id_game</ins> -> game **NN**) |
 | R06                | shopping_cart(<ins>id</ins>, <ins>id_buyer</ins> → buyer **NN**, <ins>id_game</ins> -> game **NN**, quantity **NN** **CK** quantity >= 0) |
-| R07                | order(<ins>id</ins>, <ins>id_buyer</ins> -> buyer **NN**, date **NN**) |
-| R08                | payment(<ins>id</ins>, value **NN** **CK** value > 0.0) |
+| R07                | order(<ins>id</ins>, <ins>id_buyer</ins> -> buyer **NN**, <ins>id_payment</ins> -> payment **NN**, date **NN**) |
+| R08                | payment(<ins>id</ins>, <ins>id_method</ins> -> payment_method **NN**, value **NN** **CK** value > 0.0) |
 | R09                | payment_method(<ins>id</ins>, method **NN**) |
-| R10                | notification(<ins>id</ins>, title **NN**, description **NN**) |
-| R11                | review(<ins>id</ins>, title **NN**, description **NN**, recommend **NN**, id_author -> buyer **NN**, id_game **NN**) |
-| R12                | review_like(<ins>id</ins>, id_review -> review **NN**, id_author -> buyer **NN**) |
-| R13                | report(<ins>id</ins>, description **NN**, id_reason -> reason **NN**) |
-| R14                | reason(<ins>id</ins>, reason **NN**) |
-| R15                | game(<ins>id</ins>, name **NN**, description **NN**, minimum_age **NN** **CK** minimum_age > 0, price **NN** **CK** price > 0.0, id_owner -> seller **NN**, id_platform -> platform **NN**, id_category -> category **NN**, id_language -> language **NN**, id_player -> player **NN**) |
-| R16                | cdk(<ins>id</ins>, code **UK** **NN**, id_game -> game **NN**) |
-| R17                | stock<ins>id</ins>, quantity **NN** **CK** quantity >= 0, <ins>id_game</ins> -> game **NN** |
-| R18                | platform(<ins>id</ins>, platform **NN**) |
-| R19                | category(<ins>id</ins>, category **NN**) |
-| R20                | language(<ins>id</ins>, language **NN**) |
-| R21                | player(<ins>id</ins>, player **NN**) |
-| R22                | media(<ins>id</ins>, path **NN**, <ins>id_game</ins> -> game **NN**) |
-| R23                | purchase(<ins>id</ins>, value **NN** **CK** value > 0.0, status **NN** **CK** status **IN** Status) |
-| R24                | faq(<ins>id</ins>, question **NN**, answer **NN**) |
-| R25                | about(<ins>id</ins>, about **NN**) |
-| R26                | contact(<ins>id</ins>, contact **NN**) |
+| R10                | notification_wishlist(<ins>id</ins>, id_wishlist -> wishlist **NN**, title **NN**, description **NN**) |
+| R11                | notification_game(<ins>id</ins>, id_game -> game **NN**, title **NN**, description **NN**) |
+| R12                | notification_purchase(<ins>id</ins>, id_purchase -> purchase **NN**, title **NN**, description **NN**) |
+| R13                | notification_review(<ins>id</ins>, id_review -> review **NN**, title **NN**, description **NN**) |
+| R14                | review(<ins>id</ins>, title **NN**, description **NN**, recommend **NN**, id_author -> buyer **NN**, id_game **NN**) |
+| R15                | review_like(<ins>id</ins>, id_review -> review **NN**, id_author -> buyer **NN**) |
+| R16                | report(<ins>id</ins>, description **NN**, id_reason -> reason **NN**) |
+| R17                | reason(<ins>id</ins>, reason **NN**) |
+| R18                | game(<ins>id</ins>, name **NN**, description **NN**, minimum_age **NN** **CK** minimum_age > 0, price **NN** **CK** price > 0.0, id_owner -> seller **NN**, id_platform -> platform **NN**, id_category -> category **NN**, id_language -> language **NN**, id_player -> player **NN**) |
+| R19                | cdk(<ins>id</ins>, code **UK** **NN**, id_game -> game **NN**) |
+| R20                | stock<ins>id</ins>, quantity **NN** **CK** quantity >= 0, <ins>id_game</ins> -> game **NN** |
+| R21                | platform(<ins>id</ins>, platform **NN**) |
+| R22                | category(<ins>id</ins>, category **NN**) |
+| R23                | language(<ins>id</ins>, language **NN**) |
+| R24                | player(<ins>id</ins>, player **NN**) |
+| R25                | media(<ins>id</ins>, path **NN**, <ins>id_game</ins> -> game **NN**) |
+| R26                | purchase(<ins>id</ins>, value **NN** **CK** value > 0.0, status **NN** **CK** status **IN** Status) |
+| R27                | faq(<ins>id</ins>, question **NN**, answer **NN**) |
+| R28                | about(<ins>id</ins>, about **NN**) |
+| R29                | contact(<ins>id</ins>, contact **NN**) |
 
 Legend: 
 - UK = UNIQUE KEY
