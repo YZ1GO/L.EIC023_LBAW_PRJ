@@ -43,8 +43,8 @@ The goal of the class diagram for STEAL! is to visually represent the core compo
 | R02                | user(<ins>id</ins>, username **UK** **NN**, name **NN**, email **UK** **NN**, password **NN**) |
 | R03                | buyer(<ins>id_user</ins> -> user **NN**, NIF **UK**, birth_date **NN** **CK** birth_date <= Today, coins **NN** **CK** coins >= 0) |
 | R04                | seller(<ins>id_user</ins> -> user **NN**) |
-| R05                | wishlist(<ins>id</ins>, <ins>id_buyer</ins> → buyer **NN**) |
-| R06                | shopping_cart(<ins>id</ins>, <ins>id_buyer</ins> → buyer **NN**, quantity **NN** **CK** quantity >= 0) |
+| R05                | wishlist(<ins>id</ins>, <ins>id_buyer</ins> → buyer **NN**, <ins>id_game</ins> -> game **NN**) |
+| R06                | shopping_cart(<ins>id</ins>, <ins>id_buyer</ins> → buyer **NN**, <ins>id_game</ins> -> game **NN**, quantity **NN** **CK** quantity >= 0) |
 | R07                | order(<ins>id</ins>, <ins>id_buyer</ins> -> buyer **NN**, date **NN**) |
 | R08                | payment(<ins>id</ins>, value **NN** **CK** value > 0.0) |
 | R09                | payment_method(<ins>id</ins>, method **NN**) |
