@@ -212,12 +212,12 @@ A sitemap is a visual representation of the relationships between the pages with
 
 The STEAL! system is divided into six main page types:
 
-- Static pages: Provide general information about the system.
-- Authentication pages: Allow unauthenticated users to create an account or log in.
-- Item pages: Accessible by all users to view details and interact with CDKs (codes or products) available in the system.
-- Client pages: Reserved for buyers (client users), enabling actions related to purchasing.
-- Seller pages: Exclusively for sellers to list, manage, and sell CDKs.
-- Admin pages: Reserved for system administrators to manage user accounts, product listings, and handle user reports or complaints.
+- **Static pages:** Provide general information about the system.
+- **Authentication pages:** Allow unauthenticated users to create an account or log in.
+- **Item pages:** Accessible by all users to view details and interact with CDKs (codes or products) available in the system.
+- **Client pages:** Reserved for buyers (client users), enabling actions related to purchasing.
+- **Seller pages:** Exclusively for sellers to list, manage, and sell CDKs.
+- **Admin pages:** Reserved for system administrators to manage user accounts, product listings, and handle user reports or complaints.
 
 In the following sitemap, all pages in STEAL!'s interface are displayed as small rounded boxes and grouped by their type (e.g., static, authentication, client). Black lines represent direct navigational paths between pages. Some pages with the exact same functionality and organization that can have different instances per user such as the game info pages are represented by a stack of pages.
 
@@ -245,7 +245,7 @@ Wireframes are used to describe layout ideas, content, and the overall page-leve
 
 #### UI13: Game Info
 
-![gameinfo](assets/wireframes/item.png)
+![gameinfo](assets/wireframes/itempage.png)
 
 **Figure 5:** Game info page (UI13) wireframe.
 
@@ -256,11 +256,11 @@ Wireframes are used to describe layout ideas, content, and the overall page-leve
 
 Changes made to the first submission:
 1. A1 Main Features: Expanded explanations of some mandatory project features and a clearer overview of the S coins system.
-1. ...
 
 ***
-GROUPYYgg, DD/MM/20YY
+GROUP2435, 04/10/2024
 
-* Group member 1 name, email (Editor)
-* Group member 2 name, email
-* ...
+* Bruno Huang, up202207517@up.pt (Editor)
+* Daniel Basílio, up201806838@up.pt
+* Francisco Magalhães, up202007945@up.pt
+* Ricardo Yang, up202208465@up.pt
