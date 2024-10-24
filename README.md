@@ -21,15 +21,17 @@ The increased demand for video games has made STEAL! possible by providing affor
 
 ### Main Features
 
-STEAL! provides advanced search and filtering options, making it easy for users to find their desired games. It also offers personalized game recommendations based on users' preferences for those unsure of what to play next. Additionally, users can leave reviews for games they have purchased, helping others make informed decisions.
+STEAL! provides advanced search and filtering options, making it easy for users to find their desired games. Users can conveniently manage their selections with a shopping cart and enjoy a customizable profile that tracks their purchase history and wishlist. It also offers personalized game recommendations based on users' preferences for those unsure of what to play next. Additionally, users can leave reviews for games they have purchased, helping others make informed decisions.
 
-We have a dedicated staff team that actively manages the site and monitors user activity. If any suspicious behavior or inappropriate content is detected, whether in reviews or elsewhere, our team promptly takes action to ensure a safe and healthy gaming community.
+We have a dedicated staff team that actively manages the site and monitors user activity. If any suspicious behavior or inappropriate content is detected, whether in reviews or elsewhere, our team promptly takes action to ensure a safe and healthy gaming community. Additionally, we have a help section where users can send messages to the staff or administrators for assistance or to report concerns.
 
 We have partnered with numerous game companies, allowing them to list their games directly on our platform, ensuring a wide and diverse selection for our users. Users can easily sign in with their site account or log in using their Google account for a seamless and efficient authentication experience.
 
 Authenticated users with games in their wishlist will receive real-time notifications about discounts and special offers, ensuring they never miss a great deal. Our site also supports multiple currencies, enabling users from around the world to make purchases in their preferred currency for a more convenient shopping experience.
 
-Recognizing that our users are the foundation of our success, we reward them with **S coins**, which can be used in the store. Experience top-rated, minimalist design for effortless browsing and unbeatable deals, making your shopping journey as smooth as possible.
+Recognizing that our users are the foundation of our success, we reward them with S coins that can be used as discounts on future game purchases. When users buy a game, they earn a percentage of their payment back in S coins. These coins can then be applied to reduce the price of their next purchase, enhancing their shopping experience and providing valuable savings.
+
+Experience top-rated, minimalist design for effortless browsing and unbeatable deals, making your shopping journey as smooth as possible.
 
 ### User Profiles
 
@@ -253,7 +255,7 @@ Wireframes are used to describe layout ideas, content, and the overall page-leve
 ## Revision history
 
 Changes made to the first submission:
-1. Item 1
+1. A1 Main Features: Expanded explanations of some mandatory project features and a clearer overview of the S coins system.
 1. ...
 
 ***
