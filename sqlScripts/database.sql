@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS Users CASCADE;
+DROP TABLE IF EXISTS Administrator CASCADE;
 DROP TABLE IF EXISTS Buyer CASCADE;
 DROP TABLE IF EXISTS Seller CASCADE;
 DROP TABLE IF EXISTS Game CASCADE;
@@ -23,10 +24,12 @@ DROP TABLE IF EXISTS CanceledPurchase CASCADE;
 DROP TABLE IF EXISTS DeliveredPurchase CASCADE;
 DROP TABLE IF EXISTS Review CASCADE;
 DROP TABLE IF EXISTS ReviewLike CASCADE;
+DROP TABLE IF EXISTS Notifications CASCADE;
 DROP TABLE IF EXISTS NotificationWishlist CASCADE;
 DROP TABLE IF EXISTS NotificationGame CASCADE;
 DROP TABLE IF EXISTS NotificationReview CASCADE;
 DROP TABLE IF EXISTS NotificationPurchase CASCADE;
+DROP TABLE IF EXISTS UserNotifications CASCADE;
 DROP TABLE IF EXISTS Reason CASCADE;
 DROP TABLE IF EXISTS Report CASCADE;
 DROP TABLE IF EXISTS FAQ CASCADE;
@@ -37,7 +40,15 @@ DROP TABLE IF EXISTS Contacts CASCADE;
 CREATE TABLE Users (
     id SERIAL PRIMARY KEY,
     username TEXT UNIQUE NOT NULL,
-    name TEXT UNIQUE NOT NULL,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL
+);
+
+CREATE TABLE Administrator(
+    id SERIAL PRIMARY KEY,
+    username TEXT UNIQUE NOT NULL,
+    name TEXT NOT NULL,
     email TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL
 );
@@ -46,7 +57,7 @@ CREATE TABLE Buyer (
     id INT PRIMARY KEY REFERENCES Users(id),
     NIF TEXT UNIQUE,
     birth_date DATE NOT NULL CHECK(birth_date <= CURRENT_DATE),
-    coins INT NOT NULL CHECK(coins >= 0) 
+    coins INT NOT NULL CHECK(coins >= 0) DEFAULT 0
 );
 
 CREATE TABLE Seller(
@@ -193,32 +204,38 @@ CREATE TABLE ReviewLike(
     CONSTRAINT review_author_pair_unique UNIQUE (review, author)
 );
 
-CREATE TABLE NotificationWishlist(
+CREATE TABLE Notifications(
     id SERIAL PRIMARY KEY,
-    wishlist INT NOT NULL REFERENCES Wishlist(id),
     title TEXT NOT NULL,
     description TEXT NOT NULL
+);
+
+CREATE TABLE NotificationWishlist(
+    id INT PRIMARY KEY REFERENCES Notifications(id),
+    wishlist INT NOT NULL REFERENCES Wishlist(id)
 );
 
 CREATE TABLE NotificationGame(
-    id SERIAL PRIMARY KEY,
-    game INT NOT NULL REFERENCES Game(id),
-    title TEXT NOT NULL,
-    description TEXT NOT NULL
+    id INT PRIMARY KEY REFERENCES Notifications(id),
+    game INT NOT NULL REFERENCES Game(id)
 );
 
 CREATE TABLE NotificationPurchase(
-    id SERIAL PRIMARY KEY,
-    purchase INT NOT NULL REFERENCES Purchase(id),
-    title TEXT NOT NULL,
-    description TEXT NOT NULL
+    id INT PRIMARY KEY REFERENCES Notifications(id),
+    purchase INT NOT NULL REFERENCES Purchase(id)
 );
 
 CREATE TABLE NotificationReview(
+    id INT PRIMARY KEY REFERENCES Notifications(id),
+    review INT NOT NULL REFERENCES Review(id)
+);
+
+CREATE TABLE UserNotifications(
     id SERIAL PRIMARY KEY,
-    review INT NOT NULL REFERENCES Review(id),
-    title TEXT NOT NULL,
-    description TEXT NOT NULL
+    notification INT REFERENCES Notifications(id),
+    receiver INT REFERENCES Users(id),
+    time TIMESTAMP NOT NULL CHECK (time <= CURRENT_TIMESTAMP) DEFAULT CURRENT_TIMESTAMP,
+    isRead BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE Reason(
@@ -274,6 +291,4 @@ dados de cartão e users e depois até reformular a lógoca de pagamento à volt
 são reais.
 
 */
-
-
 
