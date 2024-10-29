@@ -76,12 +76,15 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 
 | **Identifier** | **Name** | **Priority** | **Responsible** | **Description** |
 |-|-|-|-|-|
-| US1 | Browse Marketplace | High | Bruno Huang | As an Anonymous User, I want to browse the marketplace, view and filter the product list and categories, so that I can explore available CDKs. |
-| US2 | View Product Details | High | Daniel Basílio | As an Anonymous User, I want to view detailed information about a game, including reviews, so that I can decide if I want to purchase it. |
-| US3 | Register Account | High | Francisco Magalhães | As an Anonymous User, I want to register an account, so that I can access additional features. |
-| US4 | Sign In Account | High | Francisco Magalhães | As an Anonymous User, I want to sign in to my account, so that I can have access additional features. |
-| US5 | Add to Shopping Cart | High | Daniel Basílio | As an Anonymous User, I want to add games to a shopping cart, so that I can purchase multiple items at once. |
-| US6 | Manage Shopping Cart | High | Daniel Basílio | As an Anonymous User, I want to manage my shopping cart, so that I can update quantities or remove items before purchasing. |
+| US01 | Browse Marketplace | High | Bruno Huang | As an Anonymous User, I want to browse the marketplace, view and filter the product list and categories, so that I can explore available CDKs. |
+| US02 | View Product Details | High | Daniel Basílio | As an Anonymous User, I want to view detailed information about a game, including reviews, so that I can decide if I want to purchase it. |
+| US03 | Register Account | High | Francisco Magalhães | As an Anonymous User, I want to register an account, so that I can access additional features. |
+| US04 | Sign In Account | High | Francisco Magalhães | As an Anonymous User, I want to sign in to my account, so that I can have access additional features. |
+| US05 | Add to Shopping Cart | High | Daniel Basílio | As an Anonymous User, I want to add games to a shopping cart, so that I can purchase multiple items at once. |
+| US06 | Manage Shopping Cart | High | Daniel Basílio | As an Anonymous User, I want to manage my shopping cart, so that I can update quantities or remove items before purchasing. |
+| US07 | Full Text Search | High | Ricardo Yang | As an Anonymous User, I want to perform full-text searches across the game catalog, so that I can quickly find games based on keywords. |
+| US08 | Search Games by Genre/Platform | High | Daniel Basílio | As an Anonymous User, I want to search for games by genre, platform, price, language and rating, so that I can quickly find the games I am interested in. |
+| US09 | Access Static Pages | Medium | Ricardo Yang | As an Anonymous User, I want to view static pages (About Us, Contact Us, Terms of Service), so that I can understand the platform’s purpose and policies. |
 
 **Table 2:** Anonymous User user stories.
 
@@ -89,13 +92,14 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 
 | **Identifier** | **Name** | **Priority** | **Responsible** | **Description** |
 |-|-|-|-|-|
-| US7 | Log Out | High | Francisco Magalhães | As an Authenticated User, I want to log out of my account, so that my session is securely terminated and my account is protected. |
-| US8 | View Profile | High | Francisco Magalhães | As an Authenticated User, I want to view my profile information, so that I can see my account details and ensure they are correct. |
-| US9 | Update Profile Information | High | Francisco Magalhães | As an Authenticated User, I want to update my profile information, so that my account details are current. |
-| US10 | Search Games by Genre/Platform | High | Daniel Basílio | As an Authenticated User, I want to search for games by genre, platform, price, language and rating, so that I can quickly find the games I am interested in. |
-| US11 | Change Password | Medium | Francisco Magalhães | As an Authenticated User, I want to change my password, so that I can maintain the security of my account. |
-| US12 | Contact Customer Support | Low | Ricardo Yang | As an Authenticated User, I want to be able to contact customer support, so that I can get help with any issues or questions I have. |
-| US13 | View Activity History | Low | Francisco Magalhães | As an Authenticated User, I want to view my activity history, so that I can keep track of my interactions on the platform. |
+| US10 | Delete Own Account | High | Bruno Huang | As an Authenticated User, I want the option to delete my own account, so that I can control my personal data on the platform. |
+| US11 | Edit Profile | High | Daniel Basílio | As an Authenticated User, I want to be able to edit my profile, so that I can personalize my account. |
+| US12 | Log Out | High | Francisco Magalhães | As an Authenticated User, I want to log out of my account, so that my session is securely terminated and my account is protected. |
+| US13 | View Profile | High | Francisco Magalhães | As an Authenticated User, I want to view my profile information, so that I can see my account details and ensure they are correct. |
+| US14 | Update Profile Information | High | Francisco Magalhães | As an Authenticated User, I want to update my profile information, so that my account details are current. |
+| US15 | Change Password | Medium | Francisco Magalhães | As an Authenticated User, I want to change my password, so that I can maintain the security of my account. |
+| US16 | Contact Customer Support | Low | Ricardo Yang | As an Authenticated User, I want to be able to contact customer support, so that I can get help with any issues or questions I have. |
+| US17 | View Activity History | Low | Francisco Magalhães | As an Authenticated User, I want to view my activity history, so that I can keep track of my interactions on the platform. |
 
 **Table 3:** Authenticated User user stories.
 
@@ -103,20 +107,20 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 
 | **Identifier** | **Name** | **Priority** | **Responsible** | **Description** |
 |-|-|-|-|-|
-| US14 | Manage Shopping Cart | High | Daniel Basílio | As a Buyer, I want to manage my shopping cart, so that I can easily add or remove items before checkout. |
-| US15 | Multiple Payment Options | High | Bruno Huang | As a Buyer, I want to complete my purchase using multiple payment methods as by PayPal, MBWay or credit card, so that I can choose the most convenient method for me. |
-| US16 | Manage Wishlist | High | Daniel Basílio | As a Buyer, I want to manage my wishlist, so that I can keep track of desired games and purchase them in the future. |
-| US17 | Add to Wishlist | High | Bruno Huang | As a Buyer, I want to add games to my wishlist, so that I can save them for future purchases. |
-| US18 | Pay With S Coins | Medium | Daniel Basílio | As a Buyer, I want to use **S coins** to pay for my purchases, either in full or partially, so that I can utilize the rewards I have earned in the store. |
-| US19 | Leave Reviews and Ratings| Medium | Bruno Huang | As a Buyer, I want to leave reviews and ratings for CDKs I have purchased, so that I can share my experience with other users. |
-| US20 | Track Purchase History | Medium | Francisco Magalhães | As a Buyer, I want to track my purchase history, so that I can review my past orders. |
-| US21 | Receive Payment and Order Notifications | Medium | Ricardo Yang | As a Buyer, I want to receive notifications about payment approvals and changes in order status, so that I am updated on my purchase progress. |
-| US22 | Review Purchased Product | Medium | Francisco Magalhães | As a Buyer, I want to review products I have purchased, so that I can share my feedback with other users. |
-| US23 | Edit or Remove Review | Medium | Ricardo Yang | As a Buyer, I want to edit or remove my reviews, so that I can update or delete feedback as necessary. |
-| US24 | Cancel Order | Medium | Bruno Huang | As a Buyer, I want to cancel my order, so that I can manage my purchases effectively if I change my mind.|
-| US25 | Report Inappropriate Reviews | Medium | Bruno Huang | As a Buyer, I want to report inappropriate reviews, so that I can help maintain a respectful and constructive community. |
-| US26 | Receive Price Notifications | Medium | Ricardo Yang | As a Buyer, I want to receive notifications about promotions, and price changes on products either in shopping cart or in wishlist. |
-| US27 | Receive Game Recommendations | Low | Ricardo Yang | As a Buyer, I want to receive game recommendations based on my search history and previous purchases, so that I can more easily find products that may be of my interest. |
+| US18 | Checkout Items | High | Daniel Basílio | As a Buyer, I want to complete the checkout process for items in my cart or individual items, so that I can finalize my purchases efficiently. |
+| US19 | Manage Wishlist | High | Daniel Basílio | As a Buyer, I want to manage my wishlist, so that I can keep track of desired games and purchase them in the future. |
+| US20 | Add to Wishlist | High | Bruno Huang | As a Buyer, I want to add games to my wishlist, so that I can save them for future purchases. |
+| US21 | Leave Reviews and Ratings| Medium | Bruno Huang | As a Buyer, I want to leave reviews and ratings for CDKs I have purchased, so that I can share my experience with other users. |
+| US22 | Track Purchase History | Medium | Francisco Magalhães | As a Buyer, I want to track my purchase history, so that I can review my past orders. |
+| US23 | Receive Payment and Order Notifications | Medium | Ricardo Yang | As a Buyer, I want to receive notifications about payment approvals and changes in order status, so that I am updated on my purchase progress. |
+| US24 | Review Purchased Product | Medium | Francisco Magalhães | As a Buyer, I want to review products I have purchased, so that I can share my feedback with other users. |
+| US25 | Edit or Remove Review | Medium | Ricardo Yang | As a Buyer, I want to edit or remove my reviews, so that I can update or delete feedback as necessary. |
+| US26 | Cancel Order | Medium | Bruno Huang | As a Buyer, I want to cancel my order, so that I can manage my purchases effectively if I change my mind.|
+| US27 | Report Inappropriate Reviews | Medium | Bruno Huang | As a Buyer, I want to report inappropriate reviews, so that I can help maintain a respectful and constructive community. |
+| US28 | Receive Price Notifications | Medium | Ricardo Yang | As a Buyer, I want to receive notifications about promotions, and price changes on products either in shopping cart or in wishlist. |
+| US29 | Multiple Payment Options | Low | Bruno Huang | As a Buyer, I want to complete my purchase using multiple payment methods as by PayPal, MBWay or credit card, so that I can choose the most convenient method for me. |
+| US30 | Pay With S Coins | Low | Daniel Basílio | As a Buyer, I want to use **S coins** to pay for my purchases, either in full or partially, so that I can utilize the rewards I have earned in the store. |
+| US31 | Receive Game Recommendations | Low | Ricardo Yang | As a Buyer, I want to receive game recommendations based on my search history and previous purchases, so that I can more easily find products that may be of my interest. |
 
 **Table 4:** Buyer user stories.
 
@@ -124,13 +128,13 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 
 | **Identifier** | **Name** | **Priority** | **Responsible** | **Description** |
 |-|-|-|-|-|
-| US28 | List Games for Sale | High | Bruno Huang | As a Seller, I want to list games for sale, so that I can reach potential buyers. |
-| US29 | Manage Product Listings | High | Daniel Basílio | As a Seller, I want to manage product listings and stock, so that the marketplace has accurate and relevant information. |
-| US30 | Manage Product Information and Pricing | Medium | Ricardo Yang | As a Seller, I want to manage my product information and pricing, so that I can keep my listings up-to-date and competitive. |
-| US31 | View Sales History | Medium | Ricardo Yang | As a Seller, I want to view my sales history, so that I can track my performance and earnings.|
-| US32 | Receive Seller Notifications | Medium | Bruno Huang | As a Seller, I want to receive notifications about sales and buyer reviews, so that I can stay informed about my transactions and feedback. |
-| US33 | Manage Product Discounts | Medium | Daniel Basílio | As a Seller, I want to manage product discounts, so that I can offer promotions and sales on CDKs. |
-| US34 | Oversee Order Processing | Medium | Bruno Huang | As a Seller, I want to oversee order processing and manage order status, so that I can ensure smooth operations and address any issues promptly. |
+| US32 | List Games for Sale | High | Bruno Huang | As a Seller, I want to list games for sale, so that I can reach potential buyers. |
+| US33 | Manage Product Listings | High | Daniel Basílio | As a Seller, I want to manage product listings and stock, so that the marketplace has accurate and relevant information. |
+| US34 | Manage Product Information and Pricing | Medium | Ricardo Yang | As a Seller, I want to manage my product information and pricing, so that I can keep my listings up-to-date and competitive. |
+| US35 | View Sales History | Medium | Ricardo Yang | As a Seller, I want to view my sales history, so that I can track my performance and earnings.|
+| US36 | Receive Seller Notifications | Medium | Bruno Huang | As a Seller, I want to receive notifications about sales and buyer reviews, so that I can stay informed about my transactions and feedback. |
+| US37 | Oversee Order Processing | Medium | Bruno Huang | As a Seller, I want to oversee order processing and manage order status, so that I can ensure smooth operations and address any issues promptly. |
+| US38 | Manage Product Discounts | Low | Daniel Basílio | As a Seller, I want to manage product discounts, so that I can offer promotions and sales on CDKs. |
 
 **Table 5:** Seller user stories.
 
@@ -138,11 +142,11 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 
 | **Identifier** | **Name** | **Priority** | **Responsible** | **Description** |
 |-|-|-|-|-|
-| US35 | Manage User Accounts | High | Ricardo Yang | As an Administrator, I want to manage user accounts, so that I can maintain a secure and orderly platform. |
-| US36 | Remove or Suspend Products | Medium | Bruno Huang | As an Administrator, I want to be able to suspend or remove and ban certain games from the system, so that I can ensure that all products available comply with our system's rules and guidelines. |
-| US37 | Delete inappropriate reviews | Medium | Daniel Basílio | As an Administrator, I want to be able to delete inappropriate user reviews from the system, so that I can keep the interactions between the users respectful and polite. |
-| US38 | Send Notification | Low | Francisco Magalhães | As an Administrator, I want to send notifications to users, so that I can communicate important information to buyers, sellers, or both. |
-| US39 | Access to Sales Report | Low | Ricardo Yang | As an Administrator, I want to access sales reports for all games, so that I can analyze overall sales performance and trends. |
+| US39 | Manage User Accounts | High | Ricardo Yang | As an Administrator, I want to manage user accounts, so that I can maintain a secure and orderly platform. |
+| US40 | Remove or Suspend Products | Medium | Bruno Huang | As an Administrator, I want to be able to suspend or remove and ban certain games from the system, so that I can ensure that all products available comply with our system's rules and guidelines. |
+| US41 | Delete inappropriate reviews | Medium | Daniel Basílio | As an Administrator, I want to be able to delete inappropriate user reviews from the system, so that I can keep the interactions between the users respectful and polite. |
+| US42 | Send Notification | Low | Francisco Magalhães | As an Administrator, I want to send notifications to users, so that I can communicate important information to buyers, sellers, or both. |
+| US43 | Access to Sales Report | Low | Ricardo Yang | As an Administrator, I want to access sales reports for all games, so that I can analyze overall sales performance and trends. |
 
 **Table 6:** Administrator user stories.
 
@@ -256,6 +260,7 @@ Wireframes are used to describe layout ideas, content, and the overall page-leve
 
 Changes made to the first submission:
 1. A1 Main Features: Expanded explanations of some mandatory project features and a clearer overview of the S coins system.
+2. A2 User Stories: Refined some user stories to incorporate some missing mandatory features.
 
 ***
 GROUP2435, 04/10/2024
