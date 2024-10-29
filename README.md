@@ -297,58 +297,97 @@ This artifact outlines the strategies and mechanisms employed to ensure efficien
  
 We carried out an analysis of the anticipated system load on the database, including estimates of the number of tuples (records) for each relation, as understanding the database workload is crucial for optimizing performance and ensuring scalability. The table below outlines the expected order of magnitude for each relation and their estimated growth over time.
 
-| **Relation reference** | **Relation Name**      | **Order of Magnitude**       | **Estimated Growth**           |
+| **Relation Reference** | **Relation Name**      | **Order of Magnitude**       | **Estimated Growth**           |
 |------------------------|------------------------|------------------------------|--------------------------------|
 | R01                    | administrator          | Dozens                       | Rare                           |
-| R02                    | user                   | Tens of thousands            | Thousands per month            |
-| R03                    | buyer                  | Tens of thousands            | Thousands per month            |
-| R04                    | seller                 | Hundreds                     | Dozens per month               |
+| R02                    | user                   | Hundreds of thousands        | Thousands per month            |
+| R03                    | buyer                  | Hundreds of thousands        | Thousands per month            |
+| R04                    | seller                 | Dozens                       | Dozens per month              |
 | R05                    | wishlist               | Hundreds of thousands        | Thousands per month            |
-| R06                    | shopping_cart          | Tens of thousands            | Thousands per day              |
-| R07                    | order                  | Hundreds of thousands        | Thousands per day              |
-| R08                    | payment                | Hundreds of thousands        | Thousands per day              |
+| R06                    | shopping_cart          | Hundreds of thousands        | Thousands per month            |
+| R07                    | order                  | Hundreds of thousands        | Thousands per month            |
+| R08                    | payment                | Hundreds of thousands        | Thousands per month            |
 | R09                    | payment_method         | Dozens                       | Rare                           |
-| R10                    | notification_wishlist  | Hundreds of thousands        | Thousands per day              |
-| R11                    | notification_game      | Hundreds of thousands        | Thousands per day              |
-| R12                    | notification_purchase  | Hundreds of thousands        | Thousands per day              |
-| R13                    | notification_review    | Hundreds of thousands        | Thousands per day              |
-| R14                    | review                 | Tens of thousands            | Thousands per day              |
-| R15                    | review_like            | Hundreds of thousands        | Thousands per day              |
-| R16                    | report                 | Thousands                    | Hundreds per month             |
+| R10                    | notification_wishlist  | Hundreds of thousands        | Thousands per month            |
+| R11                    | notification_game      | Hundreds of thousands        | Thousands per month            |
+| R12                    | notification_purchase  | Hundreds of thousands        | Thousands per month            |
+| R13                    | notification_review    | Hundreds of thousands        | Thousands per month            |
+| R14                    | review                 | Hundreds of thousands        | Thousands per month            |
+| R15                    | review_like            | Hundreds of thousands        | Thousands per month            |
+| R16                    | report                 | Hundreds                     | Hundreds per month             |
 | R17                    | reason                 | Dozens                       | Rare                           |
-| R18                    | game                   | Thousands                    | Hundreds per day               |
-| R19                    | game_platform          | Tens of thousands            | Thousands per month            |
-| R20                    | game_category          | Tens of thousands            | Thousands per month            |
-| R21                    | game_language          | Tens of thousands            | Thousands per month            |
-| R22                    | game_player            | Tens of thousands            | Thousands per month            |
-| R23                    | cdk                    | Hundreds of thousands        | Thousands per day              |
-| R24                    | stock                  | Thousands                    | Hundreds per day               |
+| R18                    | game                   | Hundreds of thousands        | Thousands per month            |
+| R19                    | game_platform          | Dozens                       | Rare                           |
+| R20                    | game_category          | Dozens                       | Rare                           |
+| R21                    | game_language          | Dozens                       | Rare                           |
+| R22                    | game_player            | Hundreds of thousands        | Thousands per month            |
+| R23                    | cdk                    | Hundreds of thousands        | Thousands per month            |
+| R24                    | stock                  | Hundreds                     | Hundreds per month             |
 | R25                    | platform               | Dozens                       | Rare                           |
-| R26                    | category               | Hundreds                     | Rare                           |
-| R27                    | language               | Hundreds                     | Rare                           |
+| R26                    | category               | Dozens                       | Rare                           |
+| R27                    | language               | Dozens                       | Rare                           |
 | R28                    | player                 | Hundreds                     | Rare                           |
-| R29                    | media                  | Tens of thousands            | Thousands per month            |
-| R30                    | purchase               | Hundreds of thousands        | Thousands per day              |
+| R29                    | media                  | Hundreds of thousands        | Thousands per month            |
+| R30                    | purchase               | Hundreds of thousands        | Thousands per month            |
 | R31                    | faq                    | Dozens                       | Rare                           |
 | R32                    | about                  | Dozens                       | Rare                           |
 | R33                    | contact                | Dozens                       | Rare                           |
 
 ### 2. Proposed Indices
-
+ 
 #### 2.1. Performance Indices
  
-> Indices proposed to improve performance of the identified queries.
+The following indices are proposed to improve performance of the identified queries.
 
 | **Index**           | IDX01                                  |
-| ---                 | ---                                    |
-| **Relation**        | Relation where the index is applied    |
-| **Attribute**       | Attribute where the index is applied   |
-| **Type**            | B-tree, Hash, GiST or GIN              |
-| **Cardinality**     | Attribute cardinality: low/medium/high |
-| **Clustering**      | Clustering of the index                |
-| **Justification**   | Justification for the proposed index   |
-| `SQL code`                                                  ||
+| ------------------- | -------------------------------------- |
+| **Relation**        | game                                   |
+| **Attribute**       | price                                  |
+| **Type**            | B-tree                                 |
+| **Cardinality**     | High                                   |
+| **Clustering**      | No                                     |
+| **Justification**   | Optimizes range queries for filtering games within specific price ranges. |
+| `SQL code`          | `CREATE INDEX idx_game_price ON game (price);` |
 
+| **Index**           | IDX02                                  |
+| ------------------- | -------------------------------------- |
+| **Relation**        | review                                 |
+| **Attribute**       | id_game                                |
+| **Type**            | B-tree                                 |
+| **Cardinality**     | High                                   |
+| **Clustering**      | No                                     |
+| **Justification**   | Optimizes retrieval of reviews for specific games, enhancing performance of queries filtering on game reviews. |
+| `SQL code`          | `CREATE INDEX idx_review_id_game ON review (id_game);` |
+
+| **Index**           | IDX03                                  |
+| ------------------- | -------------------------------------- |
+| **Relation**        | purchase                               |
+| **Attribute**       | id_buyer                               |
+| **Type**            | B-tree                                 |
+| **Cardinality**     | High                                   |
+| **Clustering**      | No                                     |
+| **Justification**   | Speeds up queries retrieving purchase history for specific buyers. |
+| `SQL code`          | `CREATE INDEX idx_purchase_id_buyer ON purchase (id_buyer);` |
+
+| **Index**           | IDX04                                  |
+| ------------------- | -------------------------------------- |
+| **Relation**        | shopping_cart                          |
+| **Attribute**       | id_buyer                               |
+| **Type**            | B-tree                                 |
+| **Cardinality**     | Medium                                 |
+| **Clustering**      | No                                     |
+| **Justification**   | Increases efficiency of operations accessing or updating a buyer's shopping cart data. |
+| `SQL code`          | `CREATE INDEX idx_shopping_cart_id_buyer ON shopping_cart (id_buyer);` |
+
+| **Index**           | IDX05                                  |
+| ------------------- | -------------------------------------- |
+| **Relation**        | cdk                                    |
+| **Attribute**       | code                                   |
+| **Type**            | Hash                                   |
+| **Cardinality**     | High                                   |
+| **Clustering**      | No                                     |
+| **Justification**   | Enables rapid searches for CDK codes to prevent duplicates and ensure quick validation during purchase. |
+| `SQL code`          | `CREATE INDEX idx_cdk_code ON cdk USING hash (code);` |
 
 #### 2.2. Full-text Search Indices 
 
