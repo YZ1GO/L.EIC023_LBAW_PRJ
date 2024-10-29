@@ -391,17 +391,52 @@ The following indices are proposed to improve performance of the identified quer
 
 #### 2.2. Full-text Search Indices 
 
-> The system being developed must provide full-text search features supported by PostgreSQL. Thus, it is necessary to specify the fields where full-text search will be available and the associated setup, namely all necessary configurations, indexes definitions and other relevant details.  
+To improve user experience, it’s crucial for our system to support full-text search (FTS) capabilities within the game relation, specifically targeting attributes like title and description. By implementing PostgreSQL’s GIN index type, we can ensure that users can efficiently search for games using keywords. This setup will involve creating the necessary configurations and indexes to maintain up-to-date search functionality, allowing users to find relevant games quickly.
 
 | **Index**           | IDX01                                  |
-| ---                 | ---                                    |
-| **Relation**        | Relation where the index is applied    |
-| **Attribute**       | Attribute where the index is applied   |
-| **Type**            | B-tree, Hash, GiST or GIN              |
-| **Clustering**      | Clustering of the index                |
-| **Justification**   | Justification for the proposed index   |
-| `SQL code`                                                  ||
+|---------------------|---------------------------------------|
+| **Relation**        | game                                  |
+| **Attribute**       | title, description                    |
+| **Type**            | GIN                                   |
+| **Clustering**      | No                                    |
+| **Justification**   | To provide full-text search features for finding games based on matching titles or descriptions. The GIN index type is chosen for its efficiency in handling FTS queries, particularly when dealing with large datasets and varying text lengths. |
+##### SQL Code
+```sql
+-- Add column to game to store computed ts_vectors.
+ALTER TABLE game
+ADD COLUMN tsvectors TSVECTOR;
 
+-- Create a function to automatically update ts_vectors.
+CREATE FUNCTION game_search_update() RETURNS TRIGGER AS $$
+BEGIN
+  IF TG_OP = 'INSERT' THEN
+    NEW.tsvectors = (
+      setweight(to_tsvector('english', NEW.title), 'A') ||
+      setweight(to_tsvector('english', NEW.description), 'B')
+    );
+  END IF;
+  IF TG_OP = 'UPDATE' THEN
+    IF (NEW.title <> OLD.title OR NEW.description <> OLD.description) THEN
+      NEW.tsvectors = (
+        setweight(to_tsvector('english', NEW.title), 'A') ||
+        setweight(to_tsvector('english', NEW.description), 'B')
+      );
+    END IF;
+  END IF;
+  RETURN NEW;
+END $$
+LANGUAGE plpgsql;
+
+-- Create a trigger before insert or update on game.
+CREATE TRIGGER game_search_update
+  BEFORE INSERT OR UPDATE ON game
+  FOR EACH ROW
+  EXECUTE PROCEDURE game_search_update();
+
+-- Finally, create a GIN index for ts_vectors.
+CREATE INDEX search_idx ON game USING GIN (tsvectors); 
+
+```
 
 ### 3. Triggers
  
