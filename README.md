@@ -291,20 +291,47 @@ Legend:
 
 ## A6: Indexes, triggers, transactions and database population
 
-> Brief presentation of the artifact goals.
+This artifact outlines the strategies and mechanisms employed to ensure efficient database operations and data integrity within the platform. Indexes are used to optimize query performance, enabling faster retrieval of data. Triggers are implemented to automate specific actions in response to certain events, ensuring consistency and enforcing business rules. Transactions are utilized to maintain data integrity by grouping a series of operations into a single, atomic unit of work, which either fully completes or fully rolls back in case of an error. Finally, database population techniques are discussed to ensure the initial and ongoing seeding of the database with relevant data, facilitating a robust and scalable environment for the platform.
 
 ### 1. Database Workload
  
-> A study of the predicted system load (database load).
-> Estimate of tuples at each relation.
+We carried out an analysis of the anticipated system load on the database, including estimates of the number of tuples (records) for each relation, as understanding the database workload is crucial for optimizing performance and ensuring scalability. The table below outlines the expected order of magnitude for each relation and their estimated growth over time.
 
-| **Relation reference** | **Relation Name** | **Order of magnitude**        | **Estimated growth** |
-| ------------------ | ------------- | ------------------------- | -------- |
-| R01                | Table1        | units|dozens|hundreds|etc | order per time |
-| R02                | Table2        | units|dozens|hundreds|etc | dozens per month |
-| R03                | Table3        | units|dozens|hundreds|etc | hundreds per day |
-| R04                | Table4        | units|dozens|hundreds|etc | no growth |
-
+| **Relation reference** | **Relation Name**      | **Order of Magnitude**       | **Estimated Growth**           |
+|------------------------|------------------------|------------------------------|--------------------------------|
+| R01                    | administrator          | Dozens                       | Rare                           |
+| R02                    | user                   | Tens of thousands            | Thousands per month            |
+| R03                    | buyer                  | Tens of thousands            | Thousands per month            |
+| R04                    | seller                 | Hundreds                     | Dozens per month               |
+| R05                    | wishlist               | Hundreds of thousands        | Thousands per month            |
+| R06                    | shopping_cart          | Tens of thousands            | Thousands per day              |
+| R07                    | order                  | Hundreds of thousands        | Thousands per day              |
+| R08                    | payment                | Hundreds of thousands        | Thousands per day              |
+| R09                    | payment_method         | Dozens                       | Rare                           |
+| R10                    | notification_wishlist  | Hundreds of thousands        | Thousands per day              |
+| R11                    | notification_game      | Hundreds of thousands        | Thousands per day              |
+| R12                    | notification_purchase  | Hundreds of thousands        | Thousands per day              |
+| R13                    | notification_review    | Hundreds of thousands        | Thousands per day              |
+| R14                    | review                 | Tens of thousands            | Thousands per day              |
+| R15                    | review_like            | Hundreds of thousands        | Thousands per day              |
+| R16                    | report                 | Thousands                    | Hundreds per month             |
+| R17                    | reason                 | Dozens                       | Rare                           |
+| R18                    | game                   | Thousands                    | Hundreds per day               |
+| R19                    | game_platform          | Tens of thousands            | Thousands per month            |
+| R20                    | game_category          | Tens of thousands            | Thousands per month            |
+| R21                    | game_language          | Tens of thousands            | Thousands per month            |
+| R22                    | game_player            | Tens of thousands            | Thousands per month            |
+| R23                    | cdk                    | Hundreds of thousands        | Thousands per day              |
+| R24                    | stock                  | Thousands                    | Hundreds per day               |
+| R25                    | platform               | Dozens                       | Rare                           |
+| R26                    | category               | Hundreds                     | Rare                           |
+| R27                    | language               | Hundreds                     | Rare                           |
+| R28                    | player                 | Hundreds                     | Rare                           |
+| R29                    | media                  | Tens of thousands            | Thousands per month            |
+| R30                    | purchase               | Hundreds of thousands        | Thousands per day              |
+| R31                    | faq                    | Dozens                       | Rare                           |
+| R32                    | about                  | Dozens                       | Rare                           |
+| R33                    | contact                | Dozens                       | Rare                           |
 
 ### 2. Proposed Indices
 
