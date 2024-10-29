@@ -168,6 +168,7 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 | BR08 | Wishlist and Cart Removal | If a game is deleted from the store, it is automatically removed from all users' wishlists and shopping carts. |
 | BR9 | Date Validation | For any date entries (e.g., exit date), the exit date must be greater than or equal to the entry date. |
 | BR10 | Seller Interaction Restrictions | Sellers cannot vote or review their own products to ensure unbiased interactions on the platform. |
+| BR11 | Purchase-Based Reviews | Buyers can only review products they have purchased, ensuring reviews are based on actual experience. |
 
 **Table 7:** STEAL! business rules.
 
@@ -261,6 +262,7 @@ Wireframes are used to describe layout ideas, content, and the overall page-leve
 Changes made to the first submission:
 1. A1 Main Features: Expanded explanations of some mandatory project features and a clearer overview of the S coins system.
 2. A2 User Stories: Refined some user stories to incorporate some missing mandatory features.
+3. A2 Business Rules: Added a business rule (BR11) that restricts buyers to reviewing only products they have purchased, ensuring reviews reflect genuine user experiences.
 
 ***
 GROUP2435, 04/10/2024
