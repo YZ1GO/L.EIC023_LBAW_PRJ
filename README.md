@@ -68,7 +68,7 @@ The goal of the class diagram for STEAL! is to visually represent the core compo
 | R27                | language(<ins>id</ins>, language **NN**) |
 | R28                | player(<ins>id</ins>, player **NN**) |
 | R29                | media(<ins>id</ins>, path **NN**, id_game -> game **NN**) |
-| R30                | purchase(<ins>id</ins>, value **NN** **CK** value > 0.0, status **NN** **CK** status **IN** Status, id_order -> order **NN**, id_cdk -> cdk **UK** **NN**) |
+| R30                | purchase(<ins>id</ins>, value **NN** **CK** value > 0.0, status **NN** **CK** status **IN** Status, id_order -> order **NN**, id_cdk -> cdk **UK**) |
 | R31                | faq(<ins>id</ins>, question **NN**, answer **NN**) |
 | R32                | about(<ins>id</ins>, about **NN**) |
 | R33                | contact(<ins>id</ins>, contact **NN**) |

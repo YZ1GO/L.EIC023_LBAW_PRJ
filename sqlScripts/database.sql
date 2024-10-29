@@ -275,7 +275,8 @@ Mais importantes:
 
 1. Separar purchase em várias tabelas de acordo com o status. Uma purchase está associada a um cdk, no entanto para o caso em que o
 status é pre-purchase ou cancelled por o artigo não estar em stock, não é possível associar um cdk à purchase porque não há nenhum em stock.
-(Implementei já uma solução para isto neste script).
+(Implementei já uma solução para isto neste script). 
+-- Alteracao do cdk UK NN para apenas cdk UK feita no relational schema (Bruno)
 
 2.Criar uma classe de associação para associar as notificações aos users que as recebem. Supondo que um user tem uma aba de notificações,
 como é que vamos buscar as notificações que devem ser carregadas nessa página se não associarmos as notificações aos users a quem se 
