@@ -62,6 +62,7 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 | User | Generic users who can access all publicly available information, such as listed CDKs. |
 | Authenticated User | Registered users who have access to additional features of the platform. |
 | Buyer | Registered users who can browse products, purchase CDKs, and create wishlists and engage with reviews. |
+| Review Author | Users who have purchased CDKs and can leave reviews and ratings for those products. |
 | Seller | Users who list games for sale and manage their product information and pricing. Cannot buy products. |
 | Administrator | Users with full control over the platform, managing product listings, user accounts, and overseeing order processing. Cannot make purchases. |
 | API | A system actor that allows external applications to interact with the platform programmatically, enabling functionalities such as retrieving product information, managing user accounts, and processing payments in several currencies. |
