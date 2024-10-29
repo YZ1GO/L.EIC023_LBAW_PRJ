@@ -135,22 +135,22 @@ Legend:
 | - | - |
 | **Keys** | { id }, { id_buyer } |
 | **Functional Dependencies:** | |
-| FD0601 | id → {id_buyer} |
-| FD0602 | id_buyer → {id} |
+| FD0601 | id → {id_buyer, quantity} |
+| FD0602 | id_buyer → {id, quantity} |
 | **NORMAL FORM** | BCNF |
 
 | **TABLE R07** | order |
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD0701 | id → {id_buyer, date} |
+| FD0701 | id → {id_buyer, id_payment, date} |
 | **NORMAL FORM** | BCNF |
 
 | **TABLE R08** | payment |
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD0801 | id → {value} |
+| FD0801 | id → {id_method, value} |
 | **NORMAL FORM** | BCNF |
 
 | **TABLE R09** | payment_method |
@@ -160,131 +160,176 @@ Legend:
 | FD0901 | id → {method} |
 | **NORMAL FORM** | BCNF |
 
-| **TABLE R10** | notification |
+| **TABLE R10** | notification_wishlist |
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD1001 | id → {title, description} |
+| FD1001 | id → {id_wishlist, title, description} |
 | **NORMAL FORM** | BCNF |
 
-| **TABLE R11** | review |
+| **TABLE R11** | notification_game |
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD1101 | id → {title, description, recommend, id_author, id_game} |
+| FD1101 | id → {id_game, title, description} |
 | **NORMAL FORM** | BCNF |
 
-| **TABLE R12** | review_like |
+| **TABLE R12** | notification_purchase |
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD1201 | id → {id_review, id_author} |
+| FD1201 | id → {id_purchase, title, description} |
 | **NORMAL FORM** | BCNF |
 
-| **TABLE R13** | report |
+| **TABLE R13** | notification_review |
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD1301 | id → {description, id_reason} |
+| FD1301 | id → {id_review, title, description} |
 | **NORMAL FORM** | BCNF |
 
-| **TABLE R14** | reason |
+| **TABLE R14** | review |
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD1401 | id → {reason} |
+| FD1401 | id → {title, description, recommend, id_author, id_game} |
 | **NORMAL FORM** | BCNF |
 
-| **TABLE R15** | game |
+| **TABLE R15** | review_like |
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD1501 | id → {name, description, minimum_age, price, id_owner, id_platform, id_category, id_language, id_player} |
+| FD1501 | id → {id_review, id_author} |
 | **NORMAL FORM** | BCNF |
 
-| **TABLE R16** | cdk |
+| **TABLE R16** | report |
+| - | - |
+| **Keys** | { id } |
+| **Functional Dependencies:** | |
+| FD1601 | id → {description, id_buyer, id_reason, id_review} |
+| **NORMAL FORM** | BCNF |
+
+| **TABLE R17** | reason |
+| - | - |
+| **Keys** | { id } |
+| **Functional Dependencies:** | |
+| FD1701 | id → {reason} |
+| **NORMAL FORM** | BCNF |
+
+| **TABLE R18** | game |
+| - | - |
+| **Keys** | { id } |
+| **Functional Dependencies:** | |
+| FD1801 | id → {name, description, minimum_age, price, id_owner} |
+| **NORMAL FORM** | BCNF |
+
+| **TABLE R19** | game_platform |
+| - | - |
+| **Keys** | { id } |
+| **Functional Dependencies:** | |
+| FD1901 | id → {id_game, id_platform} |
+| **NORMAL FORM** | BCNF |
+
+| **TABLE R20** | game_category |
+| - | - |
+| **Keys** | { id } |
+| **Functional Dependencies:** | |
+| FD2001 | id → {id_game, id_category} |
+| **NORMAL FORM** | BCNF |
+
+| **TABLE R21** | game_language |
+| - | - |
+| **Keys** | { id } |
+| **Functional Dependencies:** | |
+| FD2101 | id → {id_game, id_language} |
+| **NORMAL FORM** | BCNF |
+
+| **TABLE R22** | game_player |
+| - | - |
+| **Keys** | { id } |
+| **Functional Dependencies:** | |
+| FD2201 | id → {id_game, id_player} |
+| **NORMAL FORM** | BCNF |
+
+| **TABLE R23** | cdk |
 | - | - |
 | **Keys** | { id }, { code } |
 | **Functional Dependencies:** | |
-| FD1601 | id → {code, id_game} |
-| FD1602 | code → {id, id_game} |
+| FD2301 | id → {code, id_game} |
+| FD2302 | code → {id, id_game} |
 | **NORMAL FORM** | BCNF |
 
-| **TABLE R17** | stock |
+| **TABLE R24** | stock |
 | - | - |
 | **Keys** | { id }, { id_game } |
 | **Functional Dependencies:** | |
-| FD1701 | id → {quantity, id_game} |
-| FD1702 | id_game → {id, quantity} |
+| FD2401 | id → {quantity, id_game} |
+| FD2402 | id_game → {id, quantity} |
 | **NORMAL FORM** | BCNF |
 
-| **TABLE R18** | platform |
+| **TABLE R25** | platform |
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD1801 | id → {platform} |
+| FD2501 | id → {platform} |
 | **NORMAL FORM** | BCNF |
 
-| **TABLE R19** | category |
+| **TABLE R26** | category |
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD1901 | id → {category} |
+| FD2601 | id → {category} |
 | **NORMAL FORM** | BCNF |
 
-| **TABLE R20** | language |
+| **TABLE R27** | language |
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD2001 | id → {language} |
+| FD2701 | id → {language} |
 | **NORMAL FORM** | BCNF |
 
-| **TABLE R21** | player |
+| **TABLE R28** | player |
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD2101 | id → {player} |
+| FD2801 | id → {player} |
 | **NORMAL FORM** | BCNF |
 
-| **TABLE R22** | media |
+| **TABLE R29** | media |
 | - | - |
 | **Keys** | { id }, { id_game } |
 | **Functional Dependencies:** | |
-| FD2201 | id → {path, id_game} |
-| FD2202 | id_game → {id, path} |
+| FD2901 | id → {path, id_game} |
+| FD2902 | id_game → {id, path} |
 | **NORMAL FORM** | BCNF |
 
-| **TABLE R23** | purchase |
+| **TABLE R30** | purchase |
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD2301 | id → {value, status} |
+| FD3001 | id → {value, status, id_order, id_cdk} |
 | **NORMAL FORM** | BCNF |
 
-| **TABLE R24** | faq |
+| **TABLE R31** | faq |
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD2401 | id → {question, answer} |
+| FD3101 | id → {question, answer} |
 | **NORMAL FORM** | BCNF |
 
-| **TABLE R25** | about |
+| **TABLE R32** | about |
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD2501 | id → {about} |
+| FD3201 | id → {about} |
 | **NORMAL FORM** | BCNF |
 
-| **TABLE R26** | contact |
+| **TABLE R33** | contact |
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD2601 | id → {contact} |
+| FD3301 | id → {contact} |
 | **NORMAL FORM** | BCNF |
-
-> If necessary, description of the changes necessary to convert the schema to BCNF.  
-> Justification of the BCNF.  
-
 
 ---
 
