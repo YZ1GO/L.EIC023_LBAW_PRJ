@@ -142,7 +142,7 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 
 | **Identifier** | **Name** | **Priority** | **Responsible** | **Description** |
 |-|-|-|-|-|
-| US39 | Manage User Accounts | High | Ricardo Yang | As an Administrator, I want to manage user accounts, so that I can maintain a secure and orderly platform. |
+| US39 | Manage User Accounts | High | Ricardo Yang | As an Administrator, I want to manage user accounts (either deleting, blocking/unblocking), so that I can maintain a secure and orderly platform. |
 | US40 | Remove or Suspend Products | Medium | Bruno Huang | As an Administrator, I want to be able to suspend or remove and ban certain games from the system, so that I can ensure that all products available comply with our system's rules and guidelines. |
 | US41 | Delete inappropriate reviews | Medium | Daniel Basílio | As an Administrator, I want to be able to delete inappropriate user reviews from the system, so that I can keep the interactions between the users respectful and polite. |
 | US42 | Send Notification | Low | Francisco Magalhães | As an Administrator, I want to send notifications to users, so that I can communicate important information to buyers, sellers, or both. |
