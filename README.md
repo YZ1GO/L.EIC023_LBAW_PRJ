@@ -347,7 +347,7 @@ We carried out an analysis of the anticipated system load on the database, inclu
 | R01                    | administrator          | Dozens                       | Rare                           |
 | R02                    | user                   | Hundreds of thousands        | Thousands per month            |
 | R03                    | buyer                  | Hundreds of thousands        | Thousands per month            |
-| R04                    | seller                 | Dozens                       | Dozens per month              |
+| R04                    | seller                 | Dozens                       | Dozens per month               |
 | R05                    | wishlist               | Hundreds of thousands        | Thousands per month            |
 | R06                    | shopping_cart          | Hundreds of thousands        | Thousands per month            |
 | R07                    | order                  | Hundreds of thousands        | Thousands per month            |
@@ -365,13 +365,13 @@ We carried out an analysis of the anticipated system load on the database, inclu
 | R19                    | game_platform          | Dozens                       | Rare                           |
 | R20                    | game_category          | Dozens                       | Rare                           |
 | R21                    | game_language          | Dozens                       | Rare                           |
-| R22                    | game_player            | Hundreds of thousands        | Thousands per month            |
+| R22                    | game_player            | Single digits                | Rare                           |
 | R23                    | cdk                    | Hundreds of thousands        | Thousands per month            |
 | R24                    | stock                  | Hundreds                     | Hundreds per month             |
 | R25                    | platform               | Dozens                       | Rare                           |
 | R26                    | category               | Dozens                       | Rare                           |
 | R27                    | language               | Dozens                       | Rare                           |
-| R28                    | player                 | Hundreds                     | Rare                           |
+| R28                    | player                 | Single digits                | Rare                           |
 | R29                    | media                  | Hundreds of thousands        | Thousands per month            |
 | R30                    | purchase               | Hundreds of thousands        | Thousands per month            |
 | R31                    | faq                    | Dozens                       | Rare                           |
