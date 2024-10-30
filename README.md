@@ -167,7 +167,7 @@ Together, these user profiles create a dynamic marketplace that fosters interact
 | BR06 | Key Delivery | After payment is confirmed, the CDK is delivered instantly via the buyer's email. |
 | BR07 | Stock Availability | Buyers can only purchase a CDK if it is in stock. Out-of-stock items cannot be added to the cart or purchased; however, they can be added to the wishlist and be notified when in stock. |
 | BR08 | Wishlist and Cart Removal | If a game is deleted from the store, it is automatically removed from all users' wishlists and shopping carts. |
-| BR9 | Date Validation | For any date entries (e.g., exit date), the exit date must be greater than or equal to the entry date. |
+| BR09 | Date Validation | For any date entries (e.g., exit date), the exit date must be greater than or equal to the entry date. |
 | BR10 | Seller Interaction Restrictions | Sellers cannot vote or review their own products to ensure unbiased interactions on the platform. |
 | BR11 | Purchase-Based Reviews | Buyers can only review products they have purchased, ensuring reviews are based on actual experience. |
 
@@ -262,8 +262,9 @@ Wireframes are used to describe layout ideas, content, and the overall page-leve
 
 Changes made to the first submission:
 1. A1 Main Features: Expanded explanations of some mandatory project features and a clearer overview of the S coins system.
-2. A2 User Stories: Refined some user stories to incorporate some missing mandatory features.
-3. A2 Business Rules: Added a business rule (BR11) that restricts buyers to reviewing only products they have purchased, ensuring reviews reflect genuine user experiences.
+2. A2 Actors: Added a Review Author in actors, it ensures that only verified buyers who have purchased the game can leave a review.
+3. A2 User Stories: Refined some user stories to incorporate some missing mandatory features.
+4. A2 Business Rules: Added a business rule (BR11) that restricts buyers to reviewing only products they have purchased, ensuring reviews reflect genuine user experiences.
 
 ***
 GROUP2435, 04/10/2024
