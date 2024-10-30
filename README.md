@@ -490,7 +490,7 @@ CREATE INDEX search_idx ON game USING GIN (tsvectors);
 
 | **Trigger**      | TRIGGER01                              |
 | ---              | ---                                    |
-| **Description**  | Ensures that shared user data (e.g., reviews, likes) is retained but anonymized when a user deletes their account. (BR02 - Delete Account) |
+| **Description**  | Ensures that shared user data (e.g., reviews, likes) is retained but anonymized when a user deletes their account. (ER: BR02 - Delete Account) |
 | **Justification** | This trigger ensures user privacy by anonymizing data when an account is deleted, thereby preventing the exposure of personally identifiable information. |
 ```sql
 CREATE FUNCTION anonymize_user_data(user_id INT) RETURNS VOID AS
@@ -514,7 +514,7 @@ END;
 $BODY$
 LANGUAGE plpgsql;
 
-CREATE TRIGGER anonymize_user_upon_deletion
+CREATE TRIGGER trg_anonymize_user_data
 BEFORE UPDATE ON Users
 FOR EACH ROW
 WHEN (NEW.is_active IS FALSE)  -- Trigger when is_active is set to FALSE
@@ -523,7 +523,7 @@ EXECUTE PROCEDURE anonymize_user_data(OLD.id);
 
 | **Trigger**      | TRIGGER02                              |
 | ---              | ---                                    |
-| **Description**  | A Buyer can only leave a review for games it has purchased. (BR11 - Purchase-Based Reviews) |
+| **Description**  | A Buyer can only leave a review for games it has purchased. (ER: BR11 - Purchase-Based Reviews) |
 | **Justification** | Ensures integrity by allowing reviews only from verified purchasers, enhancing trust and quality of feedback. |
 ```sql
 CREATE FUNCTION check_review_eligibility() RETURNS TRIGGER AS
@@ -545,13 +545,42 @@ END
 $BODY$
 LANGUAGE plpgsql;
 
-CREATE TRIGGER add_review
+CREATE TRIGGER trg_check_review_eligibility
 BEFORE INSERT ON Review
 FOR EACH ROW
 EXECUTE PROCEDURE check_review_eligibility();
 ```
 
 | **Trigger**      | TRIGGER03                              |
+| ---              | ---                                    |
+| **Description**  | Trigger description, including reference to the business rules involved |
+| **Justification** |  |
+```sql
+CREATE FUNCTION clear_cart_and_wishlist() RETURNS TRIGGER AS
+$BODY$
+BEGIN
+    -- Delete items from the ShoppingCart
+    DELETE FROM ShoppingCart
+    WHERE buyer = (SELECT buyer FROM Orders WHERE id = NEW.order_) 
+      AND game = NEW.game;  -- Assuming game is part of the Purchase table
+
+    -- Delete items from the Wishlist
+    DELETE FROM Wishlist
+    WHERE buyer = (SELECT buyer FROM Orders WHERE id = NEW.order_) 
+      AND game = NEW.game;  -- Assuming game is part of the Purchase table
+
+    RETURN NEW;
+END
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_clear_cart_and_wishlist
+AFTER INSERT ON Purchase
+FOR EACH ROW
+EXECUTE PROCEDURE clear_cart_and_wishlist();
+```
+
+| **Trigger**      | TRIGGER04                              |
 | ---              | ---                                    |
 | **Description**  | Trigger description, including reference to the business rules involved |
 | **Justification** |  |
