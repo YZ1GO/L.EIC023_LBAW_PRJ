@@ -184,8 +184,8 @@ CREATE TABLE CanceledPurchase(
 );
 
 CREATE TABLE DeliveredPurchase(
-   id INT PRIMARY KEY REFERENCES Purchase(id),
-   cdk INT NOT NULL REFERENCES CDK(id)
+    id INT PRIMARY KEY REFERENCES Purchase(id),
+    cdk INT NOT NULL REFERENCES CDK(id)
 );
 
 CREATE TABLE Review(

@@ -490,7 +490,8 @@ CREATE INDEX search_idx ON game USING GIN (tsvectors);
 
 | **Trigger**      | TRIGGER01                              |
 | ---              | ---                                    |
-| **Description**  | Trigger description, including reference to the business rules involved |
+| **Description**  | Ensures that shared user data (e.g., reviews, likes) is retained but anonymized when a user deletes their account. (BR02 - Delete Account) |
+| **Justification** | This trigger ensures user privacy by anonymizing data when an account is deleted, thereby preventing the exposure of personally identifiable information. |
 ```sql
 CREATE FUNCTION anonymize_user_data(user_id INT) RETURNS VOID AS
 $BODY$
@@ -520,11 +521,43 @@ WHEN (NEW.is_active IS FALSE)  -- Trigger when is_active is set to FALSE
 EXECUTE PROCEDURE anonymize_user_data(OLD.id);
 ``` 
 
-
 | **Trigger**      | TRIGGER02                              |
 | ---              | ---                                    |
+| **Description**  | A Buyer can only leave a review for games it has purchased. (BR11 - Purchase-Based Reviews) |
+| **Justification** | Ensures integrity by allowing reviews only from verified purchasers, enhancing trust and quality of feedback. |
+```sql
+CREATE FUNCTION check_review_eligibility() RETURNS TRIGGER AS
+$BODY$
+BEGIN
+    -- Check if the buyer has purchased the game
+    IF NOT EXISTS (
+        SELECT 1 
+        FROM Purchase p
+        JOIN Orders o ON p.order_ = o.id
+        WHERE p.game = NEW.game 
+        AND o.buyer = NEW.author
+    ) THEN
+        RAISE EXCEPTION 'A buyer can only review games they have purchased.';
+    END IF;
+
+    RETURN NEW;
+END
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER add_review
+BEFORE INSERT ON Review
+FOR EACH ROW
+EXECUTE PROCEDURE check_review_eligibility();
+```
+
+| **Trigger**      | TRIGGER03                              |
+| ---              | ---                                    |
 | **Description**  | Trigger description, including reference to the business rules involved |
-| `SQL code`                                             ||
+| **Justification** |  |
+```sql
+
+```
 
 ### 4. Transactions
  
