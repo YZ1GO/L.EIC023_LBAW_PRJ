@@ -43,6 +43,7 @@ CREATE TABLE Users (
     name TEXT NOT NULL,
     email TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL
+    is_active BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE Administrator(

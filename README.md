@@ -40,7 +40,7 @@ The goal of the class diagram for STEAL! is to visually represent the core compo
 | Relation reference | Relation Compact Notation                        |
 | ------------------ | ------------------------------------------------ |
 | R01                | administrator(<ins>id</ins>, username **UK** **NN**, name **NN**, email **UK** **NN**, password **NN**) |
-| R02                | user(<ins>id</ins>, username **UK** **NN**, name **NN**, email **UK** **NN**, password **NN**) |
+| R02                | user(<ins>id</ins>, username **UK** **NN**, name **NN**, email **UK** **NN**, password **NN**, is_active **NN** **DF** TRUE) |
 | R03                | buyer(<ins>id_user</ins> -> user **NN**, NIF **UK**, birth_date **NN** **CK** birth_date <= Today, coins **NN** **CK** coins >= 0) |
 | R04                | seller(<ins>id_user</ins> -> user **NN**) |
 | R05                | wishlist(<ins>id</ins>, <ins>id_buyer</ins> → buyer **NN**, <ins>id_game</ins> -> game **NN**) |
@@ -77,6 +77,7 @@ Legend:
 - UK = UNIQUE KEY
 - NN = NOT NULL
 - CK = CHECK
+- DF = DEFAULT
 
 ### 2. Domains
 
@@ -104,9 +105,9 @@ Legend:
 | - | - |
 | **Keys** | { id }, { username }, { email } |
 | **Functional Dependencies:** | |
-| FD0201 | id → {username, name, email, password} |
-| FD0202 | username → {id, name, email, password} |
-| FD0203 | email → {id, username, name, password} |
+| FD0201 | id → {username, name, email, password, is_active} |
+| FD0202 | username → {id, name, email, password, is_active} |
+| FD0203 | email → {id, username, name, password, is_active} |
 | **NORMAL FORM** | BCNF |
 
 | **TABLE R03** | buyer |
@@ -488,6 +489,39 @@ CREATE INDEX search_idx ON game USING GIN (tsvectors);
 > User-defined functions and trigger procedures that add control structures to the SQL language or perform complex computations, are identified and described to be trusted by the database server. Every kind of function (SQL functions, Stored procedures, Trigger procedures) can take base types, composite types, or combinations of these as arguments (parameters). In addition, every kind of function can return a base type or a composite type. Functions can also be defined to return sets of base or composite values.  
 
 | **Trigger**      | TRIGGER01                              |
+| ---              | ---                                    |
+| **Description**  | Trigger description, including reference to the business rules involved |
+```sql
+CREATE FUNCTION anonymize_user_data(user_id INT) RETURNS VOID AS
+$BODY$
+BEGIN
+    -- Anonymize data in Users table
+    UPDATE Users
+    SET username = 'Anonymous' || user_id,
+        name = 'Anonymous',
+        email = 'anonymous' || user_id || '@example.com',
+        password = 'anonymous'
+    WHERE id = user_id;
+
+    -- Anonymize data in Buyer table
+    UPDATE Buyer
+    SET NIF = NULL,
+        birth_date = '1111-11-11', -- Placeholder date
+        coins = 0
+    WHERE id = user_id;
+END;
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER anonymize_user_upon_deletion
+BEFORE UPDATE ON Users
+FOR EACH ROW
+WHEN (NEW.is_active IS FALSE)  -- Trigger when is_active is set to FALSE
+EXECUTE PROCEDURE anonymize_user_data(OLD.id);
+``` 
+
+
+| **Trigger**      | TRIGGER02                              |
 | ---              | ---                                    |
 | **Description**  | Trigger description, including reference to the business rules involved |
 | `SQL code`                                             ||
