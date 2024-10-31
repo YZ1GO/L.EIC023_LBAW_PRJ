@@ -56,7 +56,7 @@ The goal of the class diagram for STEAL! is to visually represent the core compo
 | R15                | review_like(<ins>id</ins>, id_review -> review **NN**, id_author -> buyer **NN**, (id_review, id_author) **UK**) |
 | R16                | report(<ins>id</ins>, description **NN**, id_buyer -> buyer **NN**, id_reason -> reason **NN**, id_review -> review **NN**) |
 | R17                | reason(<ins>id</ins>, reason **NN**) |
-| R18                | game(<ins>id</ins>, name **NN**, description **NN**, minimum_age **NN** **CK** minimum_age > 0 AND minimum_age <= 18, price **NN** **CK** price > 0.0, is_active **NN** **DF** TRUE, id_owner -> seller **NN**) |
+| R18                | game(<ins>id</ins>, name **NN**, description **NN**, minimum_age **NN** **CK** minimum_age > 0 AND minimum_age <= 18, price **NN** **CK** price > 0.0, overall_rating **NN** **CK** overall_rating >= 0 AND overall_rating <= 100, is_active **NN** **DF** TRUE, id_owner -> seller **NN**) |
 | R19                | game_platform(<ins>id</ins>, id_game -> game **NN**, id_platform -> platform **NN**, (id_game, id_platform) **UK**) |
 | R20                | game_category(<ins>id</ins>, id_game -> game **NN**, id_category -> category **NN**, (id_game, id_category) **UK**) |
 | R21                | game_language(<ins>id</ins>, id_game -> game **NN**, id_language -> language **NN**, (id_game, id_language) **UK**) |
@@ -221,7 +221,7 @@ Legend:
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD1801 | id → {name, description, minimum_age, price, is_active, id_owner} |
+| FD1801 | id → {name, description, minimum_age, price, overall_rating, is_active, id_owner} |
 | **NORMAL FORM** | BCNF |
 
 | **TABLE R19** | game_platform |
