@@ -644,6 +644,71 @@ EXECUTE FUNCTION update_game_rating_after_review();
 
 | **Trigger**      | TRIGGER05                              |
 | ---              | ---                                    |
+| **Description**  | 	Prevents a buyer from liking the same review more than once by checking for existing likes before allowing a new entry. (EBD: BR03) |
+| **Justification** | Maintains the integrity of the review system by ensuring that each review can only be liked once per buyer, preventing duplicate interactions and skewed like counts. |
+```sql
+CREATE FUNCTION check_unique_review_like() RETURNS TRIGGER AS
+$BODY$
+BEGIN
+    -- Check if the buyer has already liked this review
+    IF EXISTS (
+        SELECT 1
+        FROM ReviewLike rl
+        WHERE rl.review_id = NEW.review_id 
+        AND rl.buyer_id = NEW.buyer_id
+    ) THEN
+        RAISE EXCEPTION 'A buyer can only like a particular review once.';
+    END IF;
+
+    RETURN NEW;
+END
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_check_unique_review_like
+BEFORE INSERT ON ReviewLike
+FOR EACH ROW
+EXECUTE PROCEDURE check_unique_review_like();
+```
+
+| **Trigger**      | TRIGGER06                              |
+| ---              | ---                                    |
+| **Description**  | Validates that a buyer meets the minimum age requirement before allowing a purchase of a game. (ER: C01 - Game Age Restriction) |
+| **Justification** | Protects against underage purchases, ensuring compliance with age-related regulations and promoting responsible gaming. |
+```sql
+CREATE FUNCTION validate_age_for_purchase() RETURNS TRIGGER AS 
+$BODY$
+DECLARE
+    buyer_age INT;
+    game_minimum_age INT;
+BEGIN
+    -- Calculate the buyer's age based on birth_date from the buyer table
+    SELECT EXTRACT(YEAR FROM AGE(CURRENT_DATE, birth_date)) INTO buyer_age
+    FROM buyer
+    WHERE id = NEW.id_buyer;
+
+    -- Get the minimum age required to purchase the game
+    SELECT minimum_age INTO game_minimum_age
+    FROM game
+    WHERE id = NEW.id_game;
+
+    -- Check if the buyer meets the age requirement
+    IF buyer_age < game_minimum_age THEN
+        RAISE EXCEPTION 'Purchase denied: Buyer does not meet the minimum age requirement of % years for this game.', game_minimum_age;
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_validate_age_for_purchase
+BEFORE INSERT ON purchase
+FOR EACH ROW
+EXECUTE FUNCTION validate_age_for_purchase();
+```
+
+| **Trigger**      | TRIGGER07                              |
+| ---              | ---                                    |
 | **Description**  |  |
 | **Justification** |  |
 ```sql
