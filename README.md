@@ -43,8 +43,8 @@ The goal of the class diagram for STEAL! is to visually represent the core compo
 | R02                | user(<ins>id</ins>, username **UK** **NN**, name **NN**, email **UK** **NN**, password **NN**, is_active **NN** **DF** TRUE) |
 | R03                | buyer(<ins>id_user</ins> -> user **NN**, NIF **UK**, birth_date **NN** **CK** birth_date <= Today, coins **NN** **CK** coins >= 0) |
 | R04                | seller(<ins>id_user</ins> -> user **NN**) |
-| R05                | wishlist(<ins>id</ins>, <ins>id_buyer</ins> → buyer **NN**, <ins>id_game</ins> -> game **NN**) |
-| R06                | shopping_cart(<ins>id</ins>, <ins>id_buyer</ins> → buyer **NN**, <ins>id_game</ins> -> game **NN**, quantity **NN** **CK** quantity >= 0) |
+| R05                | wishlist(<ins>id</ins>, <ins>id_buyer</ins> → buyer **NN**, id_game -> game) |
+| R06                | shopping_cart(<ins>id</ins>, <ins>id_buyer</ins> → buyer **NN**, id_game -> game , quantity **NN** **CK** quantity >= 0) |
 | R07                | order(<ins>id</ins>, <ins>id_buyer</ins> -> buyer **NN**, <ins>id_payment</ins> -> payment **NN**, date **NN**) |
 | R08                | payment(<ins>id</ins>, <ins>id_method</ins> -> payment_method **NN**, value **NN** **CK** value > 0.0) |
 | R09                | payment_method(<ins>id</ins>, method **NN**) |
@@ -56,7 +56,7 @@ The goal of the class diagram for STEAL! is to visually represent the core compo
 | R15                | review_like(<ins>id</ins>, id_review -> review **NN**, id_author -> buyer **NN**, (id_review, id_author) **UK**) |
 | R16                | report(<ins>id</ins>, description **NN**, id_buyer -> buyer **NN**, id_reason -> reason **NN**, id_review -> review **NN**) |
 | R17                | reason(<ins>id</ins>, reason **NN**) |
-| R18                | game(<ins>id</ins>, name **NN**, description **NN**, minimum_age **NN** **CK** minimum_age > 0 AND minimum_age <= 18, price **NN** **CK** price > 0.0, id_owner -> seller **NN**) |
+| R18                | game(<ins>id</ins>, name **NN**, description **NN**, minimum_age **NN** **CK** minimum_age > 0 AND minimum_age <= 18, price **NN** **CK** price > 0.0, is_active **NN** **DF** TRUE, id_owner -> seller **NN**) |
 | R19                | game_platform(<ins>id</ins>, id_game -> game **NN**, id_platform -> platform **NN**, (id_game, id_platform) **UK**) |
 | R20                | game_category(<ins>id</ins>, id_game -> game **NN**, id_category -> category **NN**, (id_game, id_category) **UK**) |
 | R21                | game_language(<ins>id</ins>, id_game -> game **NN**, id_language -> language **NN**, (id_game, id_language) **UK**) |
@@ -68,7 +68,7 @@ The goal of the class diagram for STEAL! is to visually represent the core compo
 | R27                | language(<ins>id</ins>, language **NN**) |
 | R28                | player(<ins>id</ins>, player **NN**) |
 | R29                | media(<ins>id</ins>, path **NN**, id_game -> game **NN**) |
-| R30                | purchase(<ins>id</ins>, value **NN** **CK** value > 0.0, status **NN** **CK** status **IN** Status, id_order -> order **NN**, id_cdk -> cdk **UK**) |
+| R30                | purchase(<ins>id</ins>, value **NN** **CK** value > 0.0, status **NN** **CK** status **IN** Status, id_order -> order **NN**, id_game -> game **NN**, id_cdk -> cdk **UK**) |
 | R31                | faq(<ins>id</ins>, question **NN**, answer **NN**) |
 | R32                | about(<ins>id</ins>, about **NN**) |
 | R33                | contact(<ins>id</ins>, contact **NN**) |
@@ -126,18 +126,18 @@ Legend:
 
 | **TABLE R05** | wishlist |
 | - | - |
-| **Keys** | { id }, { id_buyer } |
+| **Keys** | { id }, { id_buyer, id_game } |
 | **Functional Dependencies:** | |
-| FD0501 | id → {id_buyer} |
-| FD0502 | id_buyer → {id} |
+| FD0501 | id → {id_buyer, id_game} |
+| FD0502 | { id_buyer, id_game } → {id} |
 | **NORMAL FORM** | BCNF |
 
 | **TABLE R06** | shopping_cart |
 | - | - |
-| **Keys** | { id }, { id_buyer } |
+| **Keys** | { id }, { id_buyer, id_game } |
 | **Functional Dependencies:** | |
-| FD0601 | id → {id_buyer, quantity} |
-| FD0602 | id_buyer → {id, quantity} |
+| FD0601 | id → {id_buyer, id_game, quantity} |
+| FD0602 | { id_buyer, id_game } → {id, quantity} |
 | **NORMAL FORM** | BCNF |
 
 | **TABLE R07** | order |
@@ -221,35 +221,39 @@ Legend:
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD1801 | id → {name, description, minimum_age, price, id_owner} |
+| FD1801 | id → {name, description, minimum_age, price, is_active, id_owner} |
 | **NORMAL FORM** | BCNF |
 
 | **TABLE R19** | game_platform |
 | - | - |
-| **Keys** | { id } |
+| **Keys** | { id }, { id_game, id_platform }|
 | **Functional Dependencies:** | |
 | FD1901 | id → {id_game, id_platform} |
+| FD1902 | {id_game, id_platform} → {id} |
 | **NORMAL FORM** | BCNF |
 
 | **TABLE R20** | game_category |
 | - | - |
-| **Keys** | { id } |
+| **Keys** | { id }, { id_game, id_category } |
 | **Functional Dependencies:** | |
 | FD2001 | id → {id_game, id_category} |
+| FD2002 | {id_game, id_category} → {id} |
 | **NORMAL FORM** | BCNF |
 
 | **TABLE R21** | game_language |
 | - | - |
-| **Keys** | { id } |
+| **Keys** | { id }, { id_game, id_language } |
 | **Functional Dependencies:** | |
 | FD2101 | id → {id_game, id_language} |
+| FD2102 | {id_game, id_language} → {id} |
 | **NORMAL FORM** | BCNF |
 
 | **TABLE R22** | game_player |
 | - | - |
-| **Keys** | { id } |
+| **Keys** | { id }, { id_game, id_player } |
 | **Functional Dependencies:** | |
 | FD2201 | id → {id_game, id_player} |
+| FD2202 | {id_game, id_player} → {id} |
 | **NORMAL FORM** | BCNF |
 
 | **TABLE R23** | cdk |
@@ -308,7 +312,7 @@ Legend:
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD3001 | id → {value, status, id_order, id_cdk} |
+| FD3001 | id → {value, status, id_order, id_game, id_cdk} |
 | **NORMAL FORM** | BCNF |
 
 | **TABLE R31** | faq |

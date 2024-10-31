@@ -42,7 +42,7 @@ CREATE TABLE Users (
     username TEXT UNIQUE NOT NULL,
     name TEXT NOT NULL,
     email TEXT UNIQUE NOT NULL,
-    password TEXT NOT NULL
+    password TEXT NOT NULL,
     is_active BOOLEAN DEFAULT TRUE
 );
 
@@ -71,7 +71,8 @@ CREATE TABLE Game(
     description TEXT NOT NULL,
     minimum_age INT NOT NULL CHECK(minimum_age >= 0 AND minimum_age <= 18),
     price FLOAT NOT NULL CHECK(price >= 0.0),
-    owner INT NOT NULL REFERENCES Seller(id)
+    owner INT NOT NULL REFERENCES Seller(id),
+    is_active BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE CDK(
