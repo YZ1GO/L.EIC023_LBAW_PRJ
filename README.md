@@ -611,12 +611,12 @@ DECLARE
 BEGIN
     -- Calculate the total number of reviews for the game
     SELECT COUNT(*) INTO total_reviews
-    FROM review
+    FROM Review
     WHERE id_game = NEW.id_game;
 
     -- Calculate the number of recommended reviews (recommend = TRUE) for the game
     SELECT COUNT(*) INTO recommended_reviews
-    FROM review
+    FROM Review
     WHERE id_game = NEW.id_game AND recommend = TRUE;
 
     -- Calculate the recommendation percentage and round to the nearest integer
@@ -627,7 +627,7 @@ BEGIN
     END IF;
 
     -- Update the overall_rating in the game table
-    UPDATE game
+    UPDATE Game
     SET overall_rating = rating_percentage
     WHERE id = NEW.id_game;
 
@@ -637,7 +637,7 @@ $BODY$
 LANGUAGE plpgsql;
 
 CREATE TRIGGER trg_update_game_rating_after_review
-AFTER INSERT OR DELETE ON review
+AFTER INSERT OR DELETE ON Review
 FOR EACH ROW
 EXECUTE FUNCTION update_game_rating_after_review();
 ```
