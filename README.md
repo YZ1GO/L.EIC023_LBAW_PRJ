@@ -557,8 +557,8 @@ EXECUTE PROCEDURE check_review_eligibility();
 
 | **Trigger**      | TRIGGER03                              |
 | ---              | ---                                    |
-| **Description**  | Trigger description, including reference to the business rules involved |
-| **Justification** |  |
+| **Description**  | The ***trg_clear_cart_and_wishlist_after_order*** trigger automatically removes items from a buyer's shopping cart and wishlist once an order is placed. It executes the ***clear_cart_and_wishlist_after_order*** function after a new entry in the Orders table, deleting purchased games for the corresponding buyer. |
+| **Justification** | This trigger improves user experience by ensuring that buyers do not see items they have already purchased, reducing interface clutter and encouraging exploration of new products. It aligns with business rules for a streamlined purchasing process, enhancing customer satisfaction. |
 ```sql
 CREATE FUNCTION clear_cart_and_wishlist_after_order() RETURNS TRIGGER AS
 $BODY$
@@ -598,6 +598,51 @@ EXECUTE PROCEDURE clear_cart_and_wishlist_after_order();
 ```
 
 | **Trigger**      | TRIGGER04                              |
+| ---              | ---                                    |
+| **Description**  | Automatically updates a game's overall rating in the game table whenever a review is added or removed. |
+| **Justification** | Ensures the game's rating reflects the most current reviews, providing accurate information to users and enhancing the integrity of the review system. |
+```sql
+CREATE FUNCTION update_game_rating_after_review() RETURNS TRIGGER AS
+$BODY$
+DECLARE
+    total_reviews INT;
+    recommended_reviews INT;
+    rating_percentage INT;
+BEGIN
+    -- Calculate the total number of reviews for the game
+    SELECT COUNT(*) INTO total_reviews
+    FROM review
+    WHERE id_game = NEW.id_game;
+
+    -- Calculate the number of recommended reviews (recommend = TRUE) for the game
+    SELECT COUNT(*) INTO recommended_reviews
+    FROM review
+    WHERE id_game = NEW.id_game AND recommend = TRUE;
+
+    -- Calculate the recommendation percentage and round to the nearest integer
+    IF total_reviews > 0 THEN
+        rating_percentage := ROUND((recommended_reviews * 100.0) / total_reviews);
+    ELSE
+        rating_percentage := 0;  -- If no reviews, set rating to 0
+    END IF;
+
+    -- Update the overall_rating in the game table
+    UPDATE game
+    SET overall_rating = rating_percentage
+    WHERE id = NEW.id_game;
+
+    RETURN NEW;
+END
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_update_game_rating_after_review
+AFTER INSERT OR DELETE ON review
+FOR EACH ROW
+EXECUTE FUNCTION update_game_rating_after_review();
+```
+
+| **Trigger**      | TRIGGER05                              |
 | ---              | ---                                    |
 | **Description**  |  |
 | **Justification** |  |
