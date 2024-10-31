@@ -709,10 +709,79 @@ EXECUTE FUNCTION validate_age_for_purchase();
 
 | **Trigger**      | TRIGGER07                              |
 | ---              | ---                                    |
-| **Description**  |  |
-| **Justification** |  |
+| **Description**  | Automatically converts all pre-purchases into delivered purchases when CDKs for a sold-out or unreleased game become available on the website. This ensures that users who have shown interest in a game receive immediate access to their purchases as soon as the game is available. |
+| **Justification** |Enhances user experience by providing instant fulfillment of pre-orders, minimizing wait times, and ensuring that customers can start using their purchased games immediately upon release. It allows the website to respond quickly to inventory changes, aligning with customer expectations for timely access to new content.|
 ```sql
 
+-- Step 1: Create the Trigger Function
+CREATE OR REPLACE FUNCTION process_prepurchase_on_cdk_addition()
+RETURNS TRIGGER AS $$
+DECLARE
+    pre_purchase_record RECORD;
+BEGIN
+    -- Loop through all pre-purchase records that match the game of the new CDK
+    FOR pre_purchase_record IN
+        SELECT id, game
+        FROM PrePurchase
+        WHERE game = NEW.game
+    LOOP
+        -- Delete the matching pre-purchase record
+        DELETE FROM PrePurchase WHERE id = pre_purchase_record.id;
+
+        -- Insert a new record into DeliveredPurchase using the same purchase ID and new CDK ID
+        INSERT INTO DeliveredPurchase (id, cdk)
+        VALUES (pre_purchase_record.id, NEW.id);
+    END LOOP;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Step 2: Create the Trigger to Activate the Function
+CREATE TRIGGER trigger_process_prepurchase_on_cdk_addition
+AFTER INSERT ON CDK
+FOR EACH ROW
+EXECUTE FUNCTION process_prepurchase_on_cdk_addition();
+
+```
+
+| **Trigger**      | TRIGGER08                              |
+| ---              | ---                                    |
+| **Description**  |This trigger automatically increases the number of sCoins for buyers with each purchase, awarding one sCoin for every 10 euros spent.|
+| **Justification** |By rewarding buyers with sCoins, the trigger enhances customer engagement and loyalty, fostering a positive shopping experience. It encourages users to make more purchases, as they see a direct benefit from their spending.|
+```sql
+
+-- Step 1: Create the Trigger Function
+CREATE OR REPLACE FUNCTION add_scoin_on_delivery() 
+RETURNS TRIGGER AS $$
+DECLARE
+    buyer_id INT;
+    purchase_value FLOAT;
+    scoin_reward INT;
+BEGIN
+    -- Find the buyer ID and purchase value for the delivered purchase
+    SELECT o.buyer, p.value INTO buyer_id, purchase_value
+    FROM Purchase p
+    JOIN Orders o ON p.order_ = o.id
+    WHERE p.id = NEW.id;
+
+    -- Calculate SCoins reward: 1 SCoin per $10 spent
+    scoin_reward := FLOOR(purchase_value / 10);
+
+    -- Update the buyer's coins with the calculated SCoins
+    UPDATE Buyer
+    SET coins = coins + scoin_reward
+    WHERE id = buyer_id;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Step 2: Create the Trigger to Activate the Function
+CREATE TRIGGER trigger_add_scoin_on_delivery
+AFTER INSERT ON DeliveredPurchase
+FOR EACH ROW
+EXECUTE FUNCTION add_scoin_on_delivery();
 ```
 
 ### 4. Transactions
