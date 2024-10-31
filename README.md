@@ -560,33 +560,46 @@ EXECUTE PROCEDURE check_review_eligibility();
 | **Description**  | Trigger description, including reference to the business rules involved |
 | **Justification** |  |
 ```sql
-CREATE FUNCTION clear_cart_and_wishlist() RETURNS TRIGGER AS
+CREATE FUNCTION clear_cart_and_wishlist_after_order() RETURNS TRIGGER AS
 $BODY$
+DECLARE
+    game_id INT;
+    buyer_id INT;
 BEGIN
-    -- Delete items from the ShoppingCart
-    DELETE FROM ShoppingCart
-    WHERE buyer = (SELECT buyer FROM Orders WHERE id = NEW.order_) 
-      AND game = NEW.game;  -- Assuming game is part of the Purchase table
+    -- Retrieve the buyer ID associated with the order
+    SELECT id_buyer INTO buyer_id
+    FROM Orders
+    WHERE id = NEW.id;
 
-    -- Delete items from the Wishlist
-    DELETE FROM Wishlist
-    WHERE buyer = (SELECT buyer FROM Orders WHERE id = NEW.order_) 
-      AND game = NEW.game;  -- Assuming game is part of the Purchase table
+    -- Loop through all purchases associated with this order
+    FOR game_id IN
+        SELECT id_game FROM Purchase WHERE id_order = NEW.id
+    LOOP
+        -- Delete each game from ShoppingCart for this buyer
+        DELETE FROM ShoppingCart
+        WHERE buyer = buyer_id
+          AND game = game_id;
+
+        -- Delete each game from Wishlist for this buyer
+        DELETE FROM Wishlist
+        WHERE buyer = buyer_id
+          AND game = game_id;
+    END LOOP;
 
     RETURN NEW;
 END
 $BODY$
 LANGUAGE plpgsql;
 
-CREATE TRIGGER trg_clear_cart_and_wishlist
-AFTER INSERT ON Purchase
+CREATE TRIGGER trg_clear_cart_and_wishlist_after_order
+AFTER INSERT ON Orders
 FOR EACH ROW
-EXECUTE PROCEDURE clear_cart_and_wishlist();
+EXECUTE PROCEDURE clear_cart_and_wishlist_after_order();
 ```
 
 | **Trigger**      | TRIGGER04                              |
 | ---              | ---                                    |
-| **Description**  | Trigger description, including reference to the business rules involved |
+| **Description**  |  |
 | **Justification** |  |
 ```sql
 
