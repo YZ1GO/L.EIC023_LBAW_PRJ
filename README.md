@@ -453,7 +453,7 @@ To improve user experience, it’s crucial for our system to support full-text s
 ##### SQL Code
 ```sql
 -- Add column to game to store computed ts_vectors.
-ALTER TABLE game
+ALTER TABLE Game
 ADD COLUMN tsvectors TSVECTOR;
 
 -- Create a function to automatically update ts_vectors.
@@ -479,18 +479,15 @@ LANGUAGE plpgsql;
 
 -- Create a trigger before insert or update on game.
 CREATE TRIGGER game_search_update
-  BEFORE INSERT OR UPDATE ON game
+  BEFORE INSERT OR UPDATE ON Game
   FOR EACH ROW
   EXECUTE PROCEDURE game_search_update();
 
 -- Finally, create a GIN index for ts_vectors.
 CREATE INDEX search_idx ON game USING GIN (tsvectors); 
-
 ```
 
 ### 3. Triggers
- 
-> User-defined functions and trigger procedures that add control structures to the SQL language or perform complex computations, are identified and described to be trusted by the database server. Every kind of function (SQL functions, Stored procedures, Trigger procedures) can take base types, composite types, or combinations of these as arguments (parameters). In addition, every kind of function can return a base type or a composite type. Functions can also be defined to return sets of base or composite values.  
 
 | **Trigger**      | TRIGGER01                              |
 | ---              | ---                                    |
