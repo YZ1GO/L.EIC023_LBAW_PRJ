@@ -421,37 +421,26 @@ The following indices are proposed to improve performance of the identified quer
 
 #### 2.2. Full-text Search Indices 
 
-To improve user experience, it’s crucial for our system to support full-text search (FTS) capabilities within the game relation, specifically targeting attributes like title and description. By implementing PostgreSQL’s GIN index type, we can ensure that users can efficiently search for games using keywords. This setup will involve creating the necessary configurations and indexes to maintain up-to-date search functionality, allowing users to find relevant games quickly.
+To enhance user experience, it’s essential for our system to support full-text search (FTS) capabilities within the game relation, specifically targeting the title attribute. By implementing PostgreSQL’s GIN index type, we can ensure that users can efficiently search for games using keywords from the titles. This setup will involve creating the necessary configurations and indexes to maintain up-to-date search functionality, allowing users to quickly find relevant games based on their titles.
 
-| **Index**           | IDX01                                  |
+| **Index**           | IDX04                                 |
 |---------------------|---------------------------------------|
 | **Relation**        | game                                  |
-| **Attribute**       | title, description                    |
+| **Attribute**       | title                                 |
 | **Type**            | GIN                                   |
 | **Clustering**      | No                                    |
-| **Justification**   | To provide full-text search features for finding games based on matching titles or descriptions. The GIN index type is chosen for its efficiency in handling FTS queries, particularly when dealing with large datasets and varying text lengths. |
+| **Justification**   | This setup allows users to efficiently search for games based solely on their titles, improving the search experience without the overhead of additional text fields. |
 ##### SQL Code
 ```sql
--- Add column to game to store computed ts_vectors.
+-- Add column to game to store computed ts_vectors for titles only.
 ALTER TABLE Game
-ADD COLUMN tsvectors TSVECTOR;
+ADD COLUMN title_tsvector TSVECTOR;
 
--- Create a function to automatically update ts_vectors.
+-- Create a function to automatically update title_tsvector.
 CREATE FUNCTION game_search_update() RETURNS TRIGGER AS $$
 BEGIN
-  IF TG_OP = 'INSERT' THEN
-    NEW.tsvectors = (
-      setweight(to_tsvector('english', NEW.title), 'A') ||
-      setweight(to_tsvector('english', NEW.description), 'B')
-    );
-  END IF;
-  IF TG_OP = 'UPDATE' THEN
-    IF (NEW.title <> OLD.title OR NEW.description <> OLD.description) THEN
-      NEW.tsvectors = (
-        setweight(to_tsvector('english', NEW.title), 'A') ||
-        setweight(to_tsvector('english', NEW.description), 'B')
-      );
-    END IF;
+  IF TG_OP = 'INSERT' OR (TG_OP = 'UPDATE' AND NEW.title <> OLD.title) THEN
+    NEW.title_tsvector = to_tsvector('english', NEW.title);
   END IF;
   RETURN NEW;
 END $$
@@ -463,8 +452,8 @@ CREATE TRIGGER game_search_update
   FOR EACH ROW
   EXECUTE PROCEDURE game_search_update();
 
--- Finally, create a GIN index for ts_vectors.
-CREATE INDEX search_idx ON game USING GIN (tsvectors); 
+-- Finally, create a GIN index for title_tsvector.
+CREATE INDEX search_idx ON Game USING GIN (title_tsvector); 
 ```
 
 ### 3. Triggers
