@@ -644,7 +644,7 @@ EXECUTE FUNCTION update_game_rating_after_review();
 
 | **Trigger**      | TRIGGER05                              |
 | ---              | ---                                    |
-| **Description**  | 	Prevents a buyer from liking the same review more than once by checking for existing likes before allowing a new entry. (EBD: BR03) |
+| **Description**  | Prevents a buyer from liking the same review more than once by checking for existing likes before allowing a new entry. (EBD: BR03) |
 | **Justification** | Maintains the integrity of the review system by ensuring that each review can only be liked once per buyer, preventing duplicate interactions and skewed like counts. |
 ```sql
 CREATE FUNCTION check_unique_review_like() RETURNS TRIGGER AS
@@ -699,7 +699,8 @@ BEGIN
 
     RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+$BODY$ 
+LANGUAGE plpgsql;
 
 CREATE TRIGGER trg_validate_age_for_purchase
 BEFORE INSERT ON purchase
@@ -710,12 +711,10 @@ EXECUTE FUNCTION validate_age_for_purchase();
 | **Trigger**      | TRIGGER07                              |
 | ---              | ---                                    |
 | **Description**  | Automatically converts all pre-purchases into delivered purchases when CDKs for a sold-out or unreleased game become available on the website. This ensures that users who have shown interest in a game receive immediate access to their purchases as soon as the game is available. |
-| **Justification** |Enhances user experience by providing instant fulfillment of pre-orders, minimizing wait times, and ensuring that customers can start using their purchased games immediately upon release. It allows the website to respond quickly to inventory changes, aligning with customer expectations for timely access to new content.|
+| **Justification** | Enhances user experience by providing instant fulfillment of pre-orders, minimizing wait times, and ensuring that customers can start using their purchased games immediately upon release. It allows the website to respond quickly to inventory changes, aligning with customer expectations for timely access to new content. |
 ```sql
-
--- Step 1: Create the Trigger Function
-CREATE OR REPLACE FUNCTION process_prepurchase_on_cdk_addition()
-RETURNS TRIGGER AS $$
+CREATE FUNCTION process_prepurchase_on_cdk_addition() RETURNS TRIGGER AS 
+$BODY$
 DECLARE
     pre_purchase_record RECORD;
 BEGIN
@@ -735,25 +734,22 @@ BEGIN
 
     RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+$BODY$ 
+LANGUAGE plpgsql;
 
--- Step 2: Create the Trigger to Activate the Function
-CREATE TRIGGER trigger_process_prepurchase_on_cdk_addition
+CREATE TRIGGER trg_process_prepurchase_on_cdk_addition
 AFTER INSERT ON CDK
 FOR EACH ROW
 EXECUTE FUNCTION process_prepurchase_on_cdk_addition();
-
 ```
 
 | **Trigger**      | TRIGGER08                              |
 | ---              | ---                                    |
-| **Description**  |This trigger automatically increases the number of sCoins for buyers with each purchase, awarding one sCoin for every 10 euros spent.|
-| **Justification** |By rewarding buyers with sCoins, the trigger enhances customer engagement and loyalty, fostering a positive shopping experience. It encourages users to make more purchases, as they see a direct benefit from their spending.|
+| **Description**  | This trigger automatically increases the number of sCoins for buyers with each purchase, awarding one sCoin for every 10 euros spent. |
+| **Justification** | By rewarding buyers with sCoins, the trigger enhances customer engagement and loyalty, fostering a positive shopping experience. It encourages users to make more purchases, as they see a direct benefit from their spending. |
 ```sql
-
--- Step 1: Create the Trigger Function
-CREATE OR REPLACE FUNCTION add_scoin_on_purchase() 
-RETURNS TRIGGER AS $$
+CREATE FUNCTION add_scoin_on_purchase() RETURNS TRIGGER AS 
+$BODY$
 DECLARE
     buyer_id INT;
     purchase_value FLOAT;
@@ -778,25 +774,22 @@ BEGIN
 
     RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+$BODY$ 
+LANGUAGE plpgsql;
 
--- Step 2: Create the Trigger
-CREATE TRIGGER add_scoin_on_purchase
+CREATE TRIGGER trg_add_scoin_on_purchase
 AFTER INSERT ON Purchase
 FOR EACH ROW
 EXECUTE FUNCTION add_scoin_on_purchase();
-
 ```
+
 | **Trigger**      | TRIGGER09                             |
 | ---              | ---                                    |
-| **Description**  |This trigger is activated after a new row is inserted in the Purchase table. When a purchase is completed, it decreases the coins balance of the associated Buyer by the number of SCoins used in that purchase.|
-| **Justification** |This trigger ensures that the Buyer's coins balance accurately reflects the SCoins spent on purchases, automating this process and maintaining data consistency without requiring manual updates.|
-
+| **Description**  | This trigger is activated after a new row is inserted in the Purchase table. When a purchase is completed, it decreases the coins balance of the associated Buyer by the number of SCoins used in that purchase. |
+| **Justification** | This trigger ensures that the Buyer's coins balance accurately reflects the SCoins spent on purchases, automating this process and maintaining data consistency without requiring manual updates. |
 ```sql
-
--- Create the function to decrease Scoins
-CREATE OR REPLACE FUNCTION decrease_scoins()
-RETURNS TRIGGER AS $$
+CREATE FUNCTION decrease_scoins_on_purchase() RETURNS TRIGGER AS 
+$BODY$
 BEGIN
     -- Decrease the buyer's Scoins by the sCoins amount specified in the Purchase
     UPDATE Buyer
@@ -805,26 +798,22 @@ BEGIN
     
     RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+$BODY$ 
+LANGUAGE plpgsql;
 
--- Create the trigger to fire after an insert on the Purchase table
-CREATE TRIGGER decrease_scoins_on_purchase
+CREATE TRIGGER trg_decrease_scoins_on_purchase
 AFTER INSERT ON Purchase
 FOR EACH ROW
-EXECUTE FUNCTION decrease_scoins();
-
+EXECUTE FUNCTION decrease_scoins_on_purchase();
 ```
 
 | **Trigger**      | TRIGGER10                             |
 | ---              | ---                                    |
 | **Description**  |This trigger executes after a new row is inserted into the DeliveredPurchase table, indicating that a game has been delivered to a buyer. The trigger function, decrement_game_stock, checks the current stock for the purchased game and decrements the stock quantity by 1 only if the stock is greater than 0.|
 | **Justification** |This trigger maintains inventory accuracy by ensuring the game stock reflects actual sales. This automated stock management helps to reduce manual oversight and ensures real-time updates, leading to more reliable inventory data and an improved customer experience by preventing sales of out-of-stock items.|
-
 ```sql
-
--- Create the function to decrement game stock with a stock check
-CREATE OR REPLACE FUNCTION decrement_game_stock()
-RETURNS TRIGGER AS $$
+CREATE OR REPLACE FUNCTION decrement_game_stock() RETURNS TRIGGER AS 
+$BODY$
 BEGIN
     -- Decrement the quantity only if it is greater than 0
     UPDATE GameStock
@@ -833,26 +822,22 @@ BEGIN
     
     RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+$BODY$ 
+LANGUAGE plpgsql;
 
--- Create the trigger to fire after an insert on the DeliveredPurchase table
-CREATE TRIGGER decrement_game_stock
+CREATE TRIGGER trg_decrement_game_stock
 AFTER INSERT ON DeliveredPurchase
 FOR EACH ROW
 EXECUTE FUNCTION decrement_game_stock();
-
 ```
 
 | **Trigger**      | TRIGGER11                             |
 | ---              | ---                                    |
-| **Description**  |This trigger fires when a row is inserted into the CanceledPurchase table, indicating that a game purchase has been canceled. The trigger function, increment_game_stock, locates the specific game associated with the canceled purchase and increments the stock quantity by 1.|
-| **Justification** |This trigger ensures that game stock remains accurate by automatically updating inventory levels when purchases are canceled. By incrementing the stock upon cancellation, the system can accurately reflect the availability of the game, helping to prevent lost sales opportunities and providing customers with a reliable view of product availability. This reduces the need for manual stock adjustments and supports consistent, real-time inventory management.|
-
+| **Description**  | This trigger fires when a row is inserted into the CanceledPurchase table, indicating that a game purchase has been canceled. The trigger function, increment_game_stock, locates the specific game associated with the canceled purchase and increments the stock quantity by 1. |
+| **Justification** | This trigger ensures that game stock remains accurate by automatically updating inventory levels when purchases are canceled. By incrementing the stock upon cancellation, the system can accurately reflect the availability of the game, helping to prevent lost sales opportunities and providing customers with a reliable view of product availability. This reduces the need for manual stock adjustments and supports consistent, real-time inventory management. |
 ```sql
-
--- Create the function to increment game stock
-CREATE OR REPLACE FUNCTION increment_game_stock()
-RETURNS TRIGGER AS $$
+CREATE FUNCTION increment_game_stock() RETURNS TRIGGER AS 
+$BODY$
 BEGIN
     -- Increment the quantity of the respective game in the GameStock table
     UPDATE GameStock
@@ -861,28 +846,26 @@ BEGIN
     
     RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+$BODY$ 
+LANGUAGE plpgsql;
 
--- Create the trigger to fire after an insert on the CDK table
-CREATE TRIGGER update_game_stock
+CREATE TRIGGER trg_increment_game_stock
 AFTER INSERT ON CDK
 FOR EACH ROW
 EXECUTE FUNCTION increment_game_stock();
-
 ```
 
 ### 4. Transactions
  
 > Transactions needed to assure the integrity of the data.  
 
-| **Transaction**  | TRANSACTION1                   |
+| **Transaction** | TRANSACTION1                   |
 | --------------- | ----------------------------------- |
 | **Description** | This transaction adds a new game to the Game table and initializes its stock in the GameStock table with a     quantity of zero. It ensures data consistency by maintaining the relationship between games and their stock entries.|
 | **Justification**   | This transaction is necessary to ensure that every new game has a corresponding stock entry. It helps maintain the integrity of inventory management by avoiding situations where a game exists without any stock record. Using the Read Committed isolation level is sufficient because there are no concurrent transactions that could modify the relevant data simultaneously, ensuring that the data remains consistent without incurring the performance overhead associated with higher isolation levels. This approach optimizes performance while still providing adequate data integrity.|
 | **Isolation level** | Read Committed |
 
 ``` sql
-
 CREATE OR REPLACE FUNCTION add_game_with_stock(
     game_name TEXT,
     game_description TEXT,
@@ -918,17 +901,14 @@ EXCEPTION
         RAISE;
 END;
 $$ LANGUAGE plpgsql;
-
 ```
 
-| **Transaction**  | TRANSACTION2                   |
+| **Transaction** | TRANSACTION2                   |
 | --------------- | ----------------------------------- |
-| **Description** | This transaction processes an order by taking a list of game IDs, a buyer ID, the amount of SCoins to be used, and the payment method. It calculates the total price of the games, creates a payment entry, and a corresponding order. For each game in the list, it creates a purchase entry, assigns a CDK if available, decrements stock, or records the purchase as canceled if no stock is available.|
-| **Justification**   |This transaction is necessary to ensure that every new game has a corresponding stock entry. By using the Serializable isolation level, it prevents anomalies that may arise from concurrent transactions, such as phantom reads and race conditions. This is crucial in a complex order processing system where multiple transactions may affect stock levels simultaneously. The use of Serializable ensures that each transaction operates on a stable snapshot of the data, thereby maintaining the integrity of inventory management and preventing situations where a game exists without any stock record. |
+| **Description** | This transaction processes an order by taking a list of game IDs, a buyer ID, the amount of SCoins to be used, and the payment method. It calculates the total price of the games, creates a payment entry, and a corresponding order. For each game in the list, it creates a purchase entry, assigns a CDK if available, decrements stock, or records the purchase as canceled if no stock is available. |
+| **Justification**   | This transaction is necessary to ensure that every new game has a corresponding stock entry. By using the Serializable isolation level, it prevents anomalies that may arise from concurrent transactions, such as phantom reads and race conditions. This is crucial in a complex order processing system where multiple transactions may affect stock levels simultaneously. The use of Serializable ensures that each transaction operates on a stable snapshot of the data, thereby maintaining the integrity of inventory management and preventing situations where a game exists without any stock record. |
 | **Isolation level** | Serializable |
-
 ``` sql
-
 CREATE OR REPLACE FUNCTION process_order(
     game_list INT[], 
     buyer_id INT, 
@@ -990,9 +970,7 @@ BEGIN
     COMMIT;
 END;
 $$ LANGUAGE plpgsql;
-
 ```
-
 
 ## Annex A. SQL Code
 
