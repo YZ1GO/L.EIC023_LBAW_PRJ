@@ -392,12 +392,12 @@ The following indices are proposed to improve performance of the identified quer
 | **Index**           | IDX01                                  |
 | ------------------- | -------------------------------------- |
 | **Relation**        | game                                   |
-| **Attribute**       | price                                  |
+| **Attributes**      | is_active, price                       |
 | **Type**            | B-tree                                 |
 | **Cardinality**     | High                                   |
 | **Clustering**      | No                                     |
-| **Justification**   | Optimizes range queries for filtering games within specific price ranges. |
-| `SQL code`          | `CREATE INDEX idx_game_price ON game (price);` |
+| **Justification**   | Optimizes filtering of active games within specific price ranges, as inactive games are excluded upfront. |
+| `SQL code`          | `CREATE INDEX idx_game_active_price ON Game (is_active, price);` |
 
 | **Index**           | IDX02                                  |
 | ------------------- | -------------------------------------- |
@@ -407,7 +407,7 @@ The following indices are proposed to improve performance of the identified quer
 | **Cardinality**     | High                                   |
 | **Clustering**      | No                                     |
 | **Justification**   | Optimizes retrieval of reviews for specific games, enhancing performance of queries filtering on game reviews. |
-| `SQL code`          | `CREATE INDEX idx_review_id_game ON review (id_game);` |
+| `SQL code`          | `CREATE INDEX idx_review_id_game ON Review (id_game);` |
 
 | **Index**           | IDX03                                  |
 | ------------------- | -------------------------------------- |
@@ -417,27 +417,7 @@ The following indices are proposed to improve performance of the identified quer
 | **Cardinality**     | High                                   |
 | **Clustering**      | No                                     |
 | **Justification**   | Speeds up queries retrieving purchase history for specific buyers. |
-| `SQL code`          | `CREATE INDEX idx_purchase_id_buyer ON purchase (id_buyer);` |
-
-| **Index**           | IDX04                                  |
-| ------------------- | -------------------------------------- |
-| **Relation**        | shopping_cart                          |
-| **Attribute**       | id_buyer                               |
-| **Type**            | B-tree                                 |
-| **Cardinality**     | Medium                                 |
-| **Clustering**      | No                                     |
-| **Justification**   | Increases efficiency of operations accessing or updating a buyer's shopping cart data. |
-| `SQL code`          | `CREATE INDEX idx_shopping_cart_id_buyer ON shopping_cart (id_buyer);` |
-
-| **Index**           | IDX05                                  |
-| ------------------- | -------------------------------------- |
-| **Relation**        | cdk                                    |
-| **Attribute**       | code                                   |
-| **Type**            | Hash                                   |
-| **Cardinality**     | High                                   |
-| **Clustering**      | No                                     |
-| **Justification**   | Enables rapid searches for CDK codes to prevent duplicates and ensure quick validation during purchase. |
-| `SQL code`          | `CREATE INDEX idx_cdk_code ON cdk USING hash (code);` |
+| `SQL code`          | `CREATE INDEX idx_purchase_id_buyer ON Purchase (id_buyer);` |
 
 #### 2.2. Full-text Search Indices 
 
