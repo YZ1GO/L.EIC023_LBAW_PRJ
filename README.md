@@ -822,15 +822,12 @@ EXECUTE FUNCTION increment_game_stock();
 ```
 
 ### 4. Transactions
- 
-> Transactions needed to assure the integrity of the data.  
 
 | **Transaction** | TRANSACTION01                   |
 | --------------- | ----------------------------------- |
 | **Description** | This transaction adds a new game to the Game table and initializes its stock in the GameStock table with a     quantity of zero. It ensures data consistency by maintaining the relationship between games and their stock entries. |
 | **Justification**   | This transaction is necessary to ensure that every new game has a corresponding stock entry. It helps maintain the integrity of inventory management by avoiding situations where a game exists without any stock record. Using the Read Committed isolation level is sufficient because there are no concurrent transactions that could modify the relevant data simultaneously, ensuring that the data remains consistent without incurring the performance overhead associated with higher isolation levels. This approach optimizes performance while still providing adequate data integrity. |
 | **Isolation level** | Read Committed |
-
 ``` sql
 CREATE OR REPLACE FUNCTION add_game_with_stock(
     game_name TEXT,
@@ -869,7 +866,7 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
-| **Transaction** | TRANSACTION2                   |
+| **Transaction** | TRANSACTION02                   |
 | --------------- | ----------------------------------- |
 | **Description** | This transaction processes an order by taking a list of game IDs, a buyer ID, the amount of SCoins to be used, and the payment method. It calculates the total price of the games, creates a payment entry, and a corresponding order. For each game in the list, it creates a purchase entry, assigns a CDK if available, decrements stock, or records the purchase as canceled if no stock is available. |
 | **Justification**   | This transaction is necessary to ensure that every new game has a corresponding stock entry. By using the Serializable isolation level, it prevents anomalies that may arise from concurrent transactions, such as phantom reads and race conditions. This is crucial in a complex order processing system where multiple transactions may affect stock levels simultaneously. The use of Serializable ensures that each transaction operates on a stable snapshot of the data, thereby maintaining the integrity of inventory management and preventing situations where a game exists without any stock record. |
