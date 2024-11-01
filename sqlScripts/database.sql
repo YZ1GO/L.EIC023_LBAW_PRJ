@@ -25,12 +25,10 @@ DROP TABLE IF EXISTS CanceledPurchase CASCADE;
 DROP TABLE IF EXISTS DeliveredPurchase CASCADE;
 DROP TABLE IF EXISTS Review CASCADE;
 DROP TABLE IF EXISTS ReviewLike CASCADE;
-DROP TABLE IF EXISTS Notifications CASCADE;
 DROP TABLE IF EXISTS NotificationWishlist CASCADE;
 DROP TABLE IF EXISTS NotificationGame CASCADE;
 DROP TABLE IF EXISTS NotificationReview CASCADE;
 DROP TABLE IF EXISTS NotificationPurchase CASCADE;
-DROP TABLE IF EXISTS UserNotifications CASCADE;
 DROP TABLE IF EXISTS Reason CASCADE;
 DROP TABLE IF EXISTS Report CASCADE;
 DROP TABLE IF EXISTS FAQ CASCADE;
@@ -303,5 +301,6 @@ dados de cartão e users e depois até reformular a lógoca de pagamento à volt
 são reais.
 
 */
+
 
 
