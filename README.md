@@ -752,36 +752,123 @@ EXECUTE FUNCTION process_prepurchase_on_cdk_addition();
 ```sql
 
 -- Step 1: Create the Trigger Function
-CREATE OR REPLACE FUNCTION add_scoin_on_delivery() 
+CREATE OR REPLACE FUNCTION add_scoin_on_purchase() 
 RETURNS TRIGGER AS $$
 DECLARE
     buyer_id INT;
     purchase_value FLOAT;
     scoin_reward INT;
 BEGIN
-    -- Find the buyer ID and purchase value for the delivered purchase
+    -- Find the buyer ID and purchase value for the new purchase
     SELECT o.buyer, p.value INTO buyer_id, purchase_value
     FROM Purchase p
     JOIN Orders o ON p.order_ = o.id
     WHERE p.id = NEW.id;
 
-    -- Calculate SCoins reward: 1 SCoin per $10 spent
-    scoin_reward := FLOOR(purchase_value / 10);
+    -- Only proceed if no SCoins were used in the Purchase
+    IF NEW.coins = 0 THEN
+        -- Calculate SCoins reward: 1 SCoin per $10 spent
+        scoin_reward := FLOOR(purchase_value / 10);
 
-    -- Update the buyer's coins with the calculated SCoins
-    UPDATE Buyer
-    SET coins = coins + scoin_reward
-    WHERE id = buyer_id;
+        -- Update the buyer's coins with the calculated SCoins
+        UPDATE Buyer
+        SET coins = coins + scoin_reward
+        WHERE id = buyer_id;
+    END IF;
 
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
--- Step 2: Create the Trigger to Activate the Function
-CREATE TRIGGER trigger_add_scoin_on_delivery
+-- Step 2: Create the Trigger
+CREATE TRIGGER add_scoin_on_purchase
+AFTER INSERT ON Purchase
+FOR EACH ROW
+EXECUTE FUNCTION add_scoin_on_purchase();
+
+```
+| **Trigger**      | TRIGGER09                             |
+| ---              | ---                                    |
+| **Description**  |This trigger is activated after a new row is inserted in the Purchase table. When a purchase is completed, it decreases the coins balance of the associated Buyer by the number of SCoins used in that purchase.|
+| **Justification** |This trigger ensures that the Buyer's coins balance accurately reflects the SCoins spent on purchases, automating this process and maintaining data consistency without requiring manual updates.|
+
+```sql
+
+-- Create the function to decrease Scoins
+CREATE OR REPLACE FUNCTION decrease_scoins()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Decrease the buyer's Scoins by the sCoins amount specified in the Purchase
+    UPDATE Buyer
+    SET coins = coins - NEW.coins
+    WHERE id = (SELECT buyer FROM Orders WHERE id = NEW.order_);
+    
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Create the trigger to fire after an insert on the Purchase table
+CREATE TRIGGER decrease_scoins_on_purchase
+AFTER INSERT ON Purchase
+FOR EACH ROW
+EXECUTE FUNCTION decrease_scoins();
+
+```
+
+| **Trigger**      | TRIGGER10                             |
+| ---              | ---                                    |
+| **Description**  |This trigger executes after a new row is inserted into the DeliveredPurchase table, indicating that a game has been delivered to a buyer. The trigger function, decrement_game_stock, checks the current stock for the purchased game and decrements the stock quantity by 1 only if the stock is greater than 0.|
+| **Justification** |This trigger maintains inventory accuracy by ensuring the game stock reflects actual sales. This automated stock management helps to reduce manual oversight and ensures real-time updates, leading to more reliable inventory data and an improved customer experience by preventing sales of out-of-stock items.|
+
+```sql
+
+-- Create the function to decrement game stock with a stock check
+CREATE OR REPLACE FUNCTION decrement_game_stock()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Decrement the quantity only if it is greater than 0
+    UPDATE GameStock
+    SET quantity = quantity - 1
+    WHERE game = (SELECT game FROM CDK WHERE id = NEW.cdk) AND quantity > 0;
+    
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Create the trigger to fire after an insert on the DeliveredPurchase table
+CREATE TRIGGER decrement_game_stock
 AFTER INSERT ON DeliveredPurchase
 FOR EACH ROW
-EXECUTE FUNCTION add_scoin_on_delivery();
+EXECUTE FUNCTION decrement_game_stock();
+
+```
+
+| **Trigger**      | TRIGGER11                             |
+| ---              | ---                                    |
+| **Description**  |This trigger fires when a row is inserted into the CanceledPurchase table, indicating that a game purchase has been canceled. The trigger function, increment_game_stock, locates the specific game associated with the canceled purchase and increments the stock quantity by 1.|
+| **Justification** |This trigger ensures that game stock remains accurate by automatically updating inventory levels when purchases are canceled. By incrementing the stock upon cancellation, the system can accurately reflect the availability of the game, helping to prevent lost sales opportunities and providing customers with a reliable view of product availability. This reduces the need for manual stock adjustments and supports consistent, real-time inventory management.|
+
+```sql
+
+-- Create the function to increment game stock
+CREATE OR REPLACE FUNCTION increment_game_stock()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Increment the quantity of the respective game in the GameStock table
+    UPDATE GameStock
+    SET quantity = quantity + 1
+    WHERE game = NEW.game;
+    
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Create the trigger to fire after an insert on the CDK table
+CREATE TRIGGER update_game_stock
+AFTER INSERT ON CDK
+FOR EACH ROW
+EXECUTE FUNCTION increment_game_stock();
+
 ```
 
 ### 4. Transactions
