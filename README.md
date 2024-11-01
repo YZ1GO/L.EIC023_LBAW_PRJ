@@ -784,7 +784,7 @@ EXECUTE FUNCTION add_scoin_on_purchase();
 ```
 
 | **Trigger**      | TRIGGER09                             |
-| ---              | ---                                    |
+| ---              | ---                                   |
 | **Description**  | This trigger is activated after a new row is inserted in the Purchase table. When a purchase is completed, it decreases the coins balance of the associated Buyer by the number of SCoins used in that purchase. |
 | **Justification** | This trigger ensures that the Buyer's coins balance accurately reflects the SCoins spent on purchases, automating this process and maintaining data consistency without requiring manual updates. |
 ```sql
@@ -808,9 +808,9 @@ EXECUTE FUNCTION decrease_scoins_on_purchase();
 ```
 
 | **Trigger**      | TRIGGER10                             |
-| ---              | ---                                    |
-| **Description**  |This trigger executes after a new row is inserted into the DeliveredPurchase table, indicating that a game has been delivered to a buyer. The trigger function, decrement_game_stock, checks the current stock for the purchased game and decrements the stock quantity by 1 only if the stock is greater than 0.|
-| **Justification** |This trigger maintains inventory accuracy by ensuring the game stock reflects actual sales. This automated stock management helps to reduce manual oversight and ensures real-time updates, leading to more reliable inventory data and an improved customer experience by preventing sales of out-of-stock items.|
+| ---              | ---                                   |
+| **Description**  | This trigger executes after a new row is inserted into the DeliveredPurchase table, indicating that a game has been delivered to a buyer. The trigger function, decrement_game_stock, checks the current stock for the purchased game and decrements the stock quantity by 1 only if the stock is greater than 0. |
+| **Justification** | This trigger maintains inventory accuracy by ensuring the game stock reflects actual sales. This automated stock management helps to reduce manual oversight and ensures real-time updates, leading to more reliable inventory data and an improved customer experience by preventing sales of out-of-stock items. |
 ```sql
 CREATE OR REPLACE FUNCTION decrement_game_stock() RETURNS TRIGGER AS 
 $BODY$
@@ -832,7 +832,7 @@ EXECUTE FUNCTION decrement_game_stock();
 ```
 
 | **Trigger**      | TRIGGER11                             |
-| ---              | ---                                    |
+| ---              | ---                                   |
 | **Description**  | This trigger fires when a row is inserted into the CanceledPurchase table, indicating that a game purchase has been canceled. The trigger function, increment_game_stock, locates the specific game associated with the canceled purchase and increments the stock quantity by 1. |
 | **Justification** | This trigger ensures that game stock remains accurate by automatically updating inventory levels when purchases are canceled. By incrementing the stock upon cancellation, the system can accurately reflect the availability of the game, helping to prevent lost sales opportunities and providing customers with a reliable view of product availability. This reduces the need for manual stock adjustments and supports consistent, real-time inventory management. |
 ```sql
@@ -859,10 +859,10 @@ EXECUTE FUNCTION increment_game_stock();
  
 > Transactions needed to assure the integrity of the data.  
 
-| **Transaction** | TRANSACTION1                   |
+| **Transaction** | TRANSACTION01                   |
 | --------------- | ----------------------------------- |
-| **Description** | This transaction adds a new game to the Game table and initializes its stock in the GameStock table with a     quantity of zero. It ensures data consistency by maintaining the relationship between games and their stock entries.|
-| **Justification**   | This transaction is necessary to ensure that every new game has a corresponding stock entry. It helps maintain the integrity of inventory management by avoiding situations where a game exists without any stock record. Using the Read Committed isolation level is sufficient because there are no concurrent transactions that could modify the relevant data simultaneously, ensuring that the data remains consistent without incurring the performance overhead associated with higher isolation levels. This approach optimizes performance while still providing adequate data integrity.|
+| **Description** | This transaction adds a new game to the Game table and initializes its stock in the GameStock table with a     quantity of zero. It ensures data consistency by maintaining the relationship between games and their stock entries. |
+| **Justification**   | This transaction is necessary to ensure that every new game has a corresponding stock entry. It helps maintain the integrity of inventory management by avoiding situations where a game exists without any stock record. Using the Read Committed isolation level is sufficient because there are no concurrent transactions that could modify the relevant data simultaneously, ensuring that the data remains consistent without incurring the performance overhead associated with higher isolation levels. This approach optimizes performance while still providing adequate data integrity. |
 | **Isolation level** | Read Committed |
 
 ``` sql
