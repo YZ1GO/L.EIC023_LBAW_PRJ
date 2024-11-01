@@ -366,11 +366,11 @@ We carried out an analysis of the anticipated system load on the database, inclu
 | R15                    | review_like            | Hundreds of thousands        | Thousands per month            |
 | R16                    | report                 | Hundreds                     | Hundreds per month             |
 | R17                    | reason                 | Dozens                       | Rare                           |
-| R18                    | game                   | Hundreds of thousands        | Thousands per month            |
-| R19                    | game_platform          | Dozens                       | Rare                           |
-| R20                    | game_category          | Dozens                       | Rare                           |
-| R21                    | game_language          | Dozens                       | Rare                           |
-| R22                    | game_player            | Single digits                | Rare                           |
+| R18                    | game                   | Hundreds                     | Hundreds per month             |
+| R19                    | game_platform          | Hundreds                     | Hundreds per month             |
+| R20                    | game_category          | Hundreds                     | Hundreds per month             |
+| R21                    | game_language          | Hundreds                     | Hundreds per month             |
+| R22                    | game_player            | Hundreds                     | Hundreds per month             |
 | R23                    | cdk                    | Hundreds of thousands        | Thousands per month            |
 | R24                    | stock                  | Hundreds                     | Hundreds per month             |
 | R25                    | platform               | Dozens                       | Rare                           |
