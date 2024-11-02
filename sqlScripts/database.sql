@@ -55,7 +55,7 @@ CREATE TABLE Administrator(
 
 CREATE TABLE Buyer (
     id INT PRIMARY KEY REFERENCES Users(id) ON UPDATE CASCADE,
-    NIF TEXT UNIQUE,
+    NIF TEXT,
     birth_date DATE NOT NULL CHECK(birth_date <= CURRENT_DATE),
     coins INT NOT NULL CHECK(coins >= 0) DEFAULT 0
 );
@@ -69,7 +69,7 @@ CREATE TABLE Game(
     name TEXT NOT NULL,
     description TEXT NOT NULL,
     minimum_age INT NOT NULL CHECK(minimum_age >= 0 AND minimum_age <= 18),
-    price FLOAT NOT NULL CHECK(price >= 0.0),
+    price FLOAT NOT NULL CHECK(price > 0.0),
     overall_rating INT NOT NULL CHECK(overall_rating >= 0 AND overall_rating <= 100),
     owner INT NOT NULL REFERENCES Seller(id) ON UPDATE CASCADE,
     is_active BOOLEAN DEFAULT TRUE
@@ -77,7 +77,7 @@ CREATE TABLE Game(
 
 CREATE TABLE CDK(
     id SERIAL PRIMARY KEY,
-    code TEXT UNIQUE NOT NULL,
+    code TEXT NOT NULL,
     game INT NOT NULL REFERENCES Game(id) ON UPDATE CASCADE
 );
 
@@ -286,6 +286,7 @@ Mais importantes:
 status é pre-purchase ou cancelled por o artigo não estar em stock, não é possível associar um cdk à purchase porque não há nenhum em stock.
 (Implementei já uma solução para isto neste script). 
 -- Alteracao do cdk UK NN para apenas cdk UK feita no relational schema (Bruno)
+-- Alteracao: NIF do buyer para not unique, price do game para > 0.0, code do cdk para not unique (Ricardo)
 
 2.Criar uma classe de associação para associar as notificações aos users que as recebem. Supondo que um user tem uma aba de notificações,
 como é que vamos buscar as notificações que devem ser carregadas nessa página se não associarmos as notificações aos users a quem se 
