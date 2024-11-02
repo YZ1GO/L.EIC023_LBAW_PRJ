@@ -953,7 +953,18 @@ $$ LANGUAGE plpgsql;
 
 > Only a sample of the database population script may be included here, e.g. the first 10 lines. The full script must be available in the repository.
 
----
+```sql
+insert into Users (username, name, email, password, is_active) values ('hbrellin0', 'Hamil Brellin', 'hbrellin0@xrea.com', '$2a$04$ztD37YYYeiilaMhYwKIVTOWxr1lAud.fe5Ko5jcQdqEMC.oBP.l2O', true);
+insert into Users (username, name, email, password, is_active) values ('kpeschmann1', 'Kristo Peschmann', 'kpeschmann1@edublogs.org', '$2a$04$IAuigNcjKssEHMcHFqkTEeNUDoD3IEGVLxwKwIF0lbcoF67NUTM7i', true);
+insert into Users (username, name, email, password, is_active) values ('nspikings2', 'Nickolas Spikings', 'nspikings2@yahoo.co.jp', '$2a$04$ujyEJ1LF7KZNvh4weCUKHuiuAlqYyrvKqC/zh.NFX0EA7iYK2F/Va', true);
+insert into Users (username, name, email, password, is_active) values ('mbatson3', 'Myrilla Batson', 'mbatson3@home.pl', '$2a$04$zwkBwn8fRCLpHpMkuwjwJud/k7BuILroNu3D0NkHWj7NrlX22AB/O', true);
+insert into Users (username, name, email, password, is_active) values ('mkinkade4', 'Mareah Kinkade', 'mkinkade4@slideshare.net', '$2a$04$GX/2zaYED08d0fsuarAVkerO5XEm4KwRvae72vRNC4Gq32KSBwMSy', true);
+insert into Users (username, name, email, password, is_active) values ('jweagener5', 'Julina Weagener', 'jweagener5@ed.gov', '$2a$04$uKNjaZH6FmaEJRq/bObc..00KATPYnTCixdOul6KbtKJx.Qh6zBr6', true);
+insert into Users (username, name, email, password, is_active) values ('cfaveryear6', 'Cristobal Faveryear', 'cfaveryear6@printfriendly.com', '$2a$04$Aoeyt3a/Y4kB6d2VSa9JV.Y3d2w.bcZcapaL0P7KNkZA7wafyW2sq', true);
+insert into Users (username, name, email, password, is_active) values ('rarrigucci7', 'Rowena Arrigucci', 'rarrigucci7@photobucket.com', '$2a$04$rrFIgJjmvkFzm8GkaB6cjeXou1lg232iSN402rKm9sbqGlT0/NOpC', true);
+insert into Users (username, name, email, password, is_active) values ('ttibbetts8', 'Tove Tibbetts', 'ttibbetts8@adobe.com', '$2a$04$5qfCo9iWFvY00jQlRju5z.1Vg4aC.ih7sRWDvMkvBLpvJ8WecviCO', true);
+insert into Users (username, name, email, password, is_active) values ('fevelyn9', 'Franciskus Evelyn', 'fevelyn9@usda.gov', '$2a$04$egGz5KnFdRsAiHlLwNiw7.3ZS0Byg36Qvr581LGgxKBXxxQXaHNHG', true);
+```
 
 
 ## Revision history
