@@ -41,7 +41,7 @@ The goal of the class diagram for STEAL! is to visually represent the core compo
 | ------------------ | ------------------------------------------------ |
 | R01                | administrator(<ins>id</ins>, username **UK** **NN**, name **NN**, email **UK** **NN**, password **NN**) |
 | R02                | user(<ins>id</ins>, username **UK** **NN**, name **NN**, email **UK** **NN**, password **NN**, is_active **NN** **DF** TRUE) |
-| R03                | buyer(<ins>id_user</ins> -> user **NN**, NIF **UK**, birth_date **NN** **CK** birth_date <= Today, coins **NN** **CK** coins >= 0) |
+| R03                | buyer(<ins>id_user</ins> -> user **NN**, NIF, birth_date **NN** **CK** birth_date <= Today, coins **NN** **CK** coins >= 0) |
 | R04                | seller(<ins>id_user</ins> -> user **NN**) |
 | R05                | wishlist(<ins>id</ins>, <ins>id_buyer</ins> → buyer **NN**, id_game -> game) |
 | R06                | shopping_cart(<ins>id</ins>, <ins>id_buyer</ins> → buyer **NN**, id_game -> game , quantity **NN** **CK** quantity >= 0) |
@@ -61,7 +61,7 @@ The goal of the class diagram for STEAL! is to visually represent the core compo
 | R20                | game_category(<ins>id</ins>, id_game -> game **NN**, id_category -> category **NN**, (id_game, id_category) **UK**) |
 | R21                | game_language(<ins>id</ins>, id_game -> game **NN**, id_language -> language **NN**, (id_game, id_language) **UK**) |
 | R22                | game_player(<ins>id</ins>, id_game -> game **NN**, id_player -> player **NN**, (id_game, id_player) **UK**) |
-| R23                | cdk(<ins>id</ins>, code **UK** **NN**, id_game -> game **NN**) |
+| R23                | cdk(<ins>id</ins>, code **NN**, id_game -> game **NN**) |
 | R24                | stock(<ins>id</ins>, quantity **NN** **CK** quantity >= 0, <ins>id_game</ins> -> game **NN**) |
 | R25                | platform(<ins>id</ins>, platform **NN**) |
 | R26                | category(<ins>id</ins>, category **NN**) |
