@@ -61,7 +61,7 @@ The goal of the class diagram for STEAL! is to visually represent the core compo
 | R20                | game_category(<ins>id</ins>, id_game -> game **NN**, id_category -> category **NN**, (id_game, id_category) **UK**) |
 | R21                | game_language(<ins>id</ins>, id_game -> game **NN**, id_language -> language **NN**, (id_game, id_language) **UK**) |
 | R22                | game_player(<ins>id</ins>, id_game -> game **NN**, id_player -> player **NN**, (id_game, id_player) **UK**) |
-| R23                | cdk(<ins>id</ins>, code **NN**, id_game -> game **NN**) |
+| R23                | cdk(<ins>id</ins>, code **UK** **NN**, id_game -> game **NN**) |
 | R24                | stock(<ins>id</ins>, quantity **NN** **CK** quantity >= 0, <ins>id_game</ins> -> game **NN**) |
 | R25                | platform(<ins>id</ins>, platform **NN**) |
 | R26                | category(<ins>id</ins>, category **NN**) |
@@ -89,7 +89,6 @@ Legend:
 | Domain Name | Domain Specification           |
 | ----------- | ------------------------------ |
 | Today	      | DATE DEFAULT CURRENT_DATE      |
-| Status      | ENUM ('Pre_Purchased', 'Cancelled', 'Delivered') |
 
 ### 3. Schema validation
 
@@ -115,10 +114,9 @@ Legend:
 
 | **TABLE R03** | buyer |
 | - | - |
-| **Keys** | { id_user }, { NIF } |
+| **Keys** | { id_user } |
 | **Functional Dependencies:** | |
 | FD0301 | id_user → {NIF, birth_date, coins} |
-| FD0302 | NIF → {id_user, birth_date, coins} |
 | **NORMAL FORM** | BCNF |
 
 | **TABLE R04** | seller |
@@ -962,17 +960,7 @@ $$ LANGUAGE plpgsql;
 
 ## Annex A. SQL Code
 
-> The database scripts are included in this annex to the EBD component.
-> 
-> The database creation script and the population script should be presented as separate elements.
-> The creation script includes the code necessary to build (and rebuild) the database.
-> The population script includes an amount of tuples suitable for testing and with plausible values for the fields of the database.
->
-> The complete code of each script must be included in the group's git repository and links added here.
-
 ### A.1. Database schema
-
-> The complete database creation must be included here and also as a script in the repository.
 
 ``` sql
 DROP TABLE IF EXISTS Users CASCADE;
@@ -1054,7 +1042,7 @@ CREATE TABLE Game(
 
 CREATE TABLE CDK(
     id SERIAL PRIMARY KEY,
-    code TEXT NOT NULL,
+    code TEXT UNIQUE NOT NULL,
     game INT NOT NULL REFERENCES Game(id) ON UPDATE CASCADE
 );
 
@@ -1256,8 +1244,6 @@ CREATE TABLE Contacts(
 ```
 
 ### A.2. Database population
-
-> Only a sample of the database population script may be included here, e.g. the first 10 lines. The full script must be available in the repository.
 
 ```sql
 insert into Users (username, name, email, password, is_active) values ('hbrellin0', 'Hamil Brellin', 'hbrellin0@xrea.com', '$2a$04$ztD37YYYeiilaMhYwKIVTOWxr1lAud.fe5Ko5jcQdqEMC.oBP.l2O', true);
