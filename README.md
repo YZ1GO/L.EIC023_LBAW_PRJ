@@ -68,10 +68,13 @@ The goal of the class diagram for STEAL! is to visually represent the core compo
 | R27                | language(<ins>id</ins>, language **NN**) |
 | R28                | player(<ins>id</ins>, player **NN**) |
 | R29                | media(<ins>id</ins>, path **NN**, id_game -> game **NN**) |
-| R30                | purchase(<ins>id</ins>, value **NN** **CK** value > 0.0, status **NN** **CK** status **IN** Status, id_order -> order **NN**, id_game -> game **NN**, id_cdk -> cdk **UK**) |
-| R31                | faq(<ins>id</ins>, question **NN**, answer **NN**) |
-| R32                | about(<ins>id</ins>, about **NN**) |
-| R33                | contact(<ins>id</ins>, contact **NN**) |
+| R30                | purchase(<ins>id</ins>, value **NN** **CK** value >= 0.0, id_order -> order **NN**, coins **NN** **CK** coins >= 0) |
+| R31                | pre_purchase(<ins>id_purchase</ins> -> purchase **NN**, id_game -> game **NN**) |
+| R32                | canceled_purchase(<ins>id_purchase</ins> -> purchase **NN**, id_game -> game **NN**) |
+| R33                | delivered_purchase(<ins>id_purchase</ins> -> purchase **NN**, id_cdk -> cdk **UK** **NN**) |
+| R34                | faq(<ins>id</ins>, question **NN**, answer **NN**) |
+| R35                | about(<ins>id</ins>, about **NN**) |
+| R36                | contact(<ins>id</ins>, contact **NN**) |
 
 Legend: 
 - UK = UNIQUE KEY
@@ -312,28 +315,50 @@ Legend:
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD3001 | id → {value, status, id_order, id_game, id_cdk} |
+| FD3001 | id → {value, id_order, coins} |
 | **NORMAL FORM** | BCNF |
 
-| **TABLE R31** | faq |
+| **TABLE R31** | pre_purchase |
+| - | - |
+| **Keys** | { id_purchase } |
+| **Functional Dependencies:** | |
+| FD3101 | id_purchase → {id_game} |
+| **NORMAL FORM** | BCNF |
+
+| **TABLE R32** | canceled_purchase |
+| - | - |
+| **Keys** | { id_purchase } |
+| **Functional Dependencies:** | |
+| FD3201 | id_purchase → {id_game} |
+| **NORMAL FORM** | BCNF |
+
+| **TABLE R33** | delivered_purchase |
+| - | - |
+| **Keys** | { id_purchase, id_cdk } |
+| **Functional Dependencies:** | |
+| FD3301 | id_purchase → {id_cdk} |
+| FD3302 | id_cdk → {id_purchase} |
+| **NORMAL FORM** | BCNF |
+
+| **TABLE R34** | faq |
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD3101 | id → {question, answer} |
+| FD3401 | id → {question, answer} |
 | **NORMAL FORM** | BCNF |
 
-| **TABLE R32** | about |
+| **TABLE R35** | about |
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD3201 | id → {about} |
+| FD3501 | id → {about} |
 | **NORMAL FORM** | BCNF |
 
-| **TABLE R33** | contact |
+| **TABLE R36** | contact |
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD3301 | id → {contact} |
+| FD3601 | id → {contact} |
 | **NORMAL FORM** | BCNF |
 
 ---

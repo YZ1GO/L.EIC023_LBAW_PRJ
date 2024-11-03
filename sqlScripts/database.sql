@@ -69,7 +69,7 @@ CREATE TABLE Game(
     name TEXT NOT NULL,
     description TEXT NOT NULL,
     minimum_age INT NOT NULL CHECK(minimum_age >= 0 AND minimum_age <= 18),
-    price FLOAT NOT NULL CHECK(price > 0.0),
+    price FLOAT NOT NULL CHECK(price >= 0.0),
     overall_rating INT NOT NULL CHECK(overall_rating >= 0 AND overall_rating <= 100),
     owner INT NOT NULL REFERENCES Seller(id) ON UPDATE CASCADE,
     is_active BOOLEAN DEFAULT TRUE
