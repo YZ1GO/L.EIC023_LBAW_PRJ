@@ -177,7 +177,7 @@ CREATE TABLE Orders(
 CREATE TABLE Purchase(
     id SERIAL PRIMARY KEY,
     value FLOAT NOT NULL CHECK(value >= 0.0),
-    order INT NOT NULL REFERENCES Orders(id) ON UPDATE CASCADE,
+    order_ INT NOT NULL REFERENCES Orders(id) ON UPDATE CASCADE,
     coins INT NOT NULL CHECK(coins >= 0) DEFAULT 0
 );
 
