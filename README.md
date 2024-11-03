@@ -950,7 +950,6 @@ $$ LANGUAGE plpgsql;
 > The complete database creation must be included here and also as a script in the repository.
 
 ``` sql
-
 DROP TABLE IF EXISTS Users CASCADE;
 DROP TABLE IF EXISTS Administrator CASCADE;
 DROP TABLE IF EXISTS Buyer CASCADE;
@@ -1130,7 +1129,7 @@ CREATE TABLE Orders(
 CREATE TABLE Purchase(
     id SERIAL PRIMARY KEY,
     value FLOAT NOT NULL CHECK(value >= 0.0),
-    order INT NOT NULL REFERENCES Orders(id) ON UPDATE CASCADE,
+    order_ INT NOT NULL REFERENCES Orders(id) ON UPDATE CASCADE,
     coins INT NOT NULL CHECK(coins >= 0) DEFAULT 0
 );
 
@@ -1229,8 +1228,6 @@ CREATE TABLE Contacts(
     id SERIAL PRIMARY KEY,
     contact TEXT NOT NULL
 );
-
-
 ```
 
 ### A.2. Database population
