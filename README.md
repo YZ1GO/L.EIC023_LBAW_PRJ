@@ -92,8 +92,6 @@ Legend:
 
 ### 3. Schema validation
 
-> To validate the Relational Schema obtained from the Conceptual Model, all functional dependencies are identified and the normalization of all relation schemas is accomplished. Should it be necessary, in case the scheme is not in the Boyce–Codd Normal Form (BCNF), the relational schema is refined using normalization.  
-
 | **TABLE R01** | administrator |
 | - | - |
 | **Keys** | { id }, { username }, { email } |
@@ -402,9 +400,12 @@ We carried out an analysis of the anticipated system load on the database, inclu
 | R28                    | player                 | Single digits                | Rare                           |
 | R29                    | media                  | Hundreds of thousands        | Thousands per month            |
 | R30                    | purchase               | Hundreds of thousands        | Thousands per month            |
-| R31                    | faq                    | Dozens                       | Rare                           |
-| R32                    | about                  | Dozens                       | Rare                           |
-| R33                    | contact                | Dozens                       | Rare                           |
+| R31                    | pre_purchase           | Hundreds                     | Hundreds per month             |
+| R32                    | canceled_purchase      | Hundreds                     | Hundreds per month             |
+| R33                    | delivered_purchase     | Hundreds of thousands        | Thousands per month            |
+| R34                    | faq                    | Dozens                       | Rare                           |
+| R35                    | about                  | Dozens                       | Rare                           |
+| R36                    | contact                | Dozens                       | Rare                           |
 
 ### 2. Proposed Indices
  
