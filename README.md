@@ -45,13 +45,13 @@ The goal of the class diagram for STEAL! is to visually represent the core compo
 | R04                | seller(<ins>id_user</ins> -> user **NN**) |
 | R05                | wishlist(<ins>id</ins>, <ins>id_buyer</ins> → buyer **NN**, id_game -> game) |
 | R06                | shopping_cart(<ins>id</ins>, <ins>id_buyer</ins> → buyer **NN**, id_game -> game , quantity **NN** **CK** quantity >= 0) |
-| R07                | order(<ins>id</ins>, <ins>id_buyer</ins> -> buyer **NN**, <ins>id_payment</ins> -> payment **NN**, date **NN**) |
+| R07                | order(<ins>id</ins>, <ins>id_buyer</ins> -> buyer **NN**, <ins>id_payment</ins> -> payment **NN**, time **NN** **CK** time <= Now **DF** Now) |
 | R08                | payment(<ins>id</ins>, <ins>id_method</ins> -> payment_method **NN**, value **NN** **CK** value > 0.0) |
 | R09                | payment_method(<ins>id</ins>, method **NN**) |
-| R10                | notification_wishlist(<ins>id</ins>, id_wishlist -> wishlist **NN**, title **NN**, description **NN**) |
-| R11                | notification_game(<ins>id</ins>, id_game -> game **NN**, title **NN**, description **NN**) |
-| R12                | notification_purchase(<ins>id</ins>, id_purchase -> purchase **NN**, title **NN**, description **NN**) |
-| R13                | notification_review(<ins>id</ins>, id_review -> review **NN**, title **NN**, description **NN**) |
+| R10                | notification_wishlist(<ins>id</ins>, id_wishlist -> wishlist **NN**, title **NN**, description **NN**, time **NN** **CK** time <= Now **DF** Now, isRead **NN** **DF** FALSE) |
+| R11                | notification_game(<ins>id</ins>, id_game -> game **NN**, title **NN**, description **NN**, time **NN** **CK** time <= Now **DF** Now, isRead **NN** **DF** FALSE) |
+| R12                | notification_purchase(<ins>id</ins>, id_purchase -> purchase **NN**, title **NN**, description **NN**, time **NN** **CK** time <= Now **DF** Now, isRead **NN** **DF** FALSE) |
+| R13                | notification_review(<ins>id</ins>, id_review -> review **NN**, title **NN**, description **NN**, time **NN** **CK** time <= Now **DF** Now, isRead **NN** **DF** FALSE) |
 | R14                | review(<ins>id</ins>, title **NN**, description **NN**, recommend **NN**, id_author -> buyer **NN**, id_game -> game**NN**) |
 | R15                | review_like(<ins>id</ins>, id_review -> review **NN**, id_author -> buyer **NN**, (id_review, id_author) **UK**) |
 | R16                | report(<ins>id</ins>, description **NN**, id_buyer -> buyer **NN**, id_reason -> reason **NN**, id_review -> review **NN**) |
@@ -143,7 +143,7 @@ Legend:
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD0701 | id → {id_buyer, id_payment, date} |
+| FD0701 | id → {id_buyer, id_payment, time} |
 | **NORMAL FORM** | BCNF |
 
 | **TABLE R08** | payment |
@@ -164,28 +164,28 @@ Legend:
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD1001 | id → {id_wishlist, title, description} |
+| FD1001 | id → {id_wishlist, title, description, time, isRead} |
 | **NORMAL FORM** | BCNF |
 
 | **TABLE R11** | notification_game |
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD1101 | id → {id_game, title, description} |
+| FD1101 | id → {id_game, title, description, time, isRead} |
 | **NORMAL FORM** | BCNF |
 
 | **TABLE R12** | notification_purchase |
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD1201 | id → {id_purchase, title, description} |
+| FD1201 | id → {id_purchase, title, description, time, isRead} |
 | **NORMAL FORM** | BCNF |
 
 | **TABLE R13** | notification_review |
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD1301 | id → {id_review, title, description} |
+| FD1301 | id → {id_review, title, description, time, isRead} |
 | **NORMAL FORM** | BCNF |
 
 | **TABLE R14** | review |
