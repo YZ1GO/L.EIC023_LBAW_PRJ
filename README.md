@@ -89,6 +89,7 @@ Legend:
 | Domain Name | Domain Specification           |
 | ----------- | ------------------------------ |
 | Today	      | DATE DEFAULT CURRENT_DATE      |
+| Now         | TIMESTAMP DEFAULT CURRENT_TIMESTAMP |
 
 ### 3. Schema validation
 
