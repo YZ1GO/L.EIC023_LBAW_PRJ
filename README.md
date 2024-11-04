@@ -463,32 +463,36 @@ CREATE INDEX search_idx ON Game USING GIN (title_tsvector);
 | **Description**  | Ensures that shared user data (e.g., reviews, likes) is retained but anonymized when a user deletes their account. (ER: BR02 - Delete Account) |
 | **Justification** | This trigger ensures user privacy by anonymizing data when an account is deleted, thereby preventing the exposure of personally identifiable information. |
 ```sql
-CREATE FUNCTION anonymize_user_data(user_id INT) RETURNS VOID AS
+-- Create the anonymization function, ensuring it returns a TRIGGER type
+CREATE OR REPLACE FUNCTION anonymize_user_data() RETURNS TRIGGER AS
 $BODY$
 BEGIN
     -- Anonymize data in Users table
     UPDATE Users
-    SET username = 'Anonymous' || user_id,
+    SET username = 'Anonymous' || OLD.id,
         name = 'Anonymous',
-        email = 'anonymous' || user_id || '@example.com',
+        email = 'anonymous' || OLD.id || '@example.com',
         password = 'anonymous'
-    WHERE id = user_id;
+    WHERE id = OLD.id;
 
     -- Anonymize data in Buyer table
     UPDATE Buyer
     SET NIF = NULL,
         birth_date = '1111-11-11', -- Placeholder date
         coins = 0
-    WHERE id = user_id;
+    WHERE id = OLD.id;
+
+    RETURN NULL; -- Trigger functions should return a value (NULL for BEFORE triggers)
 END;
 $BODY$
 LANGUAGE plpgsql;
 
+-- Create the trigger to call the function before updating Users
 CREATE TRIGGER trg_anonymize_user_data
 BEFORE UPDATE ON Users
 FOR EACH ROW
 WHEN (NEW.is_active IS FALSE)  -- Trigger when is_active is set to FALSE
-EXECUTE PROCEDURE anonymize_user_data(OLD.id);
+EXECUTE FUNCTION anonymize_user_data();
 ``` 
 
 | **Trigger**      | TRIGGER02                              |
@@ -496,29 +500,36 @@ EXECUTE PROCEDURE anonymize_user_data(OLD.id);
 | **Description**  | A Buyer can only leave a review for games it has purchased. (ER: BR11 - Purchase-Based Reviews) |
 | **Justification** | Ensures integrity by allowing reviews only from verified purchasers, enhancing trust and quality of feedback. |
 ```sql
-CREATE FUNCTION check_review_eligibility() RETURNS TRIGGER AS
+-- Function to check if the buyer has purchased the game
+CREATE OR REPLACE FUNCTION check_review_eligibility() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-    -- Check if the buyer has purchased the game
+    -- Check if the buyer has purchased the game through a delivered purchase
     IF NOT EXISTS (
         SELECT 1 
-        FROM Purchase p
+        FROM DeliveredPurchase dp
+        JOIN Purchase p ON dp.id = p.id
         JOIN Orders o ON p.order_ = o.id
-        WHERE p.game = NEW.game 
+        WHERE dp.cdk IN (
+            SELECT cd.id 
+            FROM CDK cd 
+            JOIN Game g ON cd.game = g.id 
+            WHERE g.id = NEW.game
+        )
         AND o.buyer = NEW.author
     ) THEN
         RAISE EXCEPTION 'A buyer can only review games they have purchased.';
     END IF;
 
     RETURN NEW;
-END
-$BODY$
-LANGUAGE plpgsql;
+END;
+$BODY$ LANGUAGE plpgsql;
 
+-- Trigger to check review eligibility
 CREATE TRIGGER trg_check_review_eligibility
 BEFORE INSERT ON Review
 FOR EACH ROW
-EXECUTE PROCEDURE check_review_eligibility();
+EXECUTE FUNCTION check_review_eligibility();
 ```
 
 | **Trigger**      | TRIGGER03                              |
@@ -526,41 +537,45 @@ EXECUTE PROCEDURE check_review_eligibility();
 | **Description**  | The ***trg_clear_cart_and_wishlist_after_order*** trigger automatically removes items from a buyer's shopping cart and wishlist once an order is placed. It executes the ***clear_cart_and_wishlist_after_order*** function after a new entry in the Orders table, deleting purchased games for the corresponding buyer. |
 | **Justification** | This trigger improves user experience by ensuring that buyers do not see items they have already purchased, reducing interface clutter and encouraging exploration of new products. It aligns with business rules for a streamlined purchasing process, enhancing customer satisfaction. |
 ```sql
-CREATE FUNCTION clear_cart_and_wishlist_after_order() RETURNS TRIGGER AS
+CREATE OR REPLACE FUNCTION clear_cart_and_wishlist_after_delivery()
+RETURNS TRIGGER AS
 $BODY$
 DECLARE
     game_id INT;
     buyer_id INT;
 BEGIN
-    -- Retrieve the buyer ID associated with the order
-    SELECT id_buyer INTO buyer_id
+    -- Retrieve the game associated with the delivered CDK
+    SELECT Game.id INTO game_id
+    FROM Game
+    JOIN CDK ON CDK.game = Game.id
+    WHERE CDK.id = NEW.cdk;
+
+    -- Retrieve the buyer associated with the order
+    SELECT Orders.buyer INTO buyer_id
     FROM Orders
-    WHERE id = NEW.id;
+    JOIN Purchase ON Purchase.order_ = Orders.id
+    WHERE Purchase.id = NEW.id;
 
-    -- Loop through all purchases associated with this order
-    FOR game_id IN
-        SELECT id_game FROM Purchase WHERE id_order = NEW.id
-    LOOP
-        -- Delete each game from ShoppingCart for this buyer
-        DELETE FROM ShoppingCart
-        WHERE buyer = buyer_id
-          AND game = game_id;
+    -- Delete the game from the buyer's ShoppingCart
+    DELETE FROM ShoppingCart
+    WHERE buyer = buyer_id
+      AND game = game_id;
 
-        -- Delete each game from Wishlist for this buyer
-        DELETE FROM Wishlist
-        WHERE buyer = buyer_id
-          AND game = game_id;
-    END LOOP;
+    -- Delete the game from the buyer's Wishlist
+    DELETE FROM Wishlist
+    WHERE buyer = buyer_id
+      AND game = game_id;
 
     RETURN NEW;
-END
+END;
 $BODY$
 LANGUAGE plpgsql;
 
-CREATE TRIGGER trg_clear_cart_and_wishlist_after_order
-AFTER INSERT ON Orders
+-- Create the trigger to invoke the function after an insert on DeliveredPurchase
+CREATE TRIGGER trg_clear_cart_and_wishlist_after_delivery
+AFTER INSERT ON DeliveredPurchase
 FOR EACH ROW
-EXECUTE PROCEDURE clear_cart_and_wishlist_after_order();
+EXECUTE FUNCTION clear_cart_and_wishlist_after_delivery();
 ```
 
 | **Trigger**      | TRIGGER04                              |
@@ -610,31 +625,24 @@ EXECUTE FUNCTION update_game_rating_after_review();
 
 | **Trigger**      | TRIGGER05                              |
 | ---              | ---                                    |
-| **Description**  | Prevents a buyer from liking the same review more than once by checking for existing likes before allowing a new entry. (EBD: BR03) |
-| **Justification** | Maintains the integrity of the review system by ensuring that each review can only be liked once per buyer, preventing duplicate interactions and skewed like counts. |
+| **Description**  | Prevents a buyer from liking any reviews he authored. |
+| **Justification** | Maintains the integrity of the review system by ensuring that users cannot add likes to their own reviews. |
 ```sql
-CREATE FUNCTION check_unique_review_like() RETURNS TRIGGER AS
-$BODY$
+-- Function to check if the user is trying to like their own review
+CREATE OR REPLACE FUNCTION prevent_self_like()
+RETURNS TRIGGER AS $$
 BEGIN
-    -- Check if the buyer has already liked this review
-    IF EXISTS (
-        SELECT 1
-        FROM ReviewLike rl
-        WHERE rl.review_id = NEW.review_id 
-        AND rl.buyer_id = NEW.buyer_id
-    ) THEN
-        RAISE EXCEPTION 'A buyer can only like a particular review once.';
+    IF (SELECT author FROM Review WHERE id = NEW.review) = NEW.author THEN
+        RAISE EXCEPTION 'A user cannot like their own review';
     END IF;
-
     RETURN NEW;
-END
-$BODY$
-LANGUAGE plpgsql;
+END;
+$$ LANGUAGE plpgsql;
 
-CREATE TRIGGER trg_check_unique_review_like
+CREATE TRIGGER trigger_prevent_self_like
 BEFORE INSERT ON ReviewLike
 FOR EACH ROW
-EXECUTE PROCEDURE check_unique_review_like();
+EXECUTE FUNCTION prevent_self_like();
 ```
 
 | **Trigger**      | TRIGGER06                              |
@@ -642,39 +650,91 @@ EXECUTE PROCEDURE check_unique_review_like();
 | **Description**  | Validates that a buyer meets the minimum age requirement before allowing a purchase of a game. (ER: C01 - Game Age Restriction) |
 | **Justification** | Protects against underage purchases, ensuring compliance with age-related regulations and promoting responsible gaming. |
 ```sql
-CREATE FUNCTION validate_age_for_purchase() RETURNS TRIGGER AS 
-$BODY$
+-- Function to check age requirement before insert
+CREATE OR REPLACE FUNCTION check_age_requirement() 
+RETURNS TRIGGER AS $$
 DECLARE
-    buyer_age INT;
+    buyer_birth_date DATE;
     game_minimum_age INT;
+    buyer_age INT;
 BEGIN
-    -- Calculate the buyer's age based on birth_date from the buyer table
-    SELECT EXTRACT(YEAR FROM AGE(CURRENT_DATE, birth_date)) INTO buyer_age
-    FROM buyer
-    WHERE id = NEW.id_buyer;
+    -- Get the buyer's birth date
+    SELECT birth_date INTO buyer_birth_date
+    FROM Buyer
+    JOIN Orders ON Orders.buyer = Buyer.id
+    JOIN Purchase ON Purchase.order_ = Orders.id
+    WHERE Purchase.id = NEW.id;
 
-    -- Get the minimum age required to purchase the game
+    -- Get the minimum age of the game
     SELECT minimum_age INTO game_minimum_age
-    FROM game
-    WHERE id = NEW.id_game;
+    FROM Game
+    JOIN CDK ON CDK.game = Game.id
+    WHERE CDK.id = NEW.cdk;
 
-    -- Check if the buyer meets the age requirement
+    -- Calculate buyer's age
+    buyer_age := DATE_PART('year', CURRENT_DATE) - DATE_PART('year', buyer_birth_date);
+
+    -- Check if the buyer is old enough
     IF buyer_age < game_minimum_age THEN
-        RAISE EXCEPTION 'Purchase denied: Buyer does not meet the minimum age requirement of % years for this game.', game_minimum_age;
+        RAISE EXCEPTION 'Buyer does not meet the minimum age requirement for this game';
     END IF;
 
     RETURN NEW;
 END;
-$BODY$ 
-LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql;
 
-CREATE TRIGGER trg_validate_age_for_purchase
-BEFORE INSERT ON purchase
+-- Trigger to invoke the function before inserting into DeliveredPurchase
+CREATE TRIGGER check_age_before_insert
+BEFORE INSERT ON DeliveredPurchase
 FOR EACH ROW
-EXECUTE FUNCTION validate_age_for_purchase();
+EXECUTE FUNCTION check_age_requirement();
 ```
 
 | **Trigger**      | TRIGGER07                              |
+| ---              | ---                                    |
+| **Description**  | Validates that a buyer meets the minimum age requirement before allowing the pre-purchase of a game. (ER: C01 - Game Age Restriction) |
+| **Justification** | Protects against underage purchases, ensuring compliance with age-related regulations and promoting responsible gaming. |
+```sql
+-- Function to check age requirement before insert into PrePurchase
+CREATE OR REPLACE FUNCTION check_age_requirement_prepurchase() 
+RETURNS TRIGGER AS $$
+DECLARE
+    buyer_birth_date DATE;
+    game_minimum_age INT;
+    buyer_age INT;
+BEGIN
+    -- Get the buyer's birth date
+    SELECT birth_date INTO buyer_birth_date
+    FROM Buyer
+    JOIN Orders ON Orders.buyer = Buyer.id
+    JOIN Purchase ON Purchase.order_ = Orders.id
+    WHERE Purchase.id = NEW.id;
+
+    -- Get the minimum age of the game
+    SELECT minimum_age INTO game_minimum_age
+    FROM Game
+    WHERE Game.id = NEW.game;
+
+    -- Calculate buyer's age
+    buyer_age := DATE_PART('year', CURRENT_DATE) - DATE_PART('year', buyer_birth_date);
+
+    -- Check if the buyer is old enough
+    IF buyer_age < game_minimum_age THEN
+        RAISE EXCEPTION 'Buyer does not meet the minimum age requirement for this game';
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Trigger to invoke the function before inserting into PrePurchase
+CREATE TRIGGER check_age_before_prepurchase_insert
+BEFORE INSERT ON PrePurchase
+FOR EACH ROW
+EXECUTE FUNCTION check_age_requirement_prepurchase();
+```
+
+| **Trigger**      | TRIGGER08                              |
 | ---              | ---                                    |
 | **Description**  | Automatically converts all pre-purchases into delivered purchases when CDKs for a sold-out or unreleased game become available on the website. This ensures that users who have shown interest in a game receive immediate access to their purchases as soon as the game is available. |
 | **Justification** | Enhances user experience by providing instant fulfillment of pre-orders, minimizing wait times, and ensuring that customers can start using their purchased games immediately upon release. It allows the website to respond quickly to inventory changes, aligning with customer expectations for timely access to new content. |
@@ -709,7 +769,7 @@ FOR EACH ROW
 EXECUTE FUNCTION process_prepurchase_on_cdk_addition();
 ```
 
-| **Trigger**      | TRIGGER08                              |
+| **Trigger**      | TRIGGER09                              |
 | ---              | ---                                    |
 | **Description**  | This trigger automatically increases the number of sCoins for buyers with each purchase, awarding one sCoin for every 10 euros spent. |
 | **Justification** | By rewarding buyers with sCoins, the trigger enhances customer engagement and loyalty, fostering a positive shopping experience. It encourages users to make more purchases, as they see a direct benefit from their spending. |
@@ -749,7 +809,7 @@ FOR EACH ROW
 EXECUTE FUNCTION add_scoin_on_purchase();
 ```
 
-| **Trigger**      | TRIGGER09                             |
+| **Trigger**      | TRIGGER10                             |
 | ---              | ---                                   |
 | **Description**  | This trigger is activated after a new row is inserted in the Purchase table. When a purchase is completed, it decreases the coins balance of the associated Buyer by the number of SCoins used in that purchase. |
 | **Justification** | This trigger ensures that the Buyer's coins balance accurately reflects the SCoins spent on purchases, automating this process and maintaining data consistency without requiring manual updates. |
@@ -773,7 +833,7 @@ FOR EACH ROW
 EXECUTE FUNCTION decrease_scoins_on_purchase();
 ```
 
-| **Trigger**      | TRIGGER10                             |
+| **Trigger**      | TRIGGER11                             |
 | ---              | ---                                   |
 | **Description**  | This trigger executes after a new row is inserted into the DeliveredPurchase table, indicating that a game has been delivered to a buyer. The trigger function, decrement_game_stock, checks the current stock for the purchased game and decrements the stock quantity by 1 only if the stock is greater than 0. |
 | **Justification** | This trigger maintains inventory accuracy by ensuring the game stock reflects actual sales. This automated stock management helps to reduce manual oversight and ensures real-time updates, leading to more reliable inventory data and an improved customer experience by preventing sales of out-of-stock items. |
@@ -797,10 +857,10 @@ FOR EACH ROW
 EXECUTE FUNCTION decrement_game_stock();
 ```
 
-| **Trigger**      | TRIGGER11                             |
+| **Trigger**      | TRIGGER12                             |
 | ---              | ---                                   |
-| **Description**  | This trigger fires when a row is inserted into the CanceledPurchase table, indicating that a game purchase has been canceled. The trigger function, increment_game_stock, locates the specific game associated with the canceled purchase and increments the stock quantity by 1. |
-| **Justification** | This trigger ensures that game stock remains accurate by automatically updating inventory levels when purchases are canceled. By incrementing the stock upon cancellation, the system can accurately reflect the availability of the game, helping to prevent lost sales opportunities and providing customers with a reliable view of product availability. This reduces the need for manual stock adjustments and supports consistent, real-time inventory management. |
+| **Description**  | This trigger fires when a row is inserted into the CDK table, indicating that a game's stock has increased. The trigger function, increment_game_stock, accesses the specific game associated with the CDK and increments the stock quantity by 1. |
+| **Justification** | This trigger ensures that game stock remains accurate by automatically updating inventory levels when purchases are canceled. By automatically incrementing the stock when a new CDK is added, the system can accurately reflect the availability of the game, helping to prevent lost sales opportunities and providing customers with a reliable view of product availability. This reduces the need for manual stock adjustments and supports consistent, real-time inventory management. |
 ```sql
 CREATE FUNCTION increment_game_stock() RETURNS TRIGGER AS 
 $BODY$
