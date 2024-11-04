@@ -1024,6 +1024,13 @@ $$ LANGUAGE plpgsql;
 ### A.1. Database schema
 
 ``` sql
+DROP SCHEMA IF EXISTS StealDB CASCADE;
+
+CREATE SCHEMA StealDB;
+
+SET search_path TO StealDB;
+
+
 DROP TABLE IF EXISTS Users CASCADE;
 DROP TABLE IF EXISTS Administrator CASCADE;
 DROP TABLE IF EXISTS Buyer CASCADE;
@@ -1081,7 +1088,7 @@ CREATE TABLE Administrator(
 
 CREATE TABLE Buyer (
     id INT PRIMARY KEY REFERENCES Users(id) ON UPDATE CASCADE,
-    NIF TEXT,
+    NIF TEXT UNIQUE,
     birth_date DATE NOT NULL CHECK(birth_date <= CURRENT_DATE),
     coins INT NOT NULL CHECK(coins >= 0) DEFAULT 0
 );
@@ -1095,7 +1102,7 @@ CREATE TABLE Game(
     name TEXT NOT NULL,
     description TEXT NOT NULL,
     minimum_age INT NOT NULL CHECK(minimum_age >= 0 AND minimum_age <= 18),
-    price FLOAT NOT NULL CHECK(price > 0.0),
+    price FLOAT NOT NULL CHECK(price >= 0.0),
     overall_rating INT NOT NULL CHECK(overall_rating >= 0 AND overall_rating <= 100),
     owner INT NOT NULL REFERENCES Seller(id) ON UPDATE CASCADE,
     is_active BOOLEAN DEFAULT TRUE
@@ -1239,38 +1246,40 @@ CREATE TABLE ReviewLike(
     CONSTRAINT review_author_pair_unique UNIQUE (review, author)
 );
 
-CREATE TABLE Notifications(
+CREATE TABLE NotificationWishlist(
     id SERIAL PRIMARY KEY,
     title TEXT NOT NULL,
-    description TEXT NOT NULL
-);
-
-CREATE TABLE NotificationWishlist(
-    id INT PRIMARY KEY REFERENCES Notifications(id) ON UPDATE CASCADE,
+    description TEXT NOT NULL,
+    time TIMESTAMP NOT NULL CHECK (time <= CURRENT_TIMESTAMP) DEFAULT CURRENT_TIMESTAMP,
+    isRead BOOLEAN NOT NULL DEFAULT FALSE,
     wishlist INT NOT NULL REFERENCES Wishlist(id) ON UPDATE CASCADE
 );
 
 CREATE TABLE NotificationGame(
-    id INT PRIMARY KEY REFERENCES Notifications(id) ON UPDATE CASCADE,
+    id SERIAL PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    time TIMESTAMP NOT NULL CHECK (time <= CURRENT_TIMESTAMP) DEFAULT CURRENT_TIMESTAMP,
+    isRead BOOLEAN NOT NULL DEFAULT FALSE,
     game INT NOT NULL REFERENCES Game(id) ON UPDATE CASCADE
 );
 
 CREATE TABLE NotificationPurchase(
-    id INT PRIMARY KEY REFERENCES Notifications(id) ON UPDATE CASCADE,
+    id SERIAL PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    time TIMESTAMP NOT NULL CHECK (time <= CURRENT_TIMESTAMP) DEFAULT CURRENT_TIMESTAMP,
+    isRead BOOLEAN NOT NULL DEFAULT FALSE,
     purchase INT NOT NULL REFERENCES Purchase(id) ON UPDATE CASCADE
 );
 
 CREATE TABLE NotificationReview(
-    id INT PRIMARY KEY REFERENCES Notifications(id) ON UPDATE CASCADE,
-    review INT NOT NULL REFERENCES Review(id) ON UPDATE CASCADE
-);
-
-CREATE TABLE UserNotifications(
     id SERIAL PRIMARY KEY,
-    notification INT REFERENCES Notifications(id) ON UPDATE CASCADE,
-    receiver INT REFERENCES Users(id) ON UPDATE CASCADE,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
     time TIMESTAMP NOT NULL CHECK (time <= CURRENT_TIMESTAMP) DEFAULT CURRENT_TIMESTAMP,
-    isRead BOOLEAN NOT NULL DEFAULT FALSE
+    isRead BOOLEAN NOT NULL DEFAULT FALSE,
+    review INT NOT NULL REFERENCES Review(id) ON UPDATE CASCADE
 );
 
 CREATE TABLE Reason(
@@ -1302,6 +1311,8 @@ CREATE TABLE Contacts(
     id SERIAL PRIMARY KEY,
     contact TEXT NOT NULL
 );
+
+
 ```
 
 ### A.2. Database population

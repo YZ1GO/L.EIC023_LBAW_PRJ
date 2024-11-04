@@ -1,3 +1,10 @@
+DROP SCHEMA IF EXISTS StealDB CASCADE;
+
+CREATE SCHEMA StealDB;
+
+SET search_path TO StealDB;
+
+
 DROP TABLE IF EXISTS Users CASCADE;
 DROP TABLE IF EXISTS Administrator CASCADE;
 DROP TABLE IF EXISTS Buyer CASCADE;
@@ -55,7 +62,7 @@ CREATE TABLE Administrator(
 
 CREATE TABLE Buyer (
     id INT PRIMARY KEY REFERENCES Users(id) ON UPDATE CASCADE,
-    NIF TEXT,
+    NIF TEXT UNIQUE,
     birth_date DATE NOT NULL CHECK(birth_date <= CURRENT_DATE),
     coins INT NOT NULL CHECK(coins >= 0) DEFAULT 0
 );
@@ -69,7 +76,7 @@ CREATE TABLE Game(
     name TEXT NOT NULL,
     description TEXT NOT NULL,
     minimum_age INT NOT NULL CHECK(minimum_age >= 0 AND minimum_age <= 18),
-    price FLOAT NOT NULL CHECK(price > 0.0),
+    price FLOAT NOT NULL CHECK(price >= 0.0),
     overall_rating INT NOT NULL CHECK(overall_rating >= 0 AND overall_rating <= 100),
     owner INT NOT NULL REFERENCES Seller(id) ON UPDATE CASCADE,
     is_active BOOLEAN DEFAULT TRUE
@@ -213,38 +220,41 @@ CREATE TABLE ReviewLike(
     CONSTRAINT review_author_pair_unique UNIQUE (review, author)
 );
 
-CREATE TABLE Notifications(
-    id SERIAL PRIMARY KEY,
-    title TEXT NOT NULL,
-    description TEXT NOT NULL
-);
 
 CREATE TABLE NotificationWishlist(
-    id INT PRIMARY KEY REFERENCES Notifications(id) ON UPDATE CASCADE,
+    id SERIAL PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    time TIMESTAMP NOT NULL CHECK (time <= CURRENT_TIMESTAMP) DEFAULT CURRENT_TIMESTAMP,
+    isRead BOOLEAN NOT NULL DEFAULT FALSE,
     wishlist INT NOT NULL REFERENCES Wishlist(id) ON UPDATE CASCADE
 );
 
 CREATE TABLE NotificationGame(
-    id INT PRIMARY KEY REFERENCES Notifications(id) ON UPDATE CASCADE,
+    id SERIAL PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    time TIMESTAMP NOT NULL CHECK (time <= CURRENT_TIMESTAMP) DEFAULT CURRENT_TIMESTAMP,
+    isRead BOOLEAN NOT NULL DEFAULT FALSE,
     game INT NOT NULL REFERENCES Game(id) ON UPDATE CASCADE
 );
 
 CREATE TABLE NotificationPurchase(
-    id INT PRIMARY KEY REFERENCES Notifications(id) ON UPDATE CASCADE,
+    id SERIAL PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    time TIMESTAMP NOT NULL CHECK (time <= CURRENT_TIMESTAMP) DEFAULT CURRENT_TIMESTAMP,
+    isRead BOOLEAN NOT NULL DEFAULT FALSE,
     purchase INT NOT NULL REFERENCES Purchase(id) ON UPDATE CASCADE
 );
 
 CREATE TABLE NotificationReview(
-    id INT PRIMARY KEY REFERENCES Notifications(id) ON UPDATE CASCADE,
-    review INT NOT NULL REFERENCES Review(id) ON UPDATE CASCADE
-);
-
-CREATE TABLE UserNotifications(
     id SERIAL PRIMARY KEY,
-    notification INT REFERENCES Notifications(id) ON UPDATE CASCADE,
-    receiver INT REFERENCES Users(id) ON UPDATE CASCADE,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
     time TIMESTAMP NOT NULL CHECK (time <= CURRENT_TIMESTAMP) DEFAULT CURRENT_TIMESTAMP,
-    isRead BOOLEAN NOT NULL DEFAULT FALSE
+    isRead BOOLEAN NOT NULL DEFAULT FALSE,
+    review INT NOT NULL REFERENCES Review(id) ON UPDATE CASCADE
 );
 
 CREATE TABLE Reason(
@@ -277,31 +287,6 @@ CREATE TABLE Contacts(
     contact TEXT NOT NULL
 );
 
-/*
-Lista de sugestão de mudanças:
-
-Mais importantes:
-
-1. Separar purchase em várias tabelas de acordo com o status. Uma purchase está associada a um cdk, no entanto para o caso em que o
-status é pre-purchase ou cancelled por o artigo não estar em stock, não é possível associar um cdk à purchase porque não há nenhum em stock.
-(Implementei já uma solução para isto neste script). 
--- Alteracao do cdk UK NN para apenas cdk UK feita no relational schema (Bruno)
--- Alteracao: NIF do buyer para not unique, price do game para > 0.0, code do cdk para not unique (Ricardo)
-
-2.Criar uma classe de associação para associar as notificações aos users que as recebem. Supondo que um user tem uma aba de notificações,
-como é que vamos buscar as notificações que devem ser carregadas nessa página se não associarmos as notificações aos users a quem se 
-destinam. Para isso, acho que teríamos que criar uma classe de notificações mais geral que fosse uma generalização das mais especificas
-e depois criar uma tabela que associasse o id das notificações dessa tabela geral com o id dos users.
-(Não implementado neste script ainda).
-
-Menos importantes:
-
-1. NIF é irrelevante, devíamos guardar nesse campo dados de cartão de crédito/débito a ser usado como predefinição em pagamentos(
-por exemplo, guardar o número do cartão e os digitos de segurança nesse campo, mas podíamos ter uma tabela com dados bancários que mapeasse
-dados de cartão e users e depois até reformular a lógoca de pagamento à volta disso). Não é muito importante, porque os pagamentos não
-são reais.
-
-*/
 
 
 
