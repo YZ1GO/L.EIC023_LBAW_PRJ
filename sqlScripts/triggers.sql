@@ -360,24 +360,24 @@ LANGUAGE plpgsql;
 
 -- Trigger on GameCategory for updates
 CREATE TRIGGER touch_game_on_gamecategory_update
-AFTER UPDATE ON GameCategory
+AFTER INSERT OR UPDATE ON GameCategory
 FOR EACH ROW
 EXECUTE FUNCTION touch_game_table();
 
 -- Trigger on GamePlayer for updates
 CREATE TRIGGER touch_game_on_gameplayer_update
-AFTER UPDATE ON GamePlayer
+AFTER INSERT OR UPDATE ON GamePlayer
 FOR EACH ROW
 EXECUTE FUNCTION touch_game_table();
 
 -- Trigger on GameLanguage for updates
 CREATE TRIGGER touch_game_on_gamelanguage_update
-AFTER UPDATE ON GameLanguage
+AFTER INSERT OR UPDATE ON GameLanguage
 FOR EACH ROW
 EXECUTE FUNCTION touch_game_table();
 
 -- Trigger on GamePlatform for updates
 CREATE TRIGGER touch_game_on_gameplatform_update
-AFTER UPDATE ON GamePlatform
+AFTER INSERT OR UPDATE ON GamePlatform
 FOR EACH ROW
 EXECUTE FUNCTION touch_game_table();
