@@ -61,17 +61,20 @@ The goal of the class diagram for STEAL! is to visually represent the core compo
 | R20                | game_category(<ins>id</ins>, id_game -> game **NN**, id_category -> category **NN**, (id_game, id_category) **UK**) |
 | R21                | game_language(<ins>id</ins>, id_game -> game **NN**, id_language -> language **NN**, (id_game, id_language) **UK**) |
 | R22                | game_player(<ins>id</ins>, id_game -> game **NN**, id_player -> player **NN**, (id_game, id_player) **UK**) |
-| R23                | cdk(<ins>id</ins>, code **NN**, id_game -> game **NN**) |
+| R23                | cdk(<ins>id</ins>, code **UK** **NN**, id_game -> game **NN**) |
 | R24                | stock(<ins>id</ins>, quantity **NN** **CK** quantity >= 0, <ins>id_game</ins> -> game **NN**) |
 | R25                | platform(<ins>id</ins>, platform **NN**) |
 | R26                | category(<ins>id</ins>, category **NN**) |
 | R27                | language(<ins>id</ins>, language **NN**) |
 | R28                | player(<ins>id</ins>, player **NN**) |
 | R29                | media(<ins>id</ins>, path **NN**, id_game -> game **NN**) |
-| R30                | purchase(<ins>id</ins>, value **NN** **CK** value > 0.0, status **NN** **CK** status **IN** Status, id_order -> order **NN**, id_game -> game **NN**, id_cdk -> cdk **UK**) |
-| R31                | faq(<ins>id</ins>, question **NN**, answer **NN**) |
-| R32                | about(<ins>id</ins>, about **NN**) |
-| R33                | contact(<ins>id</ins>, contact **NN**) |
+| R30                | purchase(<ins>id</ins>, value **NN** **CK** value >= 0.0, id_order -> order **NN**, coins **NN** **CK** coins >= 0) |
+| R31                | pre_purchase(<ins>id_purchase</ins> -> purchase **NN**, id_game -> game **NN**) |
+| R32                | canceled_purchase(<ins>id_purchase</ins> -> purchase **NN**, id_game -> game **NN**) |
+| R33                | delivered_purchase(<ins>id_purchase</ins> -> purchase **NN**, id_cdk -> cdk **UK** **NN**) |
+| R34                | faq(<ins>id</ins>, question **NN**, answer **NN**) |
+| R35                | about(<ins>id</ins>, about **NN**) |
+| R36                | contact(<ins>id</ins>, contact **NN**) |
 
 Legend: 
 - UK = UNIQUE KEY
@@ -86,11 +89,8 @@ Legend:
 | Domain Name | Domain Specification           |
 | ----------- | ------------------------------ |
 | Today	      | DATE DEFAULT CURRENT_DATE      |
-| Status      | ENUM ('Pre_Purchased', 'Cancelled', 'Delivered') |
 
 ### 3. Schema validation
-
-> To validate the Relational Schema obtained from the Conceptual Model, all functional dependencies are identified and the normalization of all relation schemas is accomplished. Should it be necessary, in case the scheme is not in the Boyce–Codd Normal Form (BCNF), the relational schema is refined using normalization.  
 
 | **TABLE R01** | administrator |
 | - | - |
@@ -112,10 +112,9 @@ Legend:
 
 | **TABLE R03** | buyer |
 | - | - |
-| **Keys** | { id_user }, { NIF } |
+| **Keys** | { id_user } |
 | **Functional Dependencies:** | |
 | FD0301 | id_user → {NIF, birth_date, coins} |
-| FD0302 | NIF → {id_user, birth_date, coins} |
 | **NORMAL FORM** | BCNF |
 
 | **TABLE R04** | seller |
@@ -312,28 +311,50 @@ Legend:
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD3001 | id → {value, status, id_order, id_game, id_cdk} |
+| FD3001 | id → {value, id_order, coins} |
 | **NORMAL FORM** | BCNF |
 
-| **TABLE R31** | faq |
+| **TABLE R31** | pre_purchase |
+| - | - |
+| **Keys** | { id_purchase } |
+| **Functional Dependencies:** | |
+| FD3101 | id_purchase → {id_game} |
+| **NORMAL FORM** | BCNF |
+
+| **TABLE R32** | canceled_purchase |
+| - | - |
+| **Keys** | { id_purchase } |
+| **Functional Dependencies:** | |
+| FD3201 | id_purchase → {id_game} |
+| **NORMAL FORM** | BCNF |
+
+| **TABLE R33** | delivered_purchase |
+| - | - |
+| **Keys** | { id_purchase, id_cdk } |
+| **Functional Dependencies:** | |
+| FD3301 | id_purchase → {id_cdk} |
+| FD3302 | id_cdk → {id_purchase} |
+| **NORMAL FORM** | BCNF |
+
+| **TABLE R34** | faq |
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD3101 | id → {question, answer} |
+| FD3401 | id → {question, answer} |
 | **NORMAL FORM** | BCNF |
 
-| **TABLE R32** | about |
+| **TABLE R35** | about |
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD3201 | id → {about} |
+| FD3501 | id → {about} |
 | **NORMAL FORM** | BCNF |
 
-| **TABLE R33** | contact |
+| **TABLE R36** | contact |
 | - | - |
 | **Keys** | { id } |
 | **Functional Dependencies:** | |
-| FD3301 | id → {contact} |
+| FD3601 | id → {contact} |
 | **NORMAL FORM** | BCNF |
 
 ---
@@ -379,9 +400,12 @@ We carried out an analysis of the anticipated system load on the database, inclu
 | R28                    | player                 | Single digits                | Rare                           |
 | R29                    | media                  | Hundreds of thousands        | Thousands per month            |
 | R30                    | purchase               | Hundreds of thousands        | Thousands per month            |
-| R31                    | faq                    | Dozens                       | Rare                           |
-| R32                    | about                  | Dozens                       | Rare                           |
-| R33                    | contact                | Dozens                       | Rare                           |
+| R31                    | pre_purchase           | Hundreds                     | Hundreds per month             |
+| R32                    | canceled_purchase      | Hundreds                     | Hundreds per month             |
+| R33                    | delivered_purchase     | Hundreds of thousands        | Thousands per month            |
+| R34                    | faq                    | Dozens                       | Rare                           |
+| R35                    | about                  | Dozens                       | Rare                           |
+| R36                    | contact                | Dozens                       | Rare                           |
 
 ### 2. Proposed Indices
  
@@ -997,20 +1021,9 @@ $$ LANGUAGE plpgsql;
 
 ## Annex A. SQL Code
 
-> The database scripts are included in this annex to the EBD component.
-> 
-> The database creation script and the population script should be presented as separate elements.
-> The creation script includes the code necessary to build (and rebuild) the database.
-> The population script includes an amount of tuples suitable for testing and with plausible values for the fields of the database.
->
-> The complete code of each script must be included in the group's git repository and links added here.
-
 ### A.1. Database schema
 
-> The complete database creation must be included here and also as a script in the repository.
-
 ``` sql
-
 DROP TABLE IF EXISTS Users CASCADE;
 DROP TABLE IF EXISTS Administrator CASCADE;
 DROP TABLE IF EXISTS Buyer CASCADE;
@@ -1090,7 +1103,7 @@ CREATE TABLE Game(
 
 CREATE TABLE CDK(
     id SERIAL PRIMARY KEY,
-    code TEXT NOT NULL,
+    code TEXT UNIQUE NOT NULL,
     game INT NOT NULL REFERENCES Game(id) ON UPDATE CASCADE
 );
 
@@ -1190,7 +1203,7 @@ CREATE TABLE Orders(
 CREATE TABLE Purchase(
     id SERIAL PRIMARY KEY,
     value FLOAT NOT NULL CHECK(value >= 0.0),
-    order INT NOT NULL REFERENCES Orders(id) ON UPDATE CASCADE,
+    order_ INT NOT NULL REFERENCES Orders(id) ON UPDATE CASCADE,
     coins INT NOT NULL CHECK(coins >= 0) DEFAULT 0
 );
 
@@ -1289,13 +1302,9 @@ CREATE TABLE Contacts(
     id SERIAL PRIMARY KEY,
     contact TEXT NOT NULL
 );
-
-
 ```
 
 ### A.2. Database population
-
-> Only a sample of the database population script may be included here, e.g. the first 10 lines. The full script must be available in the repository.
 
 ```sql
 insert into Users (username, name, email, password, is_active) values ('hbrellin0', 'Hamil Brellin', 'hbrellin0@xrea.com', '$2a$04$ztD37YYYeiilaMhYwKIVTOWxr1lAud.fe5Ko5jcQdqEMC.oBP.l2O', true);
