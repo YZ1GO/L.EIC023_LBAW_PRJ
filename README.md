@@ -446,27 +446,45 @@ The following indices are proposed to improve performance of the identified quer
 
 #### 2.2. Full-text Search Indices 
 
-To enhance user experience, it’s essential for our system to support full-text search (FTS) capabilities within the game relation, specifically targeting the title attribute. By implementing PostgreSQL’s GIN index type, we can ensure that users can efficiently search for games using keywords from the titles. This setup will involve creating the necessary configurations and indexes to maintain up-to-date search functionality, allowing users to quickly find relevant games based on their titles.
-
 | **Index**           | IDX04                                 |
 |---------------------|---------------------------------------|
 | **Relation**        | game                                  |
-| **Attribute**       | title                                 |
+| **Attribute**       | title, description, category, player  |
 | **Type**            | GIN                                   |
 | **Clustering**      | No                                    |
-| **Justification**   | This setup allows users to efficiently search for games based solely on their titles, improving the search experience without the overhead of additional text fields. |
+| **Justification**   | This index enables efficient full-text search across game titles, descriptions, categories, and player types, making it easier for users to find games based on a wide range of criteria. This setup optimizes search performance by indexing relevant game attributes for a comprehensive search experience. |
 ##### SQL Code
 ```sql
--- Add column to game to store computed ts_vectors for titles only.
+-- Add column to game to store computed ts_vectors.
 ALTER TABLE Game
-ADD COLUMN title_tsvector TSVECTOR;
+ADD COLUMN tsvectors TSVECTOR;
 
--- Create a function to automatically update title_tsvector.
+-- Create a function to automatically update ts_vectors.
 CREATE FUNCTION game_search_update() RETURNS TRIGGER AS $$
+DECLARE
+  category_names TEXT;
+  player_names TEXT;
 BEGIN
-  IF TG_OP = 'INSERT' OR (TG_OP = 'UPDATE' AND NEW.title <> OLD.title) THEN
-    NEW.title_tsvector = to_tsvector('english', NEW.title);
-  END IF;
+  -- Aggregate category names associated with the game
+  SELECT STRING_AGG(name, ' ') INTO category_names
+  FROM Category
+  JOIN GameCategory ON Category.id = GameCategory.category
+  WHERE GameCategory.game = NEW.id;
+
+  -- Aggregate player types associated with the game
+  SELECT STRING_AGG(name, ' ') INTO player_names
+  FROM Player
+  JOIN GamePlayer ON Player.id = GamePlayer.player
+  WHERE GamePlayer.game = NEW.id;
+
+  -- Compute the tsvectors with all fields included
+  NEW.tsvectors = (
+    setweight(to_tsvector('english', NEW.name), 'A') ||
+    setweight(to_tsvector('english', NEW.description), 'B') ||
+    setweight(to_tsvector('english', COALESCE(category_names, '')), 'C') ||
+    setweight(to_tsvector('english', COALESCE(player_names, '')), 'D')
+  );
+
   RETURN NEW;
 END $$
 LANGUAGE plpgsql;
@@ -477,8 +495,8 @@ CREATE TRIGGER game_search_update
   FOR EACH ROW
   EXECUTE PROCEDURE game_search_update();
 
--- Finally, create a GIN index for title_tsvector.
-CREATE INDEX search_idx ON Game USING GIN (title_tsvector); 
+-- Finally, create a GIN index for ts_vectors.
+CREATE INDEX search_idx ON game USING GIN (tsvectors); 
 ```
 
 ### 3. Triggers
