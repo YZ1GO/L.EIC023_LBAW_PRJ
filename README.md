@@ -903,7 +903,7 @@ EXECUTE FUNCTION decrement_game_stock();
 | **Trigger**      | TRIGGER12                             |
 | ---              | ---                                   |
 | **Description**  | This trigger fires when a row is inserted into the CDK table, indicating that a game's stock has increased. The trigger function, increment_game_stock, accesses the specific game associated with the CDK and increments the stock quantity by 1. |
-| **Justification** | This trigger ensures that game stock remains accurate by automatically updating inventory levels when purchases are canceled. By automatically incrementing the stock when a new CDK is added, the system can accurately reflect the availability of the game, helping to prevent lost sales opportunities and providing customers with a reliable view of product availability. This reduces the need for manual stock adjustments and supports consistent, real-time inventory management. |
+| **Justification** | This trigger ensures that game stock remains accurate by automatically updating inventory levels when cdks are added to the system. By automatically incrementing the stock when a new CDK is added, the system can accurately reflect the availability of the game, helping to prevent lost sales opportunities and providing customers with a reliable view of product availability. This reduces the need for manual stock adjustments and supports consistent, real-time inventory management. |
 ```sql
 CREATE FUNCTION increment_game_stock() RETURNS TRIGGER AS 
 $BODY$
@@ -922,6 +922,46 @@ CREATE TRIGGER trg_increment_game_stock
 AFTER INSERT ON CDK
 FOR EACH ROW
 EXECUTE FUNCTION increment_game_stock();
+```
+
+| **Trigger**      | TRIGGER13                             |
+| ---              | ---                                   |
+| **Description**  | Performs a null update on the Game table whenever updates occur in the GameCategory, GamePlayer, GameLanguage, or GamePlatform tables to register related changes in game data. |
+| **Justification** | Maintains referential data integrity by touching the Game table when related tables are updated, allowing any dependent systems to track changes. |
+```sql
+CREATE OR REPLACE FUNCTION touch_game_table() RETURNS TRIGGER AS 
+$BODY$
+BEGIN
+    -- Update the Game table record related to the updated GameCategory, GamePlayer, GameLanguage, or GamePlatform
+    UPDATE game SET id = id WHERE id = NEW.game;
+    RETURN NEW;
+END;
+$BODY$ 
+LANGUAGE plpgsql;
+
+-- Trigger on GameCategory for updates
+CREATE TRIGGER touch_game_on_gamecategory_update
+AFTER UPDATE ON GameCategory
+FOR EACH ROW
+EXECUTE FUNCTION touch_game_table();
+
+-- Trigger on GamePlayer for updates
+CREATE TRIGGER touch_game_on_gameplayer_update
+AFTER UPDATE ON GamePlayer
+FOR EACH ROW
+EXECUTE FUNCTION touch_game_table();
+
+-- Trigger on GameLanguage for updates
+CREATE TRIGGER touch_game_on_gamelanguage_update
+AFTER UPDATE ON GameLanguage
+FOR EACH ROW
+EXECUTE FUNCTION touch_game_table();
+
+-- Trigger on GamePlatform for updates
+CREATE TRIGGER touch_game_on_gameplatform_update
+AFTER UPDATE ON GamePlatform
+FOR EACH ROW
+EXECUTE FUNCTION touch_game_table();
 ```
 
 ### 4. Transactions

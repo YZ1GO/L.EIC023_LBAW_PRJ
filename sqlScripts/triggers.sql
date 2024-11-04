@@ -347,4 +347,37 @@ AFTER INSERT ON DeliveredPurchase
 FOR EACH ROW
 EXECUTE FUNCTION decrement_game_stock();
 
+-- Function to update game table on category, player, language, platform change
+CREATE OR REPLACE FUNCTION touch_game_table() RETURNS TRIGGER AS 
+$BODY$
+BEGIN
+    -- Update the Game table
+    UPDATE game SET id = id WHERE id = NEW.game;
+    RETURN NEW;
+END;
+$BODY$ 
+LANGUAGE plpgsql;
 
+-- Trigger on GameCategory for updates
+CREATE TRIGGER touch_game_on_gamecategory_update
+AFTER UPDATE ON GameCategory
+FOR EACH ROW
+EXECUTE FUNCTION touch_game_table();
+
+-- Trigger on GamePlayer for updates
+CREATE TRIGGER touch_game_on_gameplayer_update
+AFTER UPDATE ON GamePlayer
+FOR EACH ROW
+EXECUTE FUNCTION touch_game_table();
+
+-- Trigger on GameLanguage for updates
+CREATE TRIGGER touch_game_on_gamelanguage_update
+AFTER UPDATE ON GameLanguage
+FOR EACH ROW
+EXECUTE FUNCTION touch_game_table();
+
+-- Trigger on GamePlatform for updates
+CREATE TRIGGER touch_game_on_gameplatform_update
+AFTER UPDATE ON GamePlatform
+FOR EACH ROW
+EXECUTE FUNCTION touch_game_table();
