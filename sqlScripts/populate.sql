@@ -1,5 +1,6 @@
--- POPULATE DATABASE
+SET search_path TO StealDB;
 
+-- POPULATE DATABASE
 -- USERS
 insert into Users (username, name, email, password, is_active) values ('hbrellin0', 'Hamil Brellin', 'hbrellin0@xrea.com', '$2a$04$ztD37YYYeiilaMhYwKIVTOWxr1lAud.fe5Ko5jcQdqEMC.oBP.l2O', true);
 insert into Users (username, name, email, password, is_active) values ('kpeschmann1', 'Kristo Peschmann', 'kpeschmann1@edublogs.org', '$2a$04$IAuigNcjKssEHMcHFqkTEeNUDoD3IEGVLxwKwIF0lbcoF67NUTM7i', true);
