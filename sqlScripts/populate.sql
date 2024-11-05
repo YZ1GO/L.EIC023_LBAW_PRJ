@@ -1,4 +1,4 @@
-SET search_path TO StealDB;
+SET search_path TO lbaw2435;
 
 -- POPULATE DATABASE
 -- USERS
