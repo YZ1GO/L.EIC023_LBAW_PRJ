@@ -44,4 +44,5 @@ Temporary Items
 .apdisk
 
 
-/config/debugbar.php
+/config/debugbar.php.env
+.env.production
